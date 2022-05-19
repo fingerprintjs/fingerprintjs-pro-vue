@@ -1,4 +1,1 @@
-import { getGreeting } from './greeting'
-export { getGreeting }
-
-console.log(getGreeting('World'))
+console.log('Hello world!')
