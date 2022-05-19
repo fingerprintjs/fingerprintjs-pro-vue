@@ -1,15 +1,15 @@
-import typescript from '@rollup/plugin-typescript'
-import jsonPlugin from '@rollup/plugin-json'
-import external from 'rollup-plugin-peer-deps-external'
-import dtsPlugin from 'rollup-plugin-dts'
-import licensePlugin from 'rollup-plugin-license'
-import { join } from 'path'
+import typescript from 'rollup-plugin-typescript2';
+import jsonPlugin from '@rollup/plugin-json';
+import external from 'rollup-plugin-peer-deps-external';
+import dtsPlugin from 'rollup-plugin-dts';
+import licensePlugin from 'rollup-plugin-license';
+import { join } from 'path';
 
-const { dependencies = {} } = require('./package.json')
+const { dependencies = {} } = require('./package.json');
 
-const inputFile = 'src/index.ts'
-const outputDirectory = 'dist'
-const artifactName = 'plugin'
+const inputFile = 'src/index.ts';
+const outputDirectory = 'dist';
+const artifactName = 'plugin';
 
 const commonBanner = licensePlugin({
   banner: {
@@ -17,17 +17,17 @@ const commonBanner = licensePlugin({
       file: join(__dirname, 'resources', 'license_banner.txt'),
     },
   },
-})
+});
 
 const commonInput = {
   input: inputFile,
   plugins: [jsonPlugin(), typescript(), external(), commonBanner],
-}
+};
 
 const commonOutput = {
   // name: 'MyFpJsLibrary', // Need for IIFE and UMD build. Name of global variable
   exports: 'named',
-}
+};
 
 // Need for IIFE or UMD build
 // const commonTerser = terserPlugin(require('./terser.config.js'))
@@ -62,4 +62,4 @@ export default [
       format: 'es',
     },
   },
-]
+];

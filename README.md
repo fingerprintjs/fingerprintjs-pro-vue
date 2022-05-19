@@ -8,7 +8,8 @@
     <img src="https://github.com/fingerprintjs/library-template-typescript/actions/workflows/build.yml/badge.svg" alt="Build status">
   </a>
 </p>
-This is template repository for creating TypeScript libraries by FingerprintJS team.
+
+# FingerprintJS Pro Vue
 
 ## Quick start
 
