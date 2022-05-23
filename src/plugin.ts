@@ -2,7 +2,7 @@ import type { Plugin } from 'vue';
 import { FpjsClient, FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
 import * as packageInfo from '../package.json';
 import type { GetOptions } from '@fingerprintjs/fingerprintjs-pro';
-import type { FpjsVueOptions } from './types';
+import type { FpjsVueGlobalProperty, FpjsVueOptions } from './types';
 import { CLEAR_CACHE, GET_VISITOR_DATA } from './symbols';
 import { ClearCache, GetVisitorData } from './types';
 
@@ -62,6 +62,6 @@ export const fpjsPlugin: Plugin = {
     app.config.globalProperties.$fpjs = {
       getVisitorData,
       clearCache,
-    };
+    } as FpjsVueGlobalProperty;
   },
 };
