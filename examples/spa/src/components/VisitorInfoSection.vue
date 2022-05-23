@@ -19,6 +19,9 @@ const emit = defineEmits<{
   <section>
     <fetch-data-btn :is-loading="props.isLoading" :text="props.buttonText" @click="emit('btn-click', $event)" />
     <visitor-data v-if="props.data" :visitor-data="props.data" />
+    <p v-if="props.error" class="error">
+      {{ props.error.message }}
+    </p>
   </section>
 </template>
 
