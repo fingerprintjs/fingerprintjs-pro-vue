@@ -7,7 +7,7 @@ const props = defineProps<{
   buttonText: string;
   isLoading: boolean;
   error?: Error | null;
-  data: Data<true>;
+  data?: Data<true> | null;
 }>();
 
 const emit = defineEmits<{

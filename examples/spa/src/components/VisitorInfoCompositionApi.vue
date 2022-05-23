@@ -18,6 +18,6 @@ watch(data, (currentData) => {
     :data="data"
     :error="error"
     :is-loading="isLoading"
-    @btn-click="getData"
+    @btn-click="getData()"
   />
 </template>

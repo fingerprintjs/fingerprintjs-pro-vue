@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
+    "build:spa": "cd examples/spa && yarn build && cd ../..",
     "watch": "rollup -c rollup.config.js -w",
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --max-warnings 0 .",
     "lint:fix": "yarn lint --fix",
