@@ -1,9 +1,6 @@
 # Reference on this file: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 name: Lint, build and test
 on:
-  push:
-    branches:
-      - main
   pull_request:
 jobs:
   build:

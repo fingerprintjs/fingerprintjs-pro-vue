@@ -25,11 +25,12 @@ export function useVisitorData<TExtended extends boolean>(
       const result = await getVisitorData(options, getDataOptions?.ignoreCache);
 
       data.value = result;
-
       currentError.value = undefined;
 
       return result;
     } catch (error) {
+      data.value = undefined;
+
       if (error instanceof Error) {
         error.message = `${error.name}: ${error.message}`;
         error.name = 'FPJSAgentError';

@@ -21,7 +21,7 @@ const getOptions = (options: FpjsClientOptions) => {
 };
 
 /**
- * Installs FingerprintJS Pro plugin
+ * FingerprintJS Pro plugin
  *
  * @example ```ts
  * import { createApp } from 'vue';
