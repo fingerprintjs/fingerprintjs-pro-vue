@@ -19,7 +19,7 @@ jobs:
           key: nodemodules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: nodemodules-
       - name: Install Node packages
-        run: yarn install
+        run: yarn install && yarn install --cwd examples/spa
       - name: Lint
         run: yarn lint
       - name: Tests
