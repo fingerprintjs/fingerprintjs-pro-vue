@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['../../../.eslintrc.js'],
+  extends: ['../../.eslintrc.js'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',

@@ -1,6 +1,5 @@
 {
   "name": "@fingerprintjs/fingerprintjs-pro-vue",
-  "version": "0.0.1",
   "description": "FingerprintJS Pro Plugin for Vue monorepo",
   "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
   "license": "MIT",
@@ -10,28 +9,16 @@
   },
   "private": true,
   "workspaces": [
-    "packages/**"
+    "packages/**",
+    "examples/**"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --max-warnings 0 .",
     "lint:fix": "yarn lint --fix",
-    "spa:build": "yarn workspace spa-example build",
-    "spa:dev": "yarn workspace spa-example dev",
-    "nuxt-3:build": "yarn workspace nuxt-3-example build",
-    "nuxt-3:dev": "yarn workspace nuxt-3-example dev",
-    "vue3:build": "yarn workspace @fingerprintjs/fingerprintjs-pro-vue-v3 build",
-    "vue3:test": "yarn workspace @fingerprintjs/fingerprintjs-pro-vue-v3 test",
-    "test": "yarn run vue3:test",
-    "build": "yarn spa:build && yarn nuxt-3:build && yarn vue3:build"
+    "nx": "nx"
   },
-  "main": "dist/plugin.cjs.js",
-  "module": "dist/plugin.esm.js",
-  "types": "dist/plugin.d.ts",
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
+    "@nrwl/nx-cloud": "latest",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.3.1",
     "@types/jest": "^27.4.0",
@@ -39,24 +26,26 @@
     "@typescript-eslint/parser": "^5.12.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/test-utils": "^2.0.0",
+    "dotenv": "^16.0.1",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.0.1",
     "jest": "^27.5.1",
+    "nx": "14.1.9",
     "prettier": "^2.5.1",
     "rollup": "^2.70.1",
     "rollup-plugin-dts": "^4.2.0",
     "rollup-plugin-license": "^2.7.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript-paths": "^1.3.1",
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5",
     "vite": "^2.9.9",
     "vue": "^3.2.36",
     "vue-eslint-parser": "^9.0.2",
-    "vue-tsc": "^0.34.7",
-    "dotenv": "^16.0.1"
+    "vue-tsc": "^0.34.7"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-spa": "^0.4.0"

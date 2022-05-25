@@ -4,6 +4,7 @@ import external from 'rollup-plugin-peer-deps-external';
 import dtsPlugin from 'rollup-plugin-dts';
 import licensePlugin from 'rollup-plugin-license';
 import path from 'path';
+import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 
 const { dependencies = {} } = require('./package.json');
 
@@ -19,9 +20,13 @@ const commonBanner = licensePlugin({
   },
 });
 
+const tsPathsPlugin = typescriptPaths({
+  tsConfigPath: path.resolve(__dirname, '../../tsconfig.json'),
+});
+
 const commonInput = {
   input: inputFile,
-  plugins: [jsonPlugin(), typescript(), external(), commonBanner],
+  plugins: [jsonPlugin(), tsPathsPlugin, typescript(), external(), commonBanner],
 };
 
 const commonOutput = {
@@ -52,7 +57,7 @@ export default [
   // TypeScript definition
   {
     ...commonInput,
-    plugins: [dtsPlugin(), commonBanner],
+    plugins: [tsPathsPlugin, typescript(), dtsPlugin(), commonBanner],
     output: {
       file: `${outputDirectory}/${artifactName}.d.ts`,
       format: 'es',

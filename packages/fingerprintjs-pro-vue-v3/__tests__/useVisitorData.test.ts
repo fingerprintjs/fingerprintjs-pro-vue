@@ -1,6 +1,6 @@
 import { config, mount } from '@vue/test-utils';
 import { fpjsPlugin } from '../src/plugin';
-import { FpjsVueOptions } from '../src/types';
+import { FpjsVueOptions } from '../../shared/src/types';
 import { useVisitorData } from '../src';
 import { onMounted, ref, watch } from 'vue';
 import { getVisitorData, init } from './setup';

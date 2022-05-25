@@ -2,7 +2,7 @@ import { fpjsPlugin } from './plugin';
 
 export * from './plugin';
 export * from './symbols';
-export * from './types';
+export * from 'shared/types';
 export * from './useVisitorData';
 export * from './useVisitorData.types';
 export * from './vue';

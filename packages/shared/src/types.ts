@@ -1,5 +1,4 @@
-import type { FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
-import { FpjsClient } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { FpjsClient, FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
 
 export type FpjsVueOptions = FpjsClientOptions;
 
