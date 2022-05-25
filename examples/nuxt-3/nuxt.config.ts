@@ -9,8 +9,8 @@ config({
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
-    API_KEY: process.env.API_KEY,
     public: {
+      // Inject FingerprintJS Pro API key
       API_KEY: process.env.API_KEY,
     },
   },

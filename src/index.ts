@@ -7,6 +7,15 @@ export * from './useVisitorData';
 export * from './useVisitorData.types';
 export * from './vue';
 
-export type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+export {
+  CacheLocation,
+  Cacheable,
+  ICache,
+  LocalStorageCache,
+  SessionStorageCache,
+  InMemoryCache,
+  LoadOptions,
+  VisitorData,
+} from '@fingerprintjs/fingerprintjs-pro-spa';
 
 export default fpjsPlugin;
