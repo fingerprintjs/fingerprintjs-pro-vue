@@ -6935,7 +6935,7 @@ vue-tsc@^0.34.7:
   dependencies:
     "@volar/vue-typescript" "0.34.16"
 
-vue@^3.2.33, vue@^3.2.36:
+vue@^3.1.0, vue@^3.2.33:
   version "3.2.36"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.36.tgz#8daa996e2ced521708de97d066c7c998e8bc3378"
   integrity sha512-5yTXmrE6gW8IQgttzHW5bfBiFA6mx35ZXHjGLDmKYzW6MMmYvCwuKybANRepwkMYeXw2v1buGg3/lPICY5YlZw==

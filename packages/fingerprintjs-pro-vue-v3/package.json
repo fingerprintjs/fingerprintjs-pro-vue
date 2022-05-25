@@ -8,6 +8,18 @@
     "type": "git",
     "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
   },
+  "keywords": [
+    "fraud",
+    "fraud detection",
+    "fraud prevention",
+    "browser",
+    "identification",
+    "fingerprint",
+    "fingerprinting",
+    "browser fingerprint",
+    "device fingerprint",
+    "privacy"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
@@ -22,7 +34,7 @@
     "dist"
   ],
   "peerDependencies": {
-    "vue": "^3.2.36"
+    "vue": "^3.1"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-spa": "^0.4.0"
