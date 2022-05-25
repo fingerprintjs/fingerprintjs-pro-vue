@@ -49,6 +49,12 @@ export const fpjsPlugin: Plugin = {
       agentOptions: GetOptions<TExtended>,
       ignoreCache?: boolean
     ) => {
+      if (typeof window === 'undefined') {
+        throw new Error(
+          'getVisitorData() can only be called in the browser. If you are using nuxt, you should apply our plugin only on client side.'
+        );
+      }
+
       await initPromise;
 
       return client.getVisitorData(agentOptions, ignoreCache);

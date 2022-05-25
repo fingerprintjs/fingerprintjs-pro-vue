@@ -1,6 +1,9 @@
 # Project artifacts
-/dist/
-/node_modules/
+dist/
+node_modules/
+
+.nuxt/
+.output/
 
 # Tests
 coverage

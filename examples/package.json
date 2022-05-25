@@ -1,0 +1,27 @@
+{
+  "name": "examples",
+  "workspaces": [
+    "nuxt-3",
+    "spa",
+    "components"
+  ],
+  "private": true,
+  "scripts": {
+    "build:spa": "yarn workspace spa-example build",
+    "dev:spa": "yarn workspace spa-example dev",
+    "build:nuxt-3": "yarn workspace nuxt-3-example build",
+    "dev:nuxt-3": "yarn workspace nuxt-3-example dev",
+    "build":  "yarn build:spa && yarn build:nuxt-3"
+  },
+  "dependencies": {
+    "@fingerprintjs/fingerprintjs-pro-vue": "link:../",
+    "vue": "link:../node_modules/vue"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "dotenv": "^16.0.1",
+    "typescript": "link:../node_modules/typescript",
+    "vite": "^2.9.9",
+    "vue-tsc": "^0.34.7"
+  }
+}

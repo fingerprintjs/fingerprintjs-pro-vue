@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FetchDataBtn from './FetchDataBtn.vue';
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue';
 import VisitorData from './VisitorData.vue';
 
 const props = defineProps<{
