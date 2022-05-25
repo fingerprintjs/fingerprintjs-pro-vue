@@ -2,9 +2,17 @@
   "name": "examples",
   "workspaces": [
     "nuxt-3",
-    "spa"
+    "spa",
+    "components"
   ],
   "private": true,
+  "scripts": {
+    "build:spa": "yarn workspace spa-example build",
+    "dev:spa": "yarn workspace spa-example dev",
+    "build:nuxt-3": "yarn workspace nuxt-3-example build",
+    "dev:nuxt-3": "yarn workspace nuxt-3-example dev",
+    "build":  "yarn build:spa && yarn build:nuxt-3"
+  },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-vue": "link:../",
     "vue": "link:../node_modules/vue"

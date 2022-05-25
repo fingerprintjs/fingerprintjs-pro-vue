@@ -1,6 +1,7 @@
 {
   "private": true,
-  "name": "nuxt-v3-example",
+  "name": "nuxt-3-example",
+  "version": "0.0.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -8,6 +9,6 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": ".0.0-rc.3"
+    "nuxt": "3.0.0-rc.3"
   }
 }
