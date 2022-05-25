@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { FpjsVueOptions, fpjsPlugin } from '@fingerprintjs/fingerprintjs-pro-vue';
+import { FpjsVueOptions, fpjsPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 
 const app = createApp(App);
 

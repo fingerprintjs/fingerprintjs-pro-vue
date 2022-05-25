@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue';
+import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 import VisitorInfoSection from './VisitorInfoSection.vue';
 
 export default defineComponent({

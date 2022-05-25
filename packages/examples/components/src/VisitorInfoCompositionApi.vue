@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue';
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 import VisitorInfoSection from './VisitorInfoSection.vue';
 import { watch } from 'vue';
 

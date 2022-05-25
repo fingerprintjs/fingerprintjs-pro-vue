@@ -14,10 +14,10 @@
     "noImplicitReturns": true
   },
   "files": [
-    "src/index.ts"
+    "**/.ts"
   ],
   "exclude": [
-    "dist",
+    "**/dist",
     "node_modules",
     "**/*.test.ts"
   ]

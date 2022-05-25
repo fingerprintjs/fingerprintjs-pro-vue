@@ -3,18 +3,18 @@ import jsonPlugin from '@rollup/plugin-json';
 import external from 'rollup-plugin-peer-deps-external';
 import dtsPlugin from 'rollup-plugin-dts';
 import licensePlugin from 'rollup-plugin-license';
-import { join } from 'path';
+import path from 'path';
 
 const { dependencies = {} } = require('./package.json');
 
-const inputFile = 'src/index.ts';
-const outputDirectory = 'dist';
+const inputFile = path.resolve(__dirname, 'src/index.ts');
+const outputDirectory = path.resolve(__dirname, 'dist');
 const artifactName = 'plugin';
 
 const commonBanner = licensePlugin({
   banner: {
     content: {
-      file: join(__dirname, 'resources', 'license_banner.txt'),
+      file: path.resolve(__dirname, '../../', 'resources', 'license_banner.txt'),
     },
   },
 });
@@ -25,12 +25,8 @@ const commonInput = {
 };
 
 const commonOutput = {
-  // name: 'MyFpJsLibrary', // Need for IIFE and UMD build. Name of global variable
   exports: 'named',
 };
-
-// Need for IIFE or UMD build
-// const commonTerser = terserPlugin(require('./terser.config.js'))
 
 export default [
   {
