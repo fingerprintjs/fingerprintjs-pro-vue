@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "nuxt-v3-example",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": ".0.0-rc.3"
+  }
+}
