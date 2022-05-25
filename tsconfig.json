@@ -11,13 +11,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "baseUrl": ".",
+    "paths": {
+      "shared/*": ["./packages/shared/src/*"]
+    }
   },
-  "files": [
-    "src/index.ts"
-  ],
   "exclude": [
-    "dist",
+    "**/dist",
     "node_modules",
     "**/*.test.ts"
   ]

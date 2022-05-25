@@ -1,0 +1,7 @@
+{
+  "name": "components-v3",
+  "version": "0.0.0",
+  "dependencies": {
+    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"
+  }
+}

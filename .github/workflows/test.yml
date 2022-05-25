@@ -19,12 +19,12 @@ jobs:
           key: nodemodules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: nodemodules-
       - name: Install Node packages
-        run: yarn install && yarn install --cwd examples/spa
+        run: yarn
       - name: Lint
         run: yarn lint
       - name: Tests
-        run: yarn test
+        run: yarn nx run-many --target=test --all
       - name: Build
-        run: yarn build && yarn run --cwd=examples build
+        run: yarn nx run-many --target=build --all
       - name: Typecheck
-        run: yarn test:dts
+        run: yarn nx run-many --target=test:dts --all
