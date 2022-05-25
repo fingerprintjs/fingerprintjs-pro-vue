@@ -4,7 +4,12 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['plugin:@typescript-eslint/eslint-recommended'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    'plugin:vue/essential',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:prettier/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
