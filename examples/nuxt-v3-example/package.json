@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "nuxt-3-example",
+  "name": "nuxt-v3-example",
   "version": "0.0.0",
   "scripts": {
     "build": "nuxt build",
