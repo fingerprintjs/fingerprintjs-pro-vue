@@ -42,8 +42,6 @@ const getOptions = (options: FpjsClientOptions) => {
  * */
 export const fpjsPlugin: Plugin = {
   install: (app, options: FpjsVueOptions) => {
-    console.log('Providing plugin...');
-
     const client = new FpjsClient(getOptions(options));
     const initPromise = client.init();
 
@@ -51,6 +49,12 @@ export const fpjsPlugin: Plugin = {
       agentOptions: GetOptions<TExtended>,
       ignoreCache?: boolean
     ) => {
+      if (typeof window === 'undefined') {
+        throw new Error(
+          'getVisitorData() can only be called in the browser. If you are using nuxt, you should apply our plugin only on client side.'
+        );
+      }
+
       await initPromise;
 
       return client.getVisitorData(agentOptions, ignoreCache);
@@ -60,8 +64,6 @@ export const fpjsPlugin: Plugin = {
 
     app.provide(GET_VISITOR_DATA, getVisitorData);
     app.provide(CLEAR_CACHE, clearCache);
-
-    console.log('Plugin provided!');
 
     app.config.globalProperties.$fpjs = {
       getVisitorData,
