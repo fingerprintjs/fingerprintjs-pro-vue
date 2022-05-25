@@ -1,7 +1,6 @@
 import { inject, onMounted, ref } from 'vue';
 import { GET_VISITOR_DATA } from './symbols';
-import type { GetOptions } from '@fingerprintjs/fingerprintjs-pro';
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { VisitorData, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
 import type { UseGetVisitorDataResult, UseVisitorDataConfig } from './useVisitorData.types';
 
 export function useVisitorData<TExtended extends boolean>(

@@ -1,7 +1,6 @@
 import type { Plugin } from 'vue';
-import { FpjsClient, FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
+import { FpjsClient, FpjsClientOptions, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
 import * as packageInfo from '../package.json';
-import type { GetOptions } from '@fingerprintjs/fingerprintjs-pro';
 import type { FpjsVueGlobalProperty, FpjsVueOptions } from './types';
 import { CLEAR_CACHE, GET_VISITOR_DATA } from './symbols';
 import { ClearCache, GetVisitorData } from './types';
@@ -44,12 +43,13 @@ const getOptions = (options: FpjsClientOptions) => {
 export const fpjsPlugin: Plugin = {
   install: (app, options: FpjsVueOptions) => {
     const client = new FpjsClient(getOptions(options));
+    const initPromise = client.init();
 
     const getVisitorData: GetVisitorData = async <TExtended extends boolean>(
       agentOptions: GetOptions<TExtended>,
       ignoreCache?: boolean
     ) => {
-      await client.init();
+      await initPromise;
 
       return client.getVisitorData(agentOptions, ignoreCache);
     };
