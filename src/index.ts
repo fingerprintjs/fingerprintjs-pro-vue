@@ -16,6 +16,8 @@ export {
   InMemoryCache,
   LoadOptions,
   VisitorData,
+  GetResult,
+  ExtendedGetResult,
 } from '@fingerprintjs/fingerprintjs-pro-spa';
 
 export default fpjsPlugin;
