@@ -6,7 +6,9 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
+    "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
     "@nuxt/vite-builder": "3.0.0-rc.3",

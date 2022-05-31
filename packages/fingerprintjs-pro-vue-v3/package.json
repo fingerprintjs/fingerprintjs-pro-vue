@@ -24,7 +24,9 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
     "test": "jest",
-    "test:dts": "tsc --noEmit dist/plugin.d.ts"
+    "test:dts": "tsc --noEmit dist/plugin.d.ts",
+    "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
+    "lint:fix": "yarn lint --fix"
   },
   "main": "dist/plugin.cjs.js",
   "module": "dist/plugin.esm.js",

@@ -21,8 +21,8 @@
     ]
   },
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix",
+    "lint": "nx run-many --target=lint --all",
+    "lint:fix": "nx run-many --target=lint:fix --all",
     "test": "nx run-many --target=test --all",
     "test:dts": "nx run-many --target=test:dts --all",
     "build": "nx run-many --target=build --all",
