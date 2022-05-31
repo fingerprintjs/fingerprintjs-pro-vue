@@ -8,13 +8,24 @@
     "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
   },
   "private": true,
-  "workspaces": [
-    "packages/**",
-    "examples/**"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/**",
+      "examples/**"
+    ],
+    "nohoist": [
+      "**/vue",
+      "vue",
+      "@nuxt/**",
+      "**/@nuxt/**"
+    ]
+  },
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --max-warnings 0 .",
     "lint:fix": "yarn lint --fix",
+    "test": "nx run-many --target=test --all",
+    "test:dts": "nx run-many --target=test:dts --all",
+    "build": "nx run-many --target=build --all",
     "nx": "nx"
   },
   "devDependencies": {
@@ -23,8 +34,6 @@
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vue/test-utils": "^2.0.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
@@ -41,8 +50,6 @@
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5",
-    "vite": "^2.9.9",
-    "vue": "^3.1",
     "vue-eslint-parser": "^9.0.2",
     "vue-tsc": "^0.34.7"
   },

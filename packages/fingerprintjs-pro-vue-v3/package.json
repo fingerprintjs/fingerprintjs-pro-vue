@@ -36,6 +36,10 @@
   "peerDependencies": {
     "vue": "^3.1"
   },
+  "devDependencies": {
+    "@vue/test-utils": "^2.0.0",
+    "vue": "^3.1"
+  },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-spa": "^0.4.0"
   }

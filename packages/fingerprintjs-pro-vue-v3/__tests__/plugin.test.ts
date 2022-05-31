@@ -1,6 +1,6 @@
 import { config, mount } from '@vue/test-utils';
 import { fpjsPlugin, FpjsVueOptions } from '../src';
-import { getVisitorData } from './setup';
+import { getVisitorData } from 'shared/tests/setup';
 
 const apiKey = 'API_KEY';
 const testData = {

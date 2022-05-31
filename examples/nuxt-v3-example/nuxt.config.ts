@@ -14,4 +14,9 @@ export default defineNuxtConfig({
       API_KEY: process.env.API_KEY,
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {},
+    },
+  },
 });
