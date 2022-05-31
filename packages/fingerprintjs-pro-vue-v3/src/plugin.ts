@@ -1,22 +1,9 @@
 import type { Plugin } from 'vue';
-import { FpjsClient, FpjsClientOptions, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
+import { FpjsClient, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
 import * as packageInfo from '../package.json';
 import { CLEAR_CACHE, GET_VISITOR_DATA } from './symbols';
 import { ClearCache, FpjsVueGlobalProperty, FpjsVueOptions, GetVisitorData } from 'shared/types';
-
-const getOptions = (options: FpjsClientOptions) => {
-  const clientOptions: FpjsClientOptions = {
-    ...options,
-    loadOptions: {
-      ...options.loadOptions,
-      integrationInfo: [
-        ...(options.loadOptions?.integrationInfo ?? []),
-        `fingerprintjs-pro-vue/${packageInfo.version}`,
-      ],
-    },
-  };
-  return clientOptions;
-};
+import { getOptions } from 'shared/config';
 
 /**
  * FingerprintJS Pro plugin
@@ -24,7 +11,7 @@ const getOptions = (options: FpjsClientOptions) => {
  * @example ```ts
  * import { createApp } from 'vue';
  * import App from './App.vue';
- * import fpjsPlugin, { FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue';
+ * import fpjsPlugin, { FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
  *
  * const app = createApp(App);
  *
@@ -41,7 +28,7 @@ const getOptions = (options: FpjsClientOptions) => {
  * */
 export const fpjsPlugin: Plugin = {
   install: (app, options: FpjsVueOptions) => {
-    const client = new FpjsClient(getOptions(options));
+    const client = new FpjsClient(getOptions(options, 'fingerprintjs-pro-vue-v3', packageInfo.version));
     const initPromise = client.init();
 
     const getVisitorData: GetVisitorData = async <TExtended extends boolean>(
