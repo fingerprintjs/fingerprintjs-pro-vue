@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import path from 'path';
 
 config({
-  path: path.resolve(__dirname, '../../../.env'),
+  path: path.resolve(__dirname, '../../.env'),
 });
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config

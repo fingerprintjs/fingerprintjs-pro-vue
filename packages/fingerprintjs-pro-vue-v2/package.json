@@ -38,9 +38,6 @@
   "peerDependencies": {
     "vue": "^2.6"
   },
-  "resolutions": {
-    "vue-template-compiler": "^2.6.14"
-  },
   "devDependencies": {
     "@vue/test-utils": "^1.3.0",
     "vue": "^2.6",

@@ -31,7 +31,7 @@ describe('fpjsPlugin', () => {
       {
         template: '<h1>Hello world</h1>',
         mounted() {
-          expect(this.$fpjs).toBeDefined();
+          expect(this).toBeDefined();
         },
       },
       {

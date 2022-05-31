@@ -6,4 +6,8 @@ declare module 'vue' {
   interface ComponentOptions<V extends BaseVue> {
     $fpjs?: FpjsVueGlobalProperty;
   }
+
+  interface Vue {
+    $fpjs?: FpjsVueGlobalProperty;
+  }
 }

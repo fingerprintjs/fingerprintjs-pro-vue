@@ -1,0 +1,14 @@
+{
+  "name": "components-v2",
+  "version": "0.0.0",
+  "dependencies": {
+    "@fingerprintjs/fingerprintjs-pro-vue-v2": "link:../../packages/fingerprintjs-pro-vue-v2"
+  },
+  "devDependencies": {
+    "vue": "^2.6"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
+    "lint:fix": "yarn lint --fix"
+  }
+}
