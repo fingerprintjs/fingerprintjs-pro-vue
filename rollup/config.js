@@ -6,7 +6,7 @@ import licensePlugin from 'rollup-plugin-license';
 import path from 'path';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 
-export function getRollupConfig(dependencies, dirname) {
+export function getRollupConfig({ dependencies, dirname }) {
   const inputFile = path.resolve(dirname, 'src/index.ts');
   const outputDirectory = path.resolve(dirname, 'dist');
   const artifactName = 'plugin';
@@ -32,6 +32,15 @@ export function getRollupConfig(dependencies, dirname) {
     exports: 'named',
   };
 
+  const makeTsDefinition = (input, outName) => ({
+    input,
+    plugins: [tsPathsPlugin, typescript(), dtsPlugin(), commonBanner],
+    output: {
+      file: `${outputDirectory}/${outName}.d.ts`,
+      format: 'es',
+    },
+  });
+
   return [
     {
       ...commonInput,
@@ -54,13 +63,6 @@ export function getRollupConfig(dependencies, dirname) {
     },
 
     // TypeScript definition
-    {
-      ...commonInput,
-      plugins: [tsPathsPlugin, typescript(), dtsPlugin(), commonBanner],
-      output: {
-        file: `${outputDirectory}/${artifactName}.d.ts`,
-        format: 'es',
-      },
-    },
+    makeTsDefinition(inputFile, artifactName),
   ];
 }

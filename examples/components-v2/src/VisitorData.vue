@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -10,7 +10,7 @@ export default Vue.extend({
       error: null,
     } as {
       isLoading: boolean;
-      visitorData: Data<true> | null;
+      visitorData: VisitorData<true> | null;
       error: Error | null;
     };
   },
