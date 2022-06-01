@@ -23,6 +23,10 @@ export default Vue.extend({
   },
   methods: {
     async getData() {
+      if (!this.$fpjs) {
+        return;
+      }
+
       try {
         this.isLoading = true;
 
