@@ -6,10 +6,15 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
+    "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.3"
+    "@nuxt/vite-builder": "3.0.0-rc.3",
+    "vue": "^3.1",
+    "nuxt": "3.0.0-rc.3",
+    "vite": "^2.9.9"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"

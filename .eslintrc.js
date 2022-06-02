@@ -29,7 +29,7 @@ module.exports = {
     },
   },
   plugins: ['@typescript-eslint', 'prettier'],
-  ignorePatterns: ['build/*'],
+  ignorePatterns: ['build/*', 'node_modules/*', 'dist/*'],
   rules: {
     semi: 'off',
     'linebreak-style': ['error', 'unix'],

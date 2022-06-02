@@ -1,5 +1,5 @@
 {
-  "name": "spa-v3-example",
+  "name": "spa-v2-example",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -11,9 +11,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "vue": "^3.1"
+    "vite-plugin-vue2": "^2.0.1",
+    "vue": "^2.6.14"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"
+    "@fingerprintjs/fingerprintjs-pro-vue-v2": "link:../../packages/fingerprintjs-pro-vue-v2"
   }
 }
