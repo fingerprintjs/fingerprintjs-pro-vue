@@ -26,11 +26,14 @@
     "test": "nx run-many --target=test --all",
     "test:dts": "nx run-many --target=test:dts --all",
     "build": "nx run-many --target=build --all",
+    "semantic-release": "nx run-many --target=semantic-release --all --maxParallel=1",
     "nx": "nx"
   },
   "devDependencies": {
+    "@nrwl/workspace": "^14.1.9",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.3.1",
+    "@theunderscorer/nx-semantic-release": "1.11.0",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
@@ -55,5 +58,9 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-spa": "^0.4.0"
+  },
+  "nxrelease": {
+    "repositoryUrl": "https://github.com/fingerprintjs/fingerprintjs-pro-vue",
+    "github": true
   }
 }
