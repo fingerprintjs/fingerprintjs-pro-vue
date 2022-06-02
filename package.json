@@ -21,6 +21,8 @@
     ]
   },
   "scripts": {
+    "prepare": "husky install",
+    "cm": "cz",
     "lint": "nx run-many --target=lint --all",
     "lint:fix": "nx run-many --target=lint:fix --all",
     "test": "nx run-many --target=test --all",
@@ -30,6 +32,8 @@
     "nx": "nx"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
     "@nrwl/workspace": "^14.1.9",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.3.1",
@@ -37,11 +41,13 @@
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.0.1",
+    "husky": "^8.0.1",
     "jest": "^27.5.1",
     "nx": "14.1.9",
     "prettier": "^2.5.1",
