@@ -30,16 +30,10 @@
         "projects": "dependencies"
       }
     ],
-    "prepare": [
+    "semantic-release": [
       {
-        "target": "prepare",
-        "projects": "dependencies"
-      }
-    ],
-    "package": [
-      {
-        "target": "package",
-        "projects": "dependencies"
+        "target": "build",
+        "projects": "self"
       }
     ]
   },

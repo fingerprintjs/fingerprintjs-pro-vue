@@ -1,5 +1,19 @@
 {
   "projectType": "library",
   "tags": [],
-  "implicitDependencies": ["shared"]
+  "implicitDependencies": ["shared"],
+  "targets": {
+    "semantic-release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release",
+      "options": {
+        "outputPath": "./",
+        "tagFormat": "fingerprintjs-pro-vue3-v${version}"
+      },
+      "configurations": {
+        "dry": {
+          "dryRun": true
+        }
+      }
+    }
+  }
 }
