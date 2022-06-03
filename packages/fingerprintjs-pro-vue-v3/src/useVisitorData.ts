@@ -1,11 +1,12 @@
 import { inject, onMounted, ref } from 'vue';
 import { GET_VISITOR_DATA } from './symbols';
-import type { VisitorData, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
-import type { UseGetVisitorDataResult, UseVisitorDataConfig } from './useVisitorData.types';
+import type { GetOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { UseGetVisitorDataResult } from './useVisitorData.types';
+import { FpjsVueQueryOptions } from 'shared/types';
 
 export function useVisitorData<TExtended extends boolean>(
   options: GetOptions<TExtended> = {},
-  { immediate = true }: UseVisitorDataConfig = {}
+  { immediate = true }: FpjsVueQueryOptions = {}
 ): UseGetVisitorDataResult<TExtended> {
   const data = ref<VisitorData<TExtended> | undefined>();
   const isLoading = ref(false);
