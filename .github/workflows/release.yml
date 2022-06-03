@@ -1,8 +1,7 @@
 name: Release
+# TODO - Change to trigger on every push to main after repository is ready
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   release:
