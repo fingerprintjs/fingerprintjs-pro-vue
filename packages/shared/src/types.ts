@@ -5,7 +5,7 @@ export type FpjsVueOptions = FpjsClientOptions;
 export type GetVisitorData = FpjsClient['getVisitorData'];
 export type ClearCache = FpjsClient['clearCache'];
 
-export interface FpjsVueGlobalProperty {
+export interface FpjsVueGlobalClient {
   getVisitorData: GetVisitorData;
   clearCache: ClearCache;
 }

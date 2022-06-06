@@ -1,11 +1,11 @@
 import type { GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
-import type { FpjsVisitorQueryData, FpjsVueGlobalProperty, GetDataOptions } from 'shared/types';
+import type { FpjsVisitorQueryData, FpjsVueGlobalClient, GetDataOptions } from 'shared/types';
 
 export type FpjsGetVisitorDataMethodThis = {
   $root: {
-    $fpjs?: FpjsVueGlobalProperty;
+    $fpjs?: FpjsVueGlobalClient;
   };
-  $fpjs?: FpjsVueGlobalProperty;
+  $fpjs?: FpjsVueGlobalClient;
 } & Partial<FpjsVisitorQueryData<boolean>>;
 
 export type FpjsGetVisitorDataMethod = (

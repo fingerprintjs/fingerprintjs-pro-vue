@@ -1,7 +1,7 @@
-import type { FpjsVueGlobalProperty } from 'shared/types';
+import type { FpjsVueGlobalClient } from 'shared/types';
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $fpjs: FpjsVueGlobalProperty;
+    $fpjs: FpjsVueGlobalClient;
   }
 }

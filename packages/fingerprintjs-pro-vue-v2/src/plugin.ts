@@ -1,6 +1,6 @@
 import type { PluginObject } from 'vue';
 import { FpjsClient } from '@fingerprintjs/fingerprintjs-pro-spa';
-import { FpjsVueGlobalProperty, FpjsVueOptions } from 'shared/types';
+import { FpjsVueGlobalClient, FpjsVueOptions } from 'shared/types';
 import { getOptions } from 'shared/config';
 import * as packageInfo from '../package.json';
 import { makeClientMethods } from 'shared/client';
@@ -39,6 +39,6 @@ export const fpjsPlugin: PluginObject<FpjsVueOptions> = {
     Vue.prototype.$fpjs = {
       getVisitorData,
       clearCache,
-    } as FpjsVueGlobalProperty;
+    } as FpjsVueGlobalClient;
   },
 };
