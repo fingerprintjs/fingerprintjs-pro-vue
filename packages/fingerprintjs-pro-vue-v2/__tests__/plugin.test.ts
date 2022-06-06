@@ -27,36 +27,30 @@ describe('fpjsPlugin', () => {
   });
 
   it('should expose global properties', () => {
-    mount(
+    const { vm } = mount(
       {
         template: '<h1>Hello world</h1>',
-        mounted() {
-          expect(this).toBeDefined();
-        },
       },
       {
         localVue,
       }
     );
+
+    expect(vm.$fpjs).toBeTruthy();
   });
 
   it('should support fetching data using global properties', async () => {
     getVisitorData.mockResolvedValue(testData);
 
-    await new Promise<void>((resolve) => {
-      mount(
-        {
-          template: '<h1>Hello world</h1>',
-          async mounted() {
-            const result = await this.$fpjs?.getVisitorData();
+    const { vm } = mount(
+      {
+        template: '<h1>Hello world</h1>',
+      },
+      { localVue }
+    );
 
-            expect(result).toEqual(testData);
+    const result = await vm.$fpjs?.getVisitorData();
 
-            resolve();
-          },
-        },
-        { localVue }
-      );
-    });
+    expect(result).toEqual(testData);
   });
 });

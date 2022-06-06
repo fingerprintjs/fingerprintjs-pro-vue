@@ -6,6 +6,7 @@ export * from 'shared/types';
 export * from './useVisitorData';
 export * from './useVisitorData.types';
 export * from './vue';
+export * from 'shared/mixins';
 
 export {
   CacheLocation,

@@ -40,17 +40,17 @@ Object {
   it('should support fetching data using global properties', async () => {
     getVisitorData.mockResolvedValue(testData);
 
-    await new Promise<void>((resolve) => {
-      mount({
-        template: '<h1>Hello world</h1>',
-        async mounted() {
-          const result = await this.$fpjs.getVisitorData();
+    const { vm } = mount({
+      template: '<h1>Hello world</h1>',
+      async mounted() {
+        const result = await this.$fpjs.getVisitorData();
 
-          expect(result).toEqual(testData);
-
-          resolve();
-        },
-      });
+        expect(result).toEqual(testData);
+      },
     });
+
+    const result = await vm.$fpjs.getVisitorData();
+
+    expect(result).toEqual(testData);
   });
 });
