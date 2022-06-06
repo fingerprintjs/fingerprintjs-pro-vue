@@ -1,5 +1,6 @@
 import type { FpjsVisitorQueryData } from 'shared/types';
 import type { FpjsGetVisitorDataMethod } from 'shared/mixins.types';
+import { GetVisitorDataMethodParams } from 'shared/mixins.types';
 
 function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   this: any,
@@ -14,7 +15,7 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
   const suffix = extended ? 'Extended' : '';
 
   const name = `$visitorData${suffix}` as const;
-  const dataName = `${name.slice(1)}`;
+  const dataName = `${name.slice(1)}` as 'visitorData' | 'visitorDataExtended';
   const methodName = `$getVisitorData${suffix}` as const;
 
   const getVisitorData: FpjsGetVisitorDataMethod = async function (options) {
@@ -66,9 +67,9 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
       };
     },
     methods: {
-      [methodName]: getVisitorData,
+      [methodName]: getVisitorData as (options?: GetVisitorDataMethodParams) => Promise<void>,
     },
-  };
+  } as const;
 }
 
 // TODO Add jsdoc examples

@@ -8,9 +8,11 @@ export type FpjsGetVisitorDataMethodThis = {
   $fpjs?: FpjsVueGlobalClient;
 };
 
+export type GetVisitorDataMethodParams = Omit<GetOptions<boolean>, 'extendedResult'> & GetDataOptions;
+
 export type FpjsGetVisitorDataMethod = (
   this: FpjsGetVisitorDataMethodThis,
-  options?: Omit<GetOptions<boolean>, 'extendedResult'> & GetDataOptions
+  options?: GetVisitorDataMethodParams
 ) => Promise<void>;
 
 interface FpjsVueMixin<TExtended extends boolean> extends FpjsVisitorQueryData<TExtended> {
