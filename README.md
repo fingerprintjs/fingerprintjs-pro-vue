@@ -27,5 +27,5 @@
 # FingerprintJS Pro Vue
 
 FingerprintJS Pro Vue is an easy-to-use Vue plugin for [FingerprintJS Pro](https://fingerprintjs.com/). 
-Example apps can be found in the [examples](./examples) folder. 
+Example apps can be found in the [examples](./examples) folder. Libraries that we publish to NPM can be found in the [packages](./packages) folder.
 This package works with FingerprintJS Pro, it is not compatible with open-source FingerprintJS. You can learn more about the difference between FingerprintJS Pro and open-source FingerprintJS in the [official documentation](https://dev.fingerprintjs.com/docs/pro-vs-open-source).

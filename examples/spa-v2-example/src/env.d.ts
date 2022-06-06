@@ -3,10 +3,9 @@
  * */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { FpjsVueGlobalProperty, FpjsVueMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import type { FpjsVueGlobal, FpjsVueGlobalProperty, FpjsVueMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 import type Vue from 'vue';
 import 'vite/client';
-import type { FpjsVueGlobal } from '@fingerprintjs/fingerprintjs-pro-vue-v2/src/types';
 
 declare module 'vue/types/options' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

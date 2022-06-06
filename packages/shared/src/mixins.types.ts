@@ -10,8 +10,8 @@ export type FpjsGetVisitorDataMethodThis = {
 
 export type GetVisitorDataMethodParams = Omit<GetOptions<boolean>, 'extendedResult'> & GetDataOptions;
 
-export type FpjsGetVisitorDataMethod = (
-  this: FpjsGetVisitorDataMethodThis,
+export type FpjsGetVisitorDataMethod<This = FpjsGetVisitorDataMethodThis> = (
+  this: This,
   options?: GetVisitorDataMethodParams
 ) => Promise<void>;
 
@@ -20,8 +20,8 @@ interface FpjsVueMixin<TExtended extends boolean> extends FpjsVisitorQueryData<T
 }
 
 export interface FpjsVueMixins {
-  $getVisitorData: FpjsGetVisitorDataMethod;
-  $getVisitorDataExtended: FpjsGetVisitorDataMethod;
+  $getVisitorData: FpjsGetVisitorDataMethod<any>;
+  $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>;
 
   visitorData: FpjsVueMixin<false>;
   visitorDataExtended: FpjsVueMixin<true>;

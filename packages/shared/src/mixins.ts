@@ -14,8 +14,7 @@ function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
 export function createMixin<TExtended extends boolean>(extended: TExtended) {
   const suffix = extended ? 'Extended' : '';
 
-  const name = `$visitorData${suffix}` as const;
-  const dataName = `${name.slice(1)}` as 'visitorData' | 'visitorDataExtended';
+  const dataName = extended ? 'visitorDataExtended' : 'visitorData';
   const methodName = `$getVisitorData${suffix}` as const;
 
   const getVisitorData: FpjsGetVisitorDataMethod = async function (options) {

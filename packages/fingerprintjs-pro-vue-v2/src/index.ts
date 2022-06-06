@@ -3,6 +3,7 @@ import { fpjsPlugin } from './plugin';
 export * from './plugin';
 export * from 'shared/types';
 export * from './vue';
+export * from './types';
 
 export { FpjsGetVisitorDataMethod, FpjsVueMixins, FpjsGetVisitorDataMethodThis } from 'shared/mixins.types';
 
