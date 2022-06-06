@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 
 export default Vue.extend({
   props: {
@@ -10,7 +9,7 @@ export default Vue.extend({
       type: String,
     },
     data: {
-      type: Object as PropType<Data<boolean>>,
+      type: Object as PropType<any>,
       required: false,
       default: undefined,
     },

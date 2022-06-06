@@ -11,9 +11,9 @@ export default Vue.extend({
 
 <template>
   <visitor-data-section
-    :is-loading="$data.$visitorData.isLoading"
-    :error="$data.$visitorData.error"
-    :data="$data.$visitorData.data"
+    :is-loading="visitorData.isLoading"
+    :error="visitorData.error"
+    :data="visitorData.data"
     @get-data="$getVisitorData"
   />
 </template>

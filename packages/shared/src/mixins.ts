@@ -10,17 +10,16 @@ function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   this.$data[dataName][key] = value;
 }
 
-// TODO Add test
 export function createMixin<TExtended extends boolean>(extended: TExtended) {
   const suffix = extended ? 'Extended' : '';
 
   const name = `$visitorData${suffix}` as const;
-  const dataName = `${name}` as const;
+  const dataName = `${name.slice(1)}`;
   const methodName = `$getVisitorData${suffix}` as const;
 
   const getVisitorData: FpjsGetVisitorDataMethod = async function (options) {
     /**
-     * We use this.$root as a fallback, because in nuxt sometimes the this.$fpjs might be empty, but it might exist in $root
+     * We use this.$root as a fallback, because in nuxt sometimes this.$fpjs might be empty, but it might exist in $root
      * */
     const fpjs = this.$fpjs ?? this.$root?.$fpjs;
     const boundSetData = setMixinData.bind(this);
@@ -43,7 +42,7 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
         'data',
         await fpjs.getVisitorData(
           {
-            ...options,
+            ...(options ?? {}),
             extendedResult: extended,
           },
           options?.ignoreCache
@@ -73,6 +72,5 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
 }
 
 // TODO Add jsdoc examples
-
 export const fpjsGetVisitorDataMixin = createMixin(false);
 export const fpjsGetVisitorDataExtendedMixin = createMixin(true);
