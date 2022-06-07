@@ -1,3 +1,13 @@
-# Vue 2 + TypeScript + Vite
+# Spa Vue 2 Example
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+To run the example,
+
+1. Create `.env` file at the repository root:
+```dotenv
+API_KEY=<YOUR_API_KEY>
+```
+
+2. Execute following command from the root directory:
+```shell
+yarn nx run spa-v2-example:dev
+```

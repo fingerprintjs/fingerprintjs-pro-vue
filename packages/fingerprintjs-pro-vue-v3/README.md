@@ -202,6 +202,44 @@ export default defineComponent({
 </template>
 ```
 
+## Nuxt
+
+Our plugin works with Nuxt out of the box, however you need to remember to only register it ony client side.
+
+```typescript
+// plugins/fingerprintjs.client.ts
+import { defineNuxtPlugin, useRuntimeConfig } from '#app';
+import { fpjsPlugin, FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig();
+
+  nuxtApp.vueApp.use(fpjsPlugin, {
+    loadOptions: {
+      apiKey: config.public.API_KEY,
+    },
+  } as FpjsVueOptions);
+});
+```
+
+```typescript
+//nuxt.config.ts
+
+import { defineNuxtConfig } from 'nuxt';
+import path from 'path';
+
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      // Inject FingerprintJS Pro API key
+      API_KEY: process.env.API_KEY,
+    },
+  }
+});
+```
+
+You can also check [example Nuxt Application](../../examples/nuxt-v3-example).
+
 ## Caching strategy
 
 :warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
@@ -221,3 +259,10 @@ please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fi
 require private support, please email us at oss-support@fingerprintjs.com. If you'd like to have a similar Vue library
 for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs),
 consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
+
+## Examples
+
+You can find following examples in the [examples](../../examples) directory:
+
+- [SPA Application](../../examples/spa-v3-example)
+- [Nuxt Application](../../examples/nuxt-v3-example)

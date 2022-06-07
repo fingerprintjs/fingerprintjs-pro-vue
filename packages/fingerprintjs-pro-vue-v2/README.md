@@ -171,6 +171,37 @@ export default Vue.extend({
 </template>
 ```
 
+## Nuxt
+
+Our plugin works with Nuxt out of the box, however you need to remember to only register it ony client side.
+
+```typescript
+// plugins/fingerprintjs.client.ts
+import { fpjsPlugin, FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import Vue from 'vue';
+
+Vue.use(fpjsPlugin, {
+  loadOptions: {
+    apiKey: process.env.API_KEY,
+  },
+} as FpjsVueOptions);
+```
+
+```javascript
+//nuxt.config.js
+
+import path from 'path';
+
+export default {
+  // Load our plugin, ".client" suffix ensures that it is only loaded on client side.
+  plugins: ['~/plugins/fingerprintjs.client.ts'],
+  
+  // Other configurations...
+};
+```
+
+You can also check [example Nuxt Application](../../examples/nuxt-v2-example).
+
 ## Caching strategy
 
 :warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
@@ -196,3 +227,10 @@ consider [raising an issue in our issue tracker](https://github.com/fingerprintj
 TODO Link to typedoc hosted on GH Pages.
 
 You can find detailed documentation and API reference [here](#).
+
+## Examples
+
+You can find following examples in the [examples](../../examples) directory:
+
+- [SPA Application](../../examples/spa-v2-example)
+- [Nuxt Application](../../examples/nuxt-v2-example)
