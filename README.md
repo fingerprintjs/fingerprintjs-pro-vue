@@ -29,3 +29,32 @@
 FingerprintJS Pro Vue is an easy-to-use Vue plugin for [FingerprintJS Pro](https://fingerprintjs.com/). 
 Example apps can be found in the [examples](./examples) folder. Libraries that we publish to NPM can be found in the [packages](./packages) folder.
 This package works with FingerprintJS Pro, it is not compatible with open-source FingerprintJS. You can learn more about the difference between FingerprintJS Pro and open-source FingerprintJS in the [official documentation](https://dev.fingerprintjs.com/docs/pro-vs-open-source).
+
+## Installation
+Currently, we are supporting Vue 2.6.x and Vue 3.1.x.
+
+If you are using Vue 2.6.x:
+```shell
+yarn add @fingerprintjs/fingerprintjs-pro-vue-2
+```
+Or:
+```shell
+npm install @fingerprintjs/fingerprintjs-pro-vue-2
+```
+---
+If you are using Vue 3.1.x:
+```shell
+yarn add @fingerprintjs/fingerprintjs-pro-vue-3
+```
+Or:
+```shell
+npm install @fingerprintjs/fingerprintjs-pro-vue-3
+```
+
+## Getting started
+For instructions on how to use the plugin, see the readme for respective Vue versions:
+- [Vue 2.6.x](./packages/fingerprintjs-pro-vue-v2/README.md)
+- [Vue 3.1.x](./packages/fingerprintjs-pro-vue-v3/README.md)
+
+## Support and feedback
+For support or to provide feedback, please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you require private support, please email us at oss-support@fingerprintjs.com. If you'd like to have a similar Vue library for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
