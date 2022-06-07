@@ -71,6 +71,80 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
   } as const;
 }
 
-// TODO Add jsdoc examples
+/**
+ * Mixin for fetching normal visitorData
+ *
+ * @example ```vue
+ *
+ * <script>
+ * import { fpjsGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+ * //import { fpjsGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+ *
+ * export default {
+ *   // Include our mixin
+ *   mixins: [fpjsGetVisitorDataMixin],
+ *   async mounted() {
+ *     // You can also fetch data on mount
+ *     // await this.$getVisitorData();
+ *   }
+ * };
+ * </script>
+ *
+ * <template>
+ *   <div>
+ *     <button @click='$getVisitorData'>
+ *       Get visitor data
+ *     </button>
+ *     <span v-if='visitorData.isLoading'>
+ *       Loading...
+ *     </span>
+ *     <span v-else-if='visitorData.isError'>
+ *       Error: {{ visitorData.error }}
+ *     </span>
+ *     <span v-else>
+ *       <!--Do something with visitorData here-->
+ *     </span>
+ *   </div>
+ * </template>
+ * ```
+ * */
 export const fpjsGetVisitorDataMixin = createMixin(false);
+
+/**
+ * Mixin for fetching extended visitorData
+ *
+ * @example ```vue
+ *
+ * <script>
+ * import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+ * //import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+ *
+ * export default {
+ *   // Include our mixin
+ *   mixins: [fpjsGetVisitorDataExtendedMixin],
+ *   async mounted() {
+ *     // You can also fetch data on mount
+ *     // await this.$getVisitorDataExtended();
+ *   }
+ * );
+ * </script>
+ *
+ * <template>
+ *   <div>
+ *     <button @click='$getVisitorDataExtended'>
+ *       Get visitor data
+ *     </button>
+ *     <span v-if='visitorDataExtended.isLoading'>
+ *       Loading...
+ *     </span>
+ *     <span v-else-if='visitorDataExtended.isError'>
+ *       Error: {{ visitorDataExtended.error }}
+ *     </span>
+ *     <span v-else>
+ *       <!--Do something with visitorData here-->
+ *     </span>
+ *   </div>
+ * </template>
+ * ```
+ * */
 export const fpjsGetVisitorDataExtendedMixin = createMixin(true);
