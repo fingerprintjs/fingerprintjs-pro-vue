@@ -15,14 +15,24 @@ export type FpjsGetVisitorDataMethod<This = FpjsGetVisitorDataMethodThis> = (
   options?: GetVisitorDataMethodParams
 ) => Promise<void>;
 
-interface FpjsVueMixin<TExtended extends boolean> extends FpjsVisitorQueryData<TExtended> {
-  $getVisitorData?: FpjsGetVisitorDataMethod;
-}
-
 export interface FpjsVueMixins {
+  /**
+   * Method for fetching visitor data
+   * */
   $getVisitorData: FpjsGetVisitorDataMethod<any>;
+
+  /**
+   * Method for fetching extended data
+   * */
   $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>;
 
-  visitorData: FpjsVueMixin<false>;
-  visitorDataExtended: FpjsVueMixin<true>;
+  /**
+   * Query state for visitor data
+   * */
+  visitorData: FpjsVisitorQueryData<false>;
+
+  /**
+   * Query state for extended visitor data
+   * */
+  visitorDataExtended: FpjsVisitorQueryData<true>;
 }
