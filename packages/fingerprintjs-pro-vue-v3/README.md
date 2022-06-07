@@ -33,13 +33,13 @@ FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](htt
 To install plugin run:
 
 ```shell
-yarn add @fingerprintjs/fingerprintjs-pro-vue-2
+yarn add @fingerprintjs/fingerprintjs-pro-vue-3
 ```
 
 Or:
 
 ```shell
-npm install @fingerprintjs/fingerprintjs-pro-vue-2
+npm install @fingerprintjs/fingerprintjs-pro-vue-3
 ```
 
 ## Getting started
@@ -72,9 +72,37 @@ app
 ```
 Refer to example usages below.
 
+## Composition API
+
+Our plugin exposes `useVisitorData` function that you can use like this:
+
+```vue
+<script setup>
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { watch } from 'vue';
+
+const { data, error, isLoading, getData } = useVisitorData(
+  { extendedResult: true }, 
+  // Set to true to fetch data on mount
+  { immediate: false }
+);
+
+watch(data, (currentData) => {
+  if (currentData) {
+    // Do something with the data
+  }
+});
+</script>
+
+<template>
+  <button @click='getData'>Get visitor data</button>
+</template>
+
+```
+
 ## Options API
 
-You can access global `$fpjs` object like this.
+Our plugin injects `$fpjs` object into your components, and you can use it like this:
 ```vue
 
 <script lang='ts'>
@@ -138,7 +166,6 @@ export default defineComponent({
 </template>
 ```
 
----
 For normal result:
 
 ```vue

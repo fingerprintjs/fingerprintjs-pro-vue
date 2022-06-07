@@ -1,6 +1,11 @@
 import { fpjsPlugin } from './plugin';
 
 export * from './plugin';
+
+export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from 'shared/mixins';
+
+export default fpjsPlugin;
+
 export * from 'shared/types';
 export * from './vue';
 export * from './types';
@@ -20,7 +25,3 @@ export {
   ExtendedGetResult,
   FpjsClientOptions,
 } from '@fingerprintjs/fingerprintjs-pro-spa';
-
-export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from 'shared/mixins';
-
-export default fpjsPlugin;

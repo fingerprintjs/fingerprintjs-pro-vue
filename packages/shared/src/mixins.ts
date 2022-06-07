@@ -11,7 +11,7 @@ function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   this.$data[dataName][key] = value;
 }
 
-export function createMixin<TExtended extends boolean>(extended: TExtended) {
+function createMixin<TExtended extends boolean>(extended: TExtended) {
   const suffix = extended ? 'Extended' : '';
 
   const dataName = extended ? 'visitorDataExtended' : 'visitorData';
@@ -108,7 +108,12 @@ export function createMixin<TExtended extends boolean>(extended: TExtended) {
  * </template>
  * ```
  * */
-export const fpjsGetVisitorDataMixin = createMixin(false);
+export const fpjsGetVisitorDataMixin = createMixin(false) as {
+  data: () => { visitorData: FpjsVisitorQueryData<false> };
+  methods: {
+    $getVisitorData: FpjsGetVisitorDataMethod<any>;
+  };
+};
 
 /**
  * Mixin for fetching extended visitorData
@@ -147,4 +152,9 @@ export const fpjsGetVisitorDataMixin = createMixin(false);
  * </template>
  * ```
  * */
-export const fpjsGetVisitorDataExtendedMixin = createMixin(true);
+export const fpjsGetVisitorDataExtendedMixin = createMixin(true) as {
+  data: () => { visitorDataExtended: FpjsVisitorQueryData<true> };
+  methods: {
+    $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>;
+  };
+};

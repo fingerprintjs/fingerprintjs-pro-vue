@@ -1,4 +1,1 @@
-module.exports = {
-  excludePrivate: true,
-  excludeProtected: true,
-};
+module.exports = require('../../typedoc');
