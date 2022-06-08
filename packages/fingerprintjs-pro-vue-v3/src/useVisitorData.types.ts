@@ -1,27 +1,11 @@
 import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
 import type { Ref } from 'vue';
+import type { FpjsVisitorQueryData, GetDataOptions } from 'shared/types';
 
-export interface UseVisitorDataConfig {
-  /**
-   * Determines whether the `getData()` method will be called immediately after function is called or not
-   *
-   * @default true
-   */
-  immediate?: boolean;
-}
+type AsRefs<T> = {
+  [K in keyof T]: Ref<T[K]>;
+};
 
-export interface GetDataOptions {
-  /**
-   * Determines whether the method should ignore cache
-   *
-   * @default false
-   * */
-  ignoreCache?: boolean;
-}
-
-export interface UseGetVisitorDataResult<TExtended extends boolean> {
-  data: Ref<VisitorData<TExtended> | undefined>;
-  error: Ref<Error | undefined>;
-  isLoading: Ref<boolean>;
+export type UseGetVisitorDataResult<TExtended extends boolean> = AsRefs<FpjsVisitorQueryData<TExtended>> & {
   getData: (options?: GetDataOptions) => Promise<VisitorData<TExtended> | undefined>;
-}
+};

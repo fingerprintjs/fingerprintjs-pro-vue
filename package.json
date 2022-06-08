@@ -17,7 +17,9 @@
       "**/vue",
       "vue",
       "@nuxt/**",
-      "**/@nuxt/**"
+      "**/@nuxt/**",
+      "nuxt/**",
+      "**/nuxt/**"
     ]
   },
   "scripts": {

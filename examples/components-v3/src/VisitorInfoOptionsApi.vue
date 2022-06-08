@@ -1,41 +1,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 import VisitorInfoSection from './VisitorInfoSection.vue';
 
 export default defineComponent({
   components: { VisitorInfoSection },
-  data() {
-    return {
-      isLoading: false,
-      visitorData: null,
-      error: null,
-    } as {
-      isLoading: boolean;
-      visitorData: Data<true> | null;
-      error: Error | null;
-    };
-  },
+  mixins: [fpjsGetVisitorDataExtendedMixin],
   watch: {
-    visitorData(currentData) {
-      if (currentData) {
-        console.log('Fetched data using Options API', currentData);
-      }
+    'visitorDataExtended.data': {
+      deep: true,
+      handler(data) {
+        if (data) {
+          console.log('Fetched data using Options API', data);
+        }
+      },
     },
   },
   methods: {
-    async getData() {
-      try {
-        this.isLoading = true;
-
-        this.visitorData = await this.$fpjs.getVisitorData({
-          extendedResult: true,
-        });
-      } catch (error) {
-        this.error = error as Error;
-      } finally {
-        this.isLoading = false;
-      }
+    getData() {
+      return this.$getVisitorDataExtended?.();
     },
   },
 });
@@ -44,9 +27,9 @@ export default defineComponent({
 <template>
   <visitor-info-section
     button-text="Get visitor data using Options API"
-    :is-loading="isLoading"
-    :error="error"
-    :data="visitorData"
+    :is-loading="visitorDataExtended.isLoading"
+    :error="visitorDataExtended.error"
+    :data="visitorDataExtended.data"
     @btn-click="getData"
   />
 </template>

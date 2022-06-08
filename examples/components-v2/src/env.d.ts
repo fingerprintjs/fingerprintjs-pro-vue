@@ -3,19 +3,15 @@
  * */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { FpjsVueGlobal, FpjsVueGlobalProperty, FpjsVueMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import type { FpjsVueMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 import type Vue from 'vue';
-import 'vite/client';
+import type { FpjsVueGlobal } from '@fingerprintjs/fingerprintjs-pro-vue-v2/src/types';
 
 declare module 'vue/types/options' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ComponentOptions<V extends Vue> extends FpjsVueGlobal {
-    $fpjs?: FpjsVueGlobalProperty;
-  }
+  interface ComponentOptions<V extends Vue> extends FpjsVueGlobal {}
 }
 
 declare module 'vue/types/vue' {
-  interface Vue extends FpjsVueGlobal {
-    $fpjs?: FpjsVueGlobalProperty;
-  }
+  interface Vue extends FpjsVueGlobal {}
 }

@@ -1,12 +1,12 @@
 <script lang="ts">
 import Vue from 'vue';
-import VisitorData from '../../components-v2/src/VisitorData.vue';
+import VisitorDataRoot from '../../components-v2/src/VisitorDataRoot.vue';
 
 export default Vue.extend({
-  components: { VisitorData },
+  components: { VisitorDataRoot },
 });
 </script>
 
 <template>
-  <visitor-data />
+  <visitor-data-root />
 </template>
