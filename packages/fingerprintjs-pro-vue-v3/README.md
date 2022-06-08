@@ -30,7 +30,7 @@ FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](htt
 
 ## Installation
 
-To install plugin run:
+To install the plugin run:
 
 ```shell
 yarn add @fingerprintjs/fingerprintjs-pro-vue-3
@@ -58,7 +58,7 @@ import { FpjsVueOptions, fpjsPlugin } from '@fingerprintjs/fingerprintjs-pro-vue
 
 const app = createApp(App);
 
-const apiKey = '<YOUR_API_KEY>'
+const apiKey = '<public-api-key>'
 
 app
   .use(fpjsPlugin, {
@@ -70,11 +70,11 @@ app
   .mount('#app');
 
 ```
-Refer to example usages below.
+Refer to the example usages below.
 
 ## Composition API
 
-Our plugin exposes `useVisitorData` function that you can use like this:
+This plugin exposes the `useVisitorData` function that you can use like this:
 
 ```vue
 <script setup>
@@ -130,7 +130,7 @@ export default defineComponent({
 
 For your convenience, we also provide mixins that handle all query states.
 
-For extended result:
+For the extended result:
 
 ```vue
 
@@ -166,7 +166,7 @@ export default defineComponent({
 </template>
 ```
 
-For normal result:
+For the default result:
 
 ```vue
 
@@ -204,7 +204,7 @@ export default defineComponent({
 
 ## Nuxt
 
-Our plugin works with Nuxt out of the box, however you need to remember to only register it ony client side.
+This plugin works with Nuxt out of the box, however, you need to register it on the client side only.
 
 ```typescript
 // plugins/fingerprintjs.client.ts
@@ -242,15 +242,15 @@ You can also check [example Nuxt Application](../../examples/nuxt-v3-example).
 
 ## Caching strategy
 
-:warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
+:warning: **WARNING** If you use data from the `extendedResult`, please pay additional attention to caching strategy.
 
 FingerprintJS Pro uses API calls as the basis for billing.
 Our [best practices](https://dev.fingerprintjs.com/docs/caching-visitor-information) strongly recommend using cache to
-optimise API calls rate. The Library uses the SessionStorage cache strategy by default.
+optimize API calls rate. The Library uses the SessionStorage cache strategy by default.
 
 Some fields from the [extendedResult](https://dev.fingerprintjs.com/docs/js-agent#extendedresult) (e.g `ip`
 or `lastSeenAt`) might change for the same visitor. If you need exact current data, it is recommended to
-pass `ignoreCache=true` inside `getVisitorData` function
+pass `ignoreCache=true` inside the `getVisitorData` function
 
 ## Support and feedback
 
@@ -262,7 +262,7 @@ consider [raising an issue in our issue tracker](https://github.com/fingerprintj
 
 ## Examples
 
-You can find following examples in the [examples](../../examples) directory:
+You can find the following examples in the [examples](../../examples) directory:
 
 - [SPA Application](../../examples/spa-v3-example)
 - [Nuxt Application](../../examples/nuxt-v3-example)
