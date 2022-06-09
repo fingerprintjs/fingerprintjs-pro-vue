@@ -4,6 +4,18 @@ import type { GetOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-s
 import type { UseGetVisitorDataResult } from './useVisitorData.types';
 import { FpjsVueQueryOptions } from 'shared/types';
 
+/**
+ * Composition API for fetching visitorData.
+ *
+ * @example ```typescript
+ *     {
+ *       template: '<h1>Hello world</h1>',
+ *       setup() {
+ *         const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true });
+ *       }
+ *     }
+ * ```
+ * */
 export function useVisitorData<TExtended extends boolean>(
   options: GetOptions<TExtended> = {},
   { immediate = true }: FpjsVueQueryOptions = {}

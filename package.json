@@ -30,6 +30,7 @@
     "test": "nx run-many --target=test --all",
     "test:dts": "nx run-many --target=test:dts --all",
     "build": "nx run-many --target=build --all",
+    "docs": "nx run-many --target=docs --all",
     "semantic-release": "nx run-many --target=semantic-release --all --maxParallel=1",
     "nx": "nx"
   },
@@ -60,6 +61,7 @@
     "rollup-plugin-typescript-paths": "^1.3.1",
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-jest": "^27.1.3",
+    "typedoc": "^0.22.17",
     "typescript": "^4.5.5",
     "vue-eslint-parser": "^9.0.2",
     "vue-tsc": "^0.35.2"

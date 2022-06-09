@@ -7,5 +7,8 @@ type AsRefs<T> = {
 };
 
 export type UseGetVisitorDataResult<TExtended extends boolean> = AsRefs<FpjsVisitorQueryData<TExtended>> & {
+  /**
+   * Fetches visitor data.
+   * */
   getData: (options?: GetDataOptions) => Promise<VisitorData<TExtended> | undefined>;
 };

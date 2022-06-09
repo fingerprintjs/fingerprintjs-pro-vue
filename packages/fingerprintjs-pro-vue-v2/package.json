@@ -26,7 +26,8 @@
     "test": "jest",
     "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/plugin.d.ts",
     "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "docs": "typedoc src/index.ts --out ../../docs/vue-2"
   },
   "main": "dist/plugin.cjs.js",
   "module": "dist/plugin.esm.js",
