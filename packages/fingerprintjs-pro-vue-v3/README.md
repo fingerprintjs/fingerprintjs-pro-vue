@@ -240,6 +240,10 @@ export default defineNuxtConfig({
 
 You can also check [example Nuxt Application](../../examples/nuxt-v3-example).
 
+## Documentation
+
+You can find detailed documentation and API reference [here](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3/).
+
 ## Caching strategy
 
 :warning: **WARNING** If you use data from the `extendedResult`, please pay additional attention to caching strategy.

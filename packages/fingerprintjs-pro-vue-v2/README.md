@@ -203,6 +203,10 @@ export default {
 
 You can also check the [example Nuxt Application](../../examples/nuxt-v2-example).
 
+## Documentation
+
+You can find detailed documentation and API reference [here](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-2/).
+
 ## Caching strategy
 
 :warning: **WARNING** If you use data from the `extendedResult`, please pay additional attention to caching strategy.
@@ -222,12 +226,6 @@ please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fi
 require private support, please email us at oss-support@fingerprintjs.com. If you'd like to have a similar Vue library
 for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs),
 consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
-
-## Documentation
-
-TODO Link to typedoc hosted on GH Pages.
-
-You can find detailed documentation and API reference [here](#).
 
 ## Examples
 
