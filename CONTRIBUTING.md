@@ -10,15 +10,15 @@ We are using [NX](https://nx.dev) for orchestrating our monorepo.
 
 ### Development playground
 
-Repository contains packages with Vue plugin (for version 2 and 3) that can be found in [packages](./packages) directory.
-Every package has associated examples in [examples](./examples) directory.
+This repository contains packages with the Vue plugin (for versions 2 and 3) that can be found in the [packages](./packages) directory.
+Every package has associated examples in the [examples](./examples) directory.
 
 To watch library run `npx nx run $PROJECT_NAME:watch`, ex:
 ```shell
 npx nx run fingerprintjs-pro-vue-v2:watch
 ```
 
-To run example applications use `npx nx run $PROJECT_NAME:dev`, ex:
+To run the example applications use `npx nx run $PROJECT_NAME:dev`, e.g.,
 ```shell
 npx nx run spa-v2-example:dev
 ```
@@ -29,12 +29,12 @@ Applications will automatically refresh on package changes.
 
 Run `yarn test` to execute the unit tests via [Jest](https://jestjs.io/) in every package.
 
-Alternatively you can use `npx nx test $PROJECT_NAME` to test only specific package, ex:
+Alternatively, you can use `npx nx test $PROJECT_NAME` to test only the specific package, e.g.,
 ```shell
 npx nx test fingerprintjs-pro-vue-v2
 ```
 
-### Commiting changes
+### Committing changes
 
 We follow [Conventional Commits](https://conventionalcommits.org/) for committing changes. We use git hooks to check that the commit message is correct.
 
@@ -44,7 +44,7 @@ To get more help on the NX use `npx nx help` or check out the [docs](https://nx.
 
 ### How to publish
 
-Affected packages are automatically released and published to NPM on every push to the main branch. The workflow must first be approved by one of the maintainers.
+Affected packages are automatically released and published to NPM on every push to the main branch. The workflow must be approved by one of the maintainers, first.
 
 ### Generating docs
 
