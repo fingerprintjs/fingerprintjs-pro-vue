@@ -2,6 +2,8 @@ name: Generate docs
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
   generate-docs:
