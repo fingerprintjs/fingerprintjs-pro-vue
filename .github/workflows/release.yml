@@ -1,6 +1,8 @@
 name: Release
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   # Permissions required for semantic-release, so that it can create new release and notes in issues and PRs that were released
