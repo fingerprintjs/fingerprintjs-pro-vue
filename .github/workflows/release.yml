@@ -1,7 +1,13 @@
 name: Release
-# TODO - Change to trigger on every push to main after repository is ready
 on:
   workflow_dispatch:
+
+permissions:
+  # Permissions required for semantic-release, so that it can create new release and notes in issues and PRs that were released
+  # See: https://github.com/semantic-release/github#github-authentication
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   release:
@@ -19,6 +25,6 @@ jobs:
       - name: Release
         run: yarn run semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           HUSKY: 0
