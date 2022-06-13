@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.0.0...fingerprintjs-pro-vue3-v1.0.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* use correct badges ([de957d7](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/de957d79fe2319b1b9a05a68ed0e1bf33531946d))
+
 # 1.0.0 (2022-06-13)
 
 
