@@ -8,7 +8,7 @@
     "semantic-release": {
       "executor": "@theunderscorer/nx-semantic-release:semantic-release",
       "options": {
-        "outputPath": "./",
+        "outputPath": "packages/fingerprintjs-pro-vue-v2",
         "tagFormat": "fingerprintjs-pro-vue2-v${version}",
         "packageJsonDir": "packages/fingerprintjs-pro-vue-v2"
       },
