@@ -20,6 +20,11 @@
     "device fingerprint",
     "privacy"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false,
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",

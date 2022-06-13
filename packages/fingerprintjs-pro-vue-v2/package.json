@@ -8,6 +8,11 @@
     "type": "git",
     "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false,
   "keywords": [
     "fraud",
     "fraud detection",
