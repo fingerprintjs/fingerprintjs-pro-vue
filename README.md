@@ -4,17 +4,11 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/build.yml">
-    <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/build.yml/badge.svg" alt="Build status">
-  </a>
    <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml">
     <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml/badge.svg" alt="Release status">
    </a>
-   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue">
-     <img src="https://img.shields.io/npm/v/@fingerprintjs/fingerprintjs-pro-vue.svg" alt="Current NPM version">
-   </a>
-   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue">
-     <img src="https://img.shields.io/npm/dm/@fingerprintjs/fingerprintjs-pro-vue.svg" alt="Monthly downloads from NPM">
+<a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml">
+    <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml/badge.svg" alt="Tests status">
    </a>
    <a href="https://opensource.org/licenses/MIT">
      <img src="https://img.shields.io/:license-mit-blue.svg" alt="MIT license">
