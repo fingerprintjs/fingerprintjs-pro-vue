@@ -5,7 +5,9 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.js": "*"
+    ".eslintrc.js": "*",
+    "tsconfig.json": "*",
+    "tsconfig.vue.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
