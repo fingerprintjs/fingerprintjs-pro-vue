@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.0.1...fingerprintjs-pro-vue3-v1.0.2) (2022-06-14)
+
+
+### Bug Fixes
+
+* change build target to es6 ([c9fc643](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/c9fc643872029fa10d04312681daa8dc6d518809))
+
 ## [1.0.1](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.0.0...fingerprintjs-pro-vue3-v1.0.1) (2022-06-13)
 
 
