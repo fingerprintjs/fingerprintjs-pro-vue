@@ -1,6 +1,10 @@
 <p align="center">
-  <a href="https://fingerprintjs.com">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/fingerprintjs-pro-vue/main/resources/logo.svg" alt="FingerprintJS" width="312px" />
+  <a href="https://fingerprint.com">
+    <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="../../resources/logo_light.svg" />
+     <source media="(prefers-color-scheme: light)" srcset="../../resources/logo_dark.svg" />
+     <img src="https://raw.githubusercontent.com/fingerprintjs/fingerprintjs-pro-vue/main/resources/logo_dark.svg" alt="Fingerprint logo" width="312px" />
+   </picture>
   </a>
 </p>
 <p align="center">
@@ -26,7 +30,7 @@
 
 # FingerprintJS Pro Vue 3
 
-FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](https://fingerprintjs.com/).
+FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](https://fingerprint.com/).
 
 ## Installation
 
@@ -45,9 +49,9 @@ npm install @fingerprintjs/fingerprintjs-pro-vue-3
 ## Getting started
 
 To identify visitors, you'll need a FingerprintJS Pro account (you
-can [sign up for free](https://dashboard.fingerprintjs.com/signup/)).
+can [sign up for free](https://dashboard.fingerprint.com/signup/)).
 You can learn more about API keys in
-the [official FingerprintJS Pro documentation](https://dev.fingerprintjs.com/docs/quick-start-guide).
+the [official FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
 Register our plugin in your Vue application:
 
@@ -249,10 +253,10 @@ You can find detailed documentation and API reference [here](https://fingerprint
 :warning: **WARNING** If you use data from the `extendedResult`, please pay additional attention to caching strategy.
 
 FingerprintJS Pro uses API calls as the basis for billing.
-Our [best practices](https://dev.fingerprintjs.com/docs/caching-visitor-information) strongly recommend using cache to
+Our [best practices](https://dev.fingerprint.com/docs/caching-visitor-information) strongly recommend using cache to
 optimize API calls rate. The Library uses the SessionStorage cache strategy by default.
 
-Some fields from the [extendedResult](https://dev.fingerprintjs.com/docs/js-agent#extendedresult) (e.g `ip`
+Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#extendedresult) (e.g `ip`
 or `lastSeenAt`) might change for the same visitor. If you need exact current data, it is recommended to
 pass `ignoreCache=true` inside the `getVisitorData` function
 
@@ -260,7 +264,7 @@ pass `ignoreCache=true` inside the `getVisitorData` function
 
 For support or to provide feedback,
 please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you
-require private support, please email us at oss-support@fingerprintjs.com. If you'd like to have a similar Vue library
+require private support, please email us at oss-support@fingerprint.com. If you'd like to have a similar Vue library
 for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs),
 consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
 
