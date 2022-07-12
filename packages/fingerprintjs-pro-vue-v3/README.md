@@ -37,13 +37,13 @@ FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](htt
 To install the plugin run:
 
 ```shell
-yarn add @fingerprintjs/fingerprintjs-pro-vue-3
+yarn add @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
 
 Or:
 
 ```shell
-npm install @fingerprintjs/fingerprintjs-pro-vue-3
+npm install @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
 
 ## Getting started
