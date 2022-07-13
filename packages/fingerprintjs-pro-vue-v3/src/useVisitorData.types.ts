@@ -1,4 +1,4 @@
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { GetOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
 import type { Ref } from 'vue';
 import type { FpjsVisitorQueryData, GetDataOptions } from 'shared/types';
 
@@ -12,3 +12,5 @@ export type UseGetVisitorDataResult<TExtended extends boolean> = AsRefs<FpjsVisi
    * */
   getData: (options?: GetDataOptions) => Promise<VisitorData<TExtended> | undefined>;
 };
+
+export type UseVisitorDataOptions<TExtended extends boolean> = GetOptions<TExtended> & Partial<GetDataOptions>;

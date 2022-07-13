@@ -1,23 +1,27 @@
 import { inject, onMounted, ref } from 'vue';
 import { GET_VISITOR_DATA } from './symbols';
-import type { GetOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
-import type { UseGetVisitorDataResult } from './useVisitorData.types';
+import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisitorData.types';
 import { FpjsVueQueryOptions } from 'shared/types';
 
 /**
  * Composition API for fetching visitorData.
  *
- * @example ```typescript
+ * @example
+ * ```typescript
  *     {
  *       template: '<h1>Hello world</h1>',
  *       setup() {
  *         const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true });
+ *
+ *         // Fetch data on mount and ignore cache
+ *         // const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: true });
  *       }
  *     }
  * ```
  * */
 export function useVisitorData<TExtended extends boolean>(
-  options: GetOptions<TExtended> = {},
+  { ignoreCache: defaultIgnoreCache, ...options }: UseVisitorDataOptions<TExtended> = {},
   { immediate = true }: FpjsVueQueryOptions = {}
 ): UseGetVisitorDataResult<TExtended> {
   const data = ref<VisitorData<TExtended> | undefined>();
@@ -33,8 +37,11 @@ export function useVisitorData<TExtended extends boolean>(
   const getData: UseGetVisitorDataResult<TExtended>['getData'] = async (getDataOptions) => {
     isLoading.value = true;
 
+    const ignoreCache =
+      typeof getDataOptions?.ignoreCache === 'boolean' ? getDataOptions.ignoreCache : defaultIgnoreCache;
+
     try {
-      const result = await getVisitorData(options, getDataOptions?.ignoreCache);
+      const result = await getVisitorData(options, ignoreCache);
 
       data.value = result;
       currentError.value = undefined;

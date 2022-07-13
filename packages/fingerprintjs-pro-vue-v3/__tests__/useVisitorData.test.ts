@@ -1,7 +1,7 @@
 import { config, mount } from '@vue/test-utils';
 import { fpjsPlugin } from '../src/plugin';
 import { FpjsVueOptions } from '../../shared/src/types';
-import { useVisitorData } from '../src';
+import { UseGetVisitorDataResult, useVisitorData } from '../src';
 import { onMounted, ref, watch } from 'vue';
 import { getVisitorData, init } from 'shared/tests/setup';
 
@@ -152,6 +152,91 @@ describe('useVisitorData', () => {
           expect(isLoading.value).toEqual(false);
         });
       },
+    });
+  });
+
+  describe('Cache', () => {
+    function assertIgnoredCache(result: UseGetVisitorDataResult<true>) {
+      return new Promise<void>((resolve) => {
+        watch(result.isLoading, (currentLoading, wasLoading) => {
+          if (!currentLoading && wasLoading) {
+            expect(result.data.value).toEqual(testData);
+
+            expect(getVisitorData).toHaveBeenCalledTimes(1);
+            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, true);
+
+            resolve();
+          }
+        });
+      });
+    }
+
+    function assertNotIgnoredCache(result: UseGetVisitorDataResult<true>) {
+      return new Promise<void>((resolve) => {
+        watch(result.isLoading, (currentLoading, wasLoading) => {
+          if (!currentLoading && wasLoading) {
+            expect(result.data.value).toEqual(testData);
+
+            expect(getVisitorData).toHaveBeenCalledTimes(1);
+            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, false);
+
+            resolve();
+          }
+        });
+      });
+    }
+
+    it('should ignore cache if ignoreCache is set to true in useVisitorData', () => {
+      getVisitorData.mockResolvedValue(testData);
+
+      return new Promise<void>((resolve, reject) => {
+        mount({
+          template: '<h1>Hello world</h1>',
+          setup() {
+            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: true });
+
+            assertIgnoredCache(result).then(resolve).catch(reject);
+          },
+        });
+      });
+    });
+
+    it('should ignore cache if it is set to true in getData call', () => {
+      getVisitorData.mockResolvedValue(testData);
+
+      return new Promise<void>((resolve, reject) => {
+        mount({
+          template: '<h1>Hello world</h1>',
+          setup() {
+            const result = useVisitorData({ extendedResult: true, ignoreCache: false }, { immediate: false });
+
+            onMounted(() => {
+              result.getData({ ignoreCache: true });
+            });
+
+            assertIgnoredCache(result).then(resolve).catch(reject);
+          },
+        });
+      });
+    });
+
+    it('should not ignore cache if it is set to ignore in useVisitorData and overwritten in getData call', () => {
+      getVisitorData.mockResolvedValue(testData);
+
+      return new Promise<void>((resolve, reject) => {
+        mount({
+          template: '<h1>Hello world</h1>',
+          setup() {
+            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: false });
+
+            onMounted(() => {
+              result.getData({ ignoreCache: false });
+            });
+
+            assertNotIgnoredCache(result).then(resolve).catch(reject);
+          },
+        });
+      });
     });
   });
 });
