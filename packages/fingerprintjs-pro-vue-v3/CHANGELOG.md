@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.0.2...fingerprintjs-pro-vue3-v1.1.0) (2022-07-13)
+
+
+### Features
+
+* support passing "ignoreCache" to "useVisitorData" as well ([6c9b827](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/6c9b82721918b732bf56256ab14107d7cdebc3ed))
+
 ## [1.0.2](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.0.1...fingerprintjs-pro-vue3-v1.0.2) (2022-06-14)
 
 
