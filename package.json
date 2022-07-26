@@ -44,6 +44,7 @@
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.9.0",
@@ -71,6 +72,95 @@
   },
   "nxrelease": {
     "repositoryUrl": "https://github.com/fingerprintjs/fingerprintjs-pro-vue",
-    "github": true
+    "branches": [
+      "main",
+      {
+        "name": "test",
+        "prerelease": true
+      }
+    ],
+    "github": true,
+    "preset": "conventionalCommits",
+    "presetConfig": {
+      "types": [
+        {
+          "type": "feat",
+          "section": "Features"
+        },
+        {
+          "type": "feature",
+          "section": "Features"
+        },
+        {
+          "type": "fix",
+          "section": "Bug Fixes"
+        },
+        {
+          "type": "perf",
+          "section": "Performance Improvements"
+        },
+        {
+          "type": "revert",
+          "section": "Reverts"
+        },
+        {
+          "type": "docs",
+          "scope": "README",
+          "section": "Documentation"
+        },
+        {
+          "type": "build",
+          "scope": "deps",
+          "section": "Build System"
+        },
+        {
+          "type": "docs",
+          "section": "Documentation",
+          "hidden": true
+        },
+        {
+          "type": "style",
+          "section": "Styles",
+          "hidden": true
+        },
+        {
+          "type": "chore",
+          "section": "Miscellaneous Chores",
+          "hidden": true
+        },
+        {
+          "type": "refactor",
+          "section": "Code Refactoring",
+          "hidden": true
+        },
+        {
+          "type": "test",
+          "section": "Tests",
+          "hidden": true
+        },
+        {
+          "type": "build",
+          "section": "Build System",
+          "hidden": true
+        },
+        {
+          "type": "ci",
+          "section": "Continuous Integration",
+          "hidden": true
+        }
+      ]
+    },
+    "releaseRules": [
+      {
+        "type": "build",
+        "scope": "deps",
+        "release": "patch"
+      },
+      {
+        "type": "docs",
+        "scope": "README",
+        "release": "patch"
+      }
+    ]
   }
 }
