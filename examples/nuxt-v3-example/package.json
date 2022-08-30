@@ -14,7 +14,7 @@
     "@nuxt/vite-builder": "3.0.0-rc.3",
     "vue": "^3.1",
     "nuxt": "3.0.0-rc.3",
-    "vite": "^2.9.9"
+    "vite": "^2.9.13"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3",
