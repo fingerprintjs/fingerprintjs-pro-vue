@@ -26,6 +26,12 @@
    <a href="https://discord.gg/39EpE2neBg">
      <img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
    </a>
+    <a href="https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-2">
+     <img src="https://img.shields.io/badge/Vue%202-Documentation-green" alt="Discord server">
+   </a>
+    <a href="https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3">
+     <img src="https://img.shields.io/badge/Vue%203-Documentation-green" alt="Discord server">
+   </a>
 </p>
 
 # FingerprintJS Pro Vue
