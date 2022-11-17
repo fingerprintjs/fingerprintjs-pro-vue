@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.3...fingerprintjs-pro-vue2-v1.0.4) (2022-11-17)
+
+
+### Bug Fixes
+
+* update SPA library to 0.7.0 ([f71d891](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/f71d891706f690bf6ba98767d01faf69814b7e66))
+
 ## [1.0.3](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.2...fingerprintjs-pro-vue2-v1.0.3) (2022-09-19)
 
 ## [1.0.2](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.1...fingerprintjs-pro-vue2-v1.0.2) (2022-06-14)
