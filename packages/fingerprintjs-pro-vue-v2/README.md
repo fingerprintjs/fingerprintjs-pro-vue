@@ -213,15 +213,11 @@ You can find detailed documentation and API reference [here](https://fingerprint
 
 ## Caching strategy
 
-:warning: **WARNING** If you use data from the `extendedResult`, please pay additional attention to caching strategy.
+When you use FingerprintJS Pro, you pay for each API call. Our [best practices](https://dev.fingerprint.com/docs/caching-visitor-information) recommend using cache to reduce the API call rate. The Library uses the SessionStorage cache strategy by default.
 
-FingerprintJS Pro uses API calls as the basis for billing.
-Our [best practices](https://dev.fingerprint.com/docs/caching-visitor-information) strongly recommend using cache to
-optimize API calls rate. The Library uses the SessionStorage cache strategy by default.
+:warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
 
-Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#extendedresult) (e.g `ip`
-or `lastSeenAt`) might change for the same visitor. If you need exact current data, it is recommended to
-pass `ignoreCache=true` inside the `getVisitorData` function,
+Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#extendedresult) (e.g `ip` or `lastSeenAt`) might change for the same visitor. If you need to get the current data, it is recommended to pass `ignoreCache=true` inside `getVisitorData` or `getVisitorDataExtended` functions.
 
 ## Support and feedback
 
