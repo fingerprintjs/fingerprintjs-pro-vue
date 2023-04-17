@@ -68,7 +68,7 @@
     "vue-tsc": "^1.2.0"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-spa": "^0.7.0"
+    "@fingerprintjs/fingerprintjs-pro-spa": "^1.0.2"
   },
   "nxrelease": {
     "repositoryUrl": "https://github.com/fingerprintjs/fingerprintjs-pro-vue",
