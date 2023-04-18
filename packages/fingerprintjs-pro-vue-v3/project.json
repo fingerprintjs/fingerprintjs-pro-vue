@@ -8,7 +8,15 @@
       "options": {
         "outputPath": "packages/fingerprintjs-pro-vue-v3",
         "tagFormat": "fingerprintjs-pro-vue3-v${version}",
-        "packageJsonDir": "packages/fingerprintjs-pro-vue-v3"
+        "packageJsonDir": "packages/fingerprintjs-pro-vue-v3",
+        "plugins": [
+          [
+            "@semantic-release/exec",
+            {
+              "prepareCmd": "npx nx run fingerprintjs-pro-vue-v3:build --skip-nx-cache"
+            }
+          ]
+        ]
       },
       "configurations": {
         "dry": {
