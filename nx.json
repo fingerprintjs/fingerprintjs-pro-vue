@@ -31,12 +31,6 @@
         "target": "build",
         "projects": "dependencies"
       }
-    ],
-    "semantic-release": [
-      {
-        "target": "build",
-        "projects": "self"
-      }
     ]
   },
   "affected": {
