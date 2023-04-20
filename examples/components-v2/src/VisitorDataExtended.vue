@@ -12,9 +12,9 @@ export default Vue.extend({
 <template>
   <visitor-data
     label="Get extended user data"
-    :is-loading="visitorDataExtended.isLoading"
-    :error="visitorDataExtended.error"
-    :data="visitorDataExtended.data"
+    :is-loading="visitorDataExtended ? visitorDataExtended.isLoading : false"
+    :error="visitorDataExtended ? visitorDataExtended.error : null"
+    :data="visitorDataExtended ? visitorDataExtended.data : null"
     @get-data="$getVisitorDataExtended"
   />
 </template>

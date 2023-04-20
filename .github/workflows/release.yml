@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - test
 
 jobs:
   release:
@@ -14,6 +15,11 @@ jobs:
         with:
           persist-credentials: false
           token: ${{ secrets.GH_RELEASE_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
       - name: Install npm dependencies
         run: yarn install
