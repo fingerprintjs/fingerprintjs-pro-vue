@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.1.2...fingerprintjs-pro-vue3-v1.1.3) (2023-04-20)
+
+
+### Bug Fixes
+
+* correctly bump version in code during release ([e189f0d](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/e189f0d0f154e3f92cbc7bca9478de8740690055))
+* update SPA package ([6e00fb9](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/6e00fb9225e8abf8c8480e9d27ea32b2dc319f2d))
+
 ## [1.1.2](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.1.1...fingerprintjs-pro-vue3-v1.1.2) (2022-11-17)
 
 
