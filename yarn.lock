@@ -1823,12 +1823,12 @@
     tslib "^2.5.0"
 
 "@fingerprintjs/fingerprintjs-pro-vue-v2@link:packages/fingerprintjs-pro-vue-v2":
-  version "1.0.4"
+  version "1.0.5"
   dependencies:
     "@fingerprintjs/fingerprintjs-pro-spa" "^1.0.2"
 
 "@fingerprintjs/fingerprintjs-pro-vue-v3@link:packages/fingerprintjs-pro-vue-v3":
-  version "1.1.2"
+  version "1.1.3"
   dependencies:
     "@fingerprintjs/fingerprintjs-pro-spa" "^1.0.2"
 
@@ -11214,7 +11214,7 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.16.0.tgz#664f43e45460fb98faf00edca0bb0d7b8dce7916"
   integrity sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==
 
-nanoid@^3.1.23, nanoid@^3.1.32, nanoid@^3.3.3, nanoid@^3.3.4:
+nanoid@^3.1.23, nanoid@^3.1.32, nanoid@^3.3.3:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
@@ -13167,16 +13167,7 @@ postcss@^7.0.36:
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.1.10, postcss@^8.4.13:
-  version "8.4.14"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.14.tgz#ee9274d5622b4858c1007a74d76e42e56fd21caf"
-  integrity sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==
-  dependencies:
-    nanoid "^3.3.4"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
-
-postcss@^8.2.1, postcss@^8.2.15, postcss@^8.4.14, postcss@^8.4.21:
+postcss@^8.1.10, postcss@^8.2.1, postcss@^8.2.15, postcss@^8.4.13, postcss@^8.4.14, postcss@^8.4.21:
   version "8.4.22"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.22.tgz#c29e6776b60ab3af602d4b513d5bd2ff9aa85dc1"
   integrity sha512-XseknLAfRHzVWjCEtdviapiBtfLdgyzExD50Rg2ePaucEesyh8Wv4VPdW0nbyDa1ydbrAxV19jvMT4+LFmcNUA==
@@ -14025,10 +14016,10 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.59.0, rollup@^2.70.1, rollup@^2.70.2, rollup@^2.72.1:
-  version "2.75.3"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.75.3.tgz#11bd3e8ace526911feea8af17f2a286fbfdb4cf8"
-  integrity sha512-YA29fLU6MAYSaDxIQYrGGOcbXlDmG96h0krGGYObroezcQ0KgEPM3+7MtKD/qeuUbFuAJXvKZee5dA1dpwq1PQ==
+"rollup@>=2.59.0 <2.78.0", rollup@^2.70.1, rollup@^2.70.2, rollup@^2.72.1:
+  version "2.77.3"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.77.3.tgz#8f00418d3a2740036e15deb653bed1a90ee0cc12"
+  integrity sha512-/qxNTG7FbmefJWoeeYJFbHehJ2HNWnjkAFRKzWN/45eNBBF/r8lo992CwcJXEzyVxs5FmfId+vTSTQDb+bxA+g==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -15973,15 +15964,15 @@ vite-plugin-vue2@^2.0.1:
     source-map "^0.7.3"
     vue-template-babel-compiler "^1.2.0"
 
-vite@^2.9.13, vite@^2.9.8, vite@^2.9.9:
-  version "2.9.13"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.13.tgz#859cb5d4c316c0d8c6ec9866045c0f7858ca6abc"
-  integrity sha512-AsOBAaT0AD7Mhe8DuK+/kE4aWYFMx/i0ZNi98hJclxb4e0OhQcZYUrvLjIaQ8e59Ui7txcvKMiJC1yftqpQoDw==
+vite@^2.9.16, vite@^2.9.8, vite@^2.9.9:
+  version "2.9.16"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.16.tgz#daf7ba50f5cc37a7bf51b118ba06bc36e97898e9"
+  integrity sha512-X+6q8KPyeuBvTQV8AVSnKDvXoBMnTx8zxh54sOwmmuOdxkjMmEJXH2UEchA+vTMps1xw9vL64uwJOWryULg7nA==
   dependencies:
     esbuild "^0.14.27"
     postcss "^8.4.13"
     resolve "^1.22.0"
-    rollup "^2.59.0"
+    rollup ">=2.59.0 <2.78.0"
   optionalDependencies:
     fsevents "~2.3.2"
 
