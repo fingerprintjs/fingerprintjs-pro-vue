@@ -11,16 +11,22 @@ export * from './useVisitorData';
 export * from './useVisitorData.types';
 export * from './vue';
 
-export {
+export type {
   CacheLocation,
   Cacheable,
   ICache,
-  LocalStorageCache,
-  SessionStorageCache,
-  InMemoryCache,
   LoadOptions,
   VisitorData,
   GetResult,
   ExtendedGetResult,
-  GetOptions,
+  FpjsClientOptions,
+} from '@fingerprintjs/fingerprintjs-pro-spa';
+
+export {
+  defaultEndpoint,
+  defaultTlsEndpoint,
+  defaultScriptUrlPattern,
+  LocalStorageCache,
+  SessionStorageCache,
+  InMemoryCache,
 } from '@fingerprintjs/fingerprintjs-pro-spa';
