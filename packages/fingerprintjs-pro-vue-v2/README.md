@@ -30,7 +30,7 @@
 
 # FingerprintJS Pro Vue 2
 
-FingerprintJS Pro Vue is an easy-to-use Vue 2 plugin for [FingerprintJS Pro](https://fingerprint.com/).
+FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 2 application.
 
 ## Installation
 
@@ -50,23 +50,28 @@ npm install @fingerprintjs/fingerprintjs-pro-vue-v2
 
 To identify visitors, you'll need a FingerprintJS Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-You can learn more about API keys in
-the [official FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
-1. Register our plugin in your Vue application:
+1. Register the plugin in your Vue application. Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration. Set `endpoint` and `scriptUrlPattern` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
 
 ```typescript
 import Vue from 'vue';
 import App from './App.vue';
-import { FpjsVueOptions, fpjsPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 
 const app = new Vue(App);
-const apiKey = '<public-api-key>'
 
 Vue.use(fpjsPlugin, {
   loadOptions: {
-    // Set your API Key
-    apiKey,
+    apiKey: '<your-public-api-key>',
+    // region: 'eu',
+    // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+    // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
   },
 } as FpjsVueOptions);
 
@@ -182,12 +187,20 @@ This plugin works with Nuxt out of the box, however, you need to register it on 
 
 ```typescript
 // plugins/fingerprintjs.client.ts
-import { fpjsPlugin, FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v2';
 import Vue from 'vue';
 
 Vue.use(fpjsPlugin, {
   loadOptions: {
     apiKey: process.env.API_KEY,
+    // region: 'eu',
+    // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+    // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
   },
 } as FpjsVueOptions);
 ```
