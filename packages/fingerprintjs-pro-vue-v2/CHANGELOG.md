@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.5...fingerprintjs-pro-vue2-v1.1.0) (2023-07-06)
+
+
+### Bug Fixes
+
+* update JS Agent with fixed `subdivisions` type ([7b0cdcf](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/7b0cdcfdeb661d82d87e9f6505d63a2cb7ae1962))
+
+
+### Features
+
+* add reexports for `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern` ([fe16ae6](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/fe16ae6e036aad0acd4de6d9fb1a824dec8ffdc9))
+
 ## [1.0.5](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.4...fingerprintjs-pro-vue2-v1.0.5) (2023-04-20)
 
 
