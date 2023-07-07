@@ -30,7 +30,7 @@
 
 # FingerprintJS Pro Vue 3
 
-FingerprintJS Pro Vue is an easy-to-use Vue 3 plugin for [FingerprintJS Pro](https://fingerprint.com/).
+FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application.
 
 ## Installation
 
@@ -50,15 +50,22 @@ npm install @fingerprintjs/fingerprintjs-pro-vue-v3
 
 To identify visitors, you'll need a FingerprintJS Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-You can learn more about API keys in
-the [official FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
-Register our plugin in your Vue application:
+Register our plugin in your Vue application. 
+
+* Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration. 
+* Set `endpoint` and `scriptUrlPattern` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
 
 ```typescript
 import { createApp } from 'vue';
 import App from './App.vue';
-import { FpjsVueOptions, fpjsPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 
 const app = createApp(App);
 
@@ -67,18 +74,20 @@ const apiKey = '<public-api-key>'
 app
   .use(fpjsPlugin, {
     loadOptions: {
-      // Provide your API key here
-      apiKey,
+      apiKey: '<your-public-api-key>',
+      // region: 'eu',
+      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
     },
   } as FpjsVueOptions)
   .mount('#app');
 
 ```
-Refer to the example usages below.
+You can use the plugin with Composition API, Options API, or Mixins, with or without Nuxt. See the usage examples below.
 
 ## Composition API
 
-This plugin exposes the `useVisitorData` function that you can use like this:
+The plugin provides a `useVisitorData` function you can use to identify visitors:
 
 ```vue
 <script setup>
@@ -106,7 +115,8 @@ watch(data, (currentData) => {
 
 ## Options API
 
-Our plugin injects `$fpjs` object into your components, and you can use it like this:
+The plugin injects a `$fpjs` object into your components that you can use to identify visitors:
+
 ```vue
 
 <script lang='ts'>
@@ -208,12 +218,17 @@ export default defineComponent({
 
 ## Nuxt
 
-This plugin works with Nuxt out of the box, however, you need to register it on the client side only.
+The plugin works with Nuxt out of the box, however, you need to register it on the client side only.
 
 ```typescript
 // plugins/fingerprintjs.client.ts
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
-import { fpjsPlugin, FpjsVueOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
@@ -221,6 +236,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(fpjsPlugin, {
     loadOptions: {
       apiKey: config.public.API_KEY,
+      // region: 'eu',
+      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
     },
   } as FpjsVueOptions);
 });
@@ -242,15 +260,15 @@ export default defineNuxtConfig({
 });
 ```
 
-You can also check [example Nuxt Application](../../examples/nuxt-v3-example).
+See the [example Nuxt Application](../../examples/nuxt-v3-example) for more details.
 
 ## Documentation
 
-You can find detailed documentation and API reference [here](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3/).
+You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3/).
 
 ## Caching strategy
 
-When you use FingerprintJS Pro, you pay for each API call. Our [best practices](https://dev.fingerprint.com/docs/caching-visitor-information) recommend using cache to reduce the API call rate. The Library uses the SessionStorage cache strategy by default.
+Fingerprint Pro usage is billed per API call. To reduce API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). The SDK uses SessionStorage to cache results by default.
 
 :warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
 
@@ -258,11 +276,7 @@ Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#
 
 ## Support and feedback
 
-For support or to provide feedback,
-please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you
-require private support, please email us at oss-support@fingerprint.com. If you'd like to have a similar Vue library
-for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs),
-consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
+To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
 
 ## Examples
 
