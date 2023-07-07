@@ -222,11 +222,11 @@ You can also check the [example Nuxt Application](../../examples/nuxt-v2-example
 
 ## Documentation
 
-You can find detailed documentation and API reference [here](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-2/).
+You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-2/).
 
 ## Caching strategy
 
-When you use FingerprintJS Pro, you pay for each API call. Our [best practices](https://dev.fingerprint.com/docs/caching-visitor-information) recommend using cache to reduce the API call rate. The Library uses the SessionStorage cache strategy by default.
+Fingerprint Pro usage is billed per API call. To reduce API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). The SDK uses SessionStorage to cache results by default.
 
 :warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
 
@@ -234,11 +234,7 @@ Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#
 
 ## Support and feedback
 
-For support or to provide feedback,
-please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you
-require private support, please email us at oss-support@fingerprint.com. If you'd like to have a similar Vue library
-for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs),
-consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
+To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
 
 ## Examples
 
