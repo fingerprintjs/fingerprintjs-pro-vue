@@ -49,6 +49,6 @@
     "vue": "^3.1"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-spa": "^1.1.0"
+    "@fingerprintjs/fingerprintjs-pro-spa": "^1.1.2"
   }
 }
