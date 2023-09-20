@@ -1,6 +1,6 @@
-import type { FpjsClient, FpjsClientOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { FpjsClient, FpjsSpaOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
 
-export type FpjsVueOptions = FpjsClientOptions;
+export type FpjsVueOptions = FpjsSpaOptions;
 
 export type GetVisitorData = FpjsClient['getVisitorData'];
 export type ClearCache = FpjsClient['clearCache'];

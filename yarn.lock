@@ -1814,23 +1814,23 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fingerprintjs/fingerprintjs-pro-spa@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@fingerprintjs/fingerprintjs-pro-spa/-/fingerprintjs-pro-spa-1.1.2.tgz#7b4a7ef2a82fa93e879df23edc7dcce0afc5967f"
-  integrity sha512-tyJli+s1TbPYDG3n56g7N6u2RWjDRrb9v5lolDAxcgniIlgMNKcbLx0+/gEw/6dk2FzKrG6BbXXh/YLHGCh5iA==
+"@fingerprintjs/fingerprintjs-pro-spa@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@fingerprintjs/fingerprintjs-pro-spa/-/fingerprintjs-pro-spa-1.1.3.tgz#fdb56d0118aa4c3f1abf440995489ad1d4096ff5"
+  integrity sha512-jZ+tsh7mF+MaLIBn89QF4ib/QOfFDmPM74JniyzZqP7N5qCKHK0mIHDuQN9KVyE2wQQv+frn712w0PhYja7fGw==
   dependencies:
     "@fingerprintjs/fingerprintjs-pro" "^3.8.5"
     tslib "^2.5.0"
 
 "@fingerprintjs/fingerprintjs-pro-vue-v2@link:packages/fingerprintjs-pro-vue-v2":
-  version "1.1.0"
+  version "1.1.1"
   dependencies:
-    "@fingerprintjs/fingerprintjs-pro-spa" "^1.1.2"
+    "@fingerprintjs/fingerprintjs-pro-spa" "^1.1.3"
 
 "@fingerprintjs/fingerprintjs-pro-vue-v3@link:packages/fingerprintjs-pro-vue-v3":
-  version "1.2.0"
+  version "1.2.1"
   dependencies:
-    "@fingerprintjs/fingerprintjs-pro-spa" "^1.1.2"
+    "@fingerprintjs/fingerprintjs-pro-spa" "^1.1.3"
 
 "@fingerprintjs/fingerprintjs-pro@^3.8.5":
   version "3.8.5"
