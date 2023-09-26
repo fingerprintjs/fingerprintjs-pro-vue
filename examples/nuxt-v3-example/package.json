@@ -11,13 +11,10 @@
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
-    "@nuxt/vite-builder": "3.0.0-rc.3",
-    "vue": "^3.1",
-    "nuxt": "3.0.0-rc.3",
-    "vite": "^2.9.16"
+    "@nuxt/devtools": "latest",
+    "nuxt": "^3.0.0"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3",
-    "@nuxt/ui-templates": "0.1.1"
+    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"
   }
 }
