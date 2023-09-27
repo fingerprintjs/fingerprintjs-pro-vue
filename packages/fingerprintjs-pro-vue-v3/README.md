@@ -57,6 +57,10 @@ Or:
 npm install @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
 
+```shell
+pnpm add @fingerprintjs/fingerprintjs-pro-vue-v3
+```
+
 ## Getting started
 
 To identify visitors, you'll need a FingerprintJS Pro account (you
