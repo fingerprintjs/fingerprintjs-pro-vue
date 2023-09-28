@@ -28,11 +28,11 @@
    </a>
 </p>
 
-# FingerprintJS Pro Vue 2
+# Fingerprint Pro Vue 2 SDK
 
 [Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
 
-FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 2 application.
+Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 2 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.
 
 ## Requirements
 
@@ -40,7 +40,7 @@ FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fing
 - Vue 2.6 or higher
 - For Nuxt users: Nuxt 2.16 or higher
 
-This package works with Fingerprint Pro, it is not compatible with open-source FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the open-source FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
+This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
 
 ## Installation
 
@@ -64,7 +64,7 @@ pnpm add @fingerprintjs/fingerprintjs-pro-vue-v2
 
 ## Getting started
 
-To identify visitors, you'll need a FingerprintJS Pro account (you
+To identify visitors, you'll need a Fingerprint Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
 Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
