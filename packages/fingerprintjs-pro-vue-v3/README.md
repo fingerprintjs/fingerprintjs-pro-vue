@@ -28,11 +28,11 @@
    </a>
 </p>
 
-# FingerprintJS Pro Vue 3
+# Fingerprint Pro Vue 3
 
 [Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
 
-FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application.
+Fingerprint Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application.
 
 ## Requirements
 
@@ -63,9 +63,9 @@ pnpm add @fingerprintjs/fingerprintjs-pro-vue-v3
 
 ## Getting started
 
-To identify visitors, you'll need a FingerprintJS Pro account (you
+To identify visitors, you'll need a Fingerprint Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [Fingerprint Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
 Register our plugin in your Vue application. 
 
@@ -268,7 +268,7 @@ import path from 'path';
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      // Inject FingerprintJS Pro API key
+      // Inject Fingerprint Pro API key
       API_KEY: process.env.API_KEY,
     },
   }

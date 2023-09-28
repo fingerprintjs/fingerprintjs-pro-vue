@@ -7,7 +7,7 @@ import { getOptions } from 'shared/config';
 import { makeClientMethods } from 'shared/client';
 
 /**
- * FingerprintJS Pro plugin
+ * Fingerprint Pro plugin
  *
  * @example ```ts
  * import { createApp } from 'vue';

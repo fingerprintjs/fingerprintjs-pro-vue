@@ -6,7 +6,7 @@ import * as packageInfo from '../package.json';
 import { makeClientMethods } from 'shared/client';
 
 /**
- * FingerprintJS Pro plugin
+ * Fingerprint Pro plugin
  *
  * @example ```ts
  * import { Vue } from 'vue';

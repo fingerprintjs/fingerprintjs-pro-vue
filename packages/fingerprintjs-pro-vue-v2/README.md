@@ -66,7 +66,7 @@ pnpm add @fingerprintjs/fingerprintjs-pro-vue-v2
 
 To identify visitors, you'll need a Fingerprint Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [Fingerprint Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
 1. Register the plugin in your Vue application. Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration. Set `endpoint` and `scriptUrlPattern` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
 
