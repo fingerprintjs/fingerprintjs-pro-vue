@@ -28,11 +28,11 @@
    </a>
 </p>
 
-# Fingerprint Pro Vue 3
+# Fingerprint Pro Vue 3 SDK
 
 [Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
 
-Fingerprint Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application.
+Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.
 
 ## Requirements
 
@@ -40,7 +40,7 @@ Fingerprint Pro Vue is an easy way to integrate [Fingerprint Pro](https://finger
 - Vue 3.1 or higher
 - For Nuxt users: Nuxt 3.0 or higher
 
-This package works with Fingerprint Pro, it is not compatible with open-source FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the open-source FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
+This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
 
 
 ## Installation
@@ -299,3 +299,7 @@ You can find the following examples in the [examples](../../examples) directory:
 
 - [SPA Application](../../examples/spa-v3-example)
 - [Nuxt Application](../../examples/nuxt-v3-example)
+
+## License
+
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE).

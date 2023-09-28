@@ -258,3 +258,7 @@ You can find the following examples in the [examples](../../examples) directory:
 
 - [SPA Application](../../examples/spa-v2-example)
 - [Nuxt Application](../../examples/nuxt-v2-example)
+
+## License
+
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE).
