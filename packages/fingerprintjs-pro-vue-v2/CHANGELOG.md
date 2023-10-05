@@ -1,3 +1,5 @@
+## [1.2.1](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.2.0...fingerprintjs-pro-vue2-v1.2.1) (2023-10-05)
+
 # [1.2.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.1.1...fingerprintjs-pro-vue2-v1.2.0) (2023-09-20)
 
 
