@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt';
+import { defineNuxtConfig } from 'nuxt/config';
 import { config } from 'dotenv';
 import path from 'path';
 
@@ -14,9 +14,5 @@ export default defineNuxtConfig({
       API_KEY: process.env.API_KEY,
     },
   },
-  vite: {
-    build: {
-      rollupOptions: {},
-    },
-  },
+  devtools: { enabled: true },
 });

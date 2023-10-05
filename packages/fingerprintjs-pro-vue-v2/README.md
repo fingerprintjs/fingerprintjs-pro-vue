@@ -28,9 +28,19 @@
    </a>
 </p>
 
-# FingerprintJS Pro Vue 2
+# Fingerprint Pro Vue 2 SDK
 
-FingerprintJS Pro Vue is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 2 application.
+[Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
+
+Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 2 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.
+
+## Requirements
+
+- For Typescript users: Typescript 4.5 or higher
+- Vue 2.6 or higher
+- For Nuxt users: Nuxt 2.16 or higher
+
+This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
 
 ## Installation
 
@@ -46,11 +56,17 @@ Or:
 npm install @fingerprintjs/fingerprintjs-pro-vue-v2
 ```
 
+Or:
+
+```shell
+pnpm add @fingerprintjs/fingerprintjs-pro-vue-v2
+```
+
 ## Getting started
 
-To identify visitors, you'll need a FingerprintJS Pro account (you
+To identify visitors, you'll need a Fingerprint Pro account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-Get your API key and get started with the [FingerprintJS Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [Fingerprint Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
 
 1. Register the plugin in your Vue application. Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration. Set `endpoint` and `scriptUrlPattern` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
 
@@ -242,3 +258,7 @@ You can find the following examples in the [examples](../../examples) directory:
 
 - [SPA Application](../../examples/spa-v2-example)
 - [Nuxt Application](../../examples/nuxt-v2-example)
+
+## License
+
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE).
