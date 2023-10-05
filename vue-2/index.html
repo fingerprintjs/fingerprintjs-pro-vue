@@ -29,10 +29,21 @@
 </p>
 
 
-<a href="#fingerprintjs-pro-vue-2" id="fingerprintjs-pro-vue-2" style="color: inherit; text-decoration: none;">
-  <h1>FingerprintJS Pro Vue 2</h1>
+<a href="#fingerprint-pro-vue-2-sdk" id="fingerprint-pro-vue-2-sdk" style="color: inherit; text-decoration: none;">
+  <h1>Fingerprint Pro Vue 2 SDK</h1>
 </a>
-<p>FingerprintJS Pro Vue is an easy way to integrate <a href="https://fingerprint.com/">Fingerprint Pro</a> into your Vue 2 application.</p>
+<p><a href="https://fingerprint.com/">Fingerprint</a> is a device intelligence platform offering 99.5% accurate visitor identification.</p>
+<p>Fingerprint Pro Vue SDK is an easy way to integrate <a href="https://fingerprint.com/">Fingerprint Pro</a> into your Vue 2 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.</p>
+
+<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+  <h2>Requirements</h2>
+</a>
+<ul>
+<li>For Typescript users: Typescript 4.5 or higher</li>
+<li>Vue 2.6 or higher</li>
+<li>For Nuxt users: Nuxt 2.16 or higher</li>
+</ul>
+<p>This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the <a href="https://dev.fingerprint.com/docs/pro-vs-open-source">difference between Fingerprint Pro and the source-available FingerprintJS</a>.</p>
 
 <a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
   <h2>Installation</h2>
@@ -43,13 +54,16 @@
 <p>Or:</p>
 <pre><code class="language-shell"><span class="hl-3">npm install @fingerprintjs/fingerprintjs-pro-vue-v2</span>
 </code></pre>
+<p>Or:</p>
+<pre><code class="language-shell"><span class="hl-3">pnpm add @fingerprintjs/fingerprintjs-pro-vue-v2</span>
+</code></pre>
 
 <a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
   <h2>Getting started</h2>
 </a>
-<p>To identify visitors, you&#39;ll need a FingerprintJS Pro account (you
+<p>To identify visitors, you&#39;ll need a Fingerprint Pro account (you
 can <a href="https://dashboard.fingerprint.com/signup/">sign up for free</a>).
-Get your API key and get started with the <a href="https://dev.fingerprint.com/docs/quick-start-guide">FingerprintJS Pro documentation</a>.</p>
+Get your API key and get started with the <a href="https://dev.fingerprint.com/docs/quick-start-guide">Fingerprint Pro documentation</a>.</p>
 <ol>
 <li>Register the plugin in your Vue application. Set a <a href="https://dev.fingerprint.com/docs/regions">region</a> if you have chosen a non-global region during registration. Set <code>endpoint</code> and <code>scriptUrlPattern</code> if you are using one of our proxy integrations to <a href="https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers">increase the accuracy and effectiveness</a> of visitor identification.</li>
 </ol>
@@ -108,4 +122,9 @@ Get your API key and get started with the <a href="https://dev.fingerprint.com/d
 <li><a href="../../examples/spa-v2-example">SPA Application</a></li>
 <li><a href="../../examples/nuxt-v2-example">Nuxt Application</a></li>
 </ul>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>This project is licensed under the <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE">MIT license</a>.</p>
 </div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-reference"><a href="modules.html#default" class="tsd-kind-icon">default</a></li><li class="tsd-kind-enum tsd-is-external"><a href="enums/CacheLocation.html" class="tsd-kind-icon">Cache<wbr/>Location</a></li><li class="tsd-kind-class tsd-is-external"><a href="classes/InMemoryCache.html" class="tsd-kind-icon">In<wbr/>Memory<wbr/>Cache</a></li><li class="tsd-kind-class tsd-is-external"><a href="classes/LocalStorageCache.html" class="tsd-kind-icon">Local<wbr/>Storage<wbr/>Cache</a></li><li class="tsd-kind-class tsd-is-external"><a href="classes/SessionStorageCache.html" class="tsd-kind-icon">Session<wbr/>Storage<wbr/>Cache</a></li><li class="tsd-kind-interface tsd-is-external"><a href="interfaces/FpjsClientOptions.html" class="tsd-kind-icon">Fpjs<wbr/>Client<wbr/>Options</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/FpjsVisitorQueryData.html" class="tsd-kind-icon">Fpjs<wbr/>Visitor<wbr/>Query<wbr/>Data</a></li><li class="tsd-kind-interface"><a href="interfaces/FpjsVueGlobal.html" class="tsd-kind-icon">Fpjs<wbr/>Vue<wbr/>Global</a></li><li class="tsd-kind-interface"><a href="interfaces/FpjsVueGlobalClient.html" class="tsd-kind-icon">Fpjs<wbr/>Vue<wbr/>Global<wbr/>Client</a></li><li class="tsd-kind-interface"><a href="interfaces/FpjsVueMixins.html" class="tsd-kind-icon">Fpjs<wbr/>Vue<wbr/>Mixins</a></li><li class="tsd-kind-interface"><a href="interfaces/FpjsVueQueryOptions.html" class="tsd-kind-icon">Fpjs<wbr/>Vue<wbr/>Query<wbr/>Options</a></li><li class="tsd-kind-interface"><a href="interfaces/GetDataOptions.html" class="tsd-kind-icon">Get<wbr/>Data<wbr/>Options</a></li><li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ICache.html" class="tsd-kind-icon">ICache</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter tsd-is-external"><a href="modules.html#Cacheable" class="tsd-kind-icon">Cacheable</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ClearCache" class="tsd-kind-icon">Clear<wbr/>Cache</a></li><li class="tsd-kind-type-alias tsd-is-external"><a href="modules.html#ExtendedGetResult" class="tsd-kind-icon">Extended<wbr/>Get<wbr/>Result</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#FpjsGetVisitorDataMethod" class="tsd-kind-icon">Fpjs<wbr/>Get<wbr/>Visitor<wbr/>Data<wbr/>Method</a></li><li class="tsd-kind-type-alias"><a href="modules.html#FpjsGetVisitorDataMethodThis" class="tsd-kind-icon">Fpjs<wbr/>Get<wbr/>Visitor<wbr/>Data<wbr/>Method<wbr/>This</a></li><li class="tsd-kind-type-alias"><a href="modules.html#FpjsVueOptions" class="tsd-kind-icon">Fpjs<wbr/>Vue<wbr/>Options</a></li><li class="tsd-kind-type-alias tsd-is-external"><a href="modules.html#GetResult" class="tsd-kind-icon">Get<wbr/>Result</a></li><li class="tsd-kind-type-alias"><a href="modules.html#GetVisitorData" class="tsd-kind-icon">Get<wbr/>Visitor<wbr/>Data</a></li><li class="tsd-kind-type-alias tsd-is-external"><a href="modules.html#LoadOptions" class="tsd-kind-icon">Load<wbr/>Options</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter tsd-is-external"><a href="modules.html#VisitorData" class="tsd-kind-icon">Visitor<wbr/>Data</a></li><li class="tsd-kind-variable tsd-is-external"><a href="modules.html#defaultEndpoint" class="tsd-kind-icon">default<wbr/>Endpoint</a></li><li class="tsd-kind-variable tsd-is-external"><a href="modules.html#defaultScriptUrlPattern" class="tsd-kind-icon">default<wbr/>Script<wbr/>Url<wbr/>Pattern</a></li><li class="tsd-kind-variable tsd-is-external"><a href="modules.html#defaultTlsEndpoint" class="tsd-kind-icon">default<wbr/>Tls<wbr/>Endpoint</a></li><li class="tsd-kind-variable"><a href="modules.html#fpjsGetVisitorDataExtendedMixin" class="tsd-kind-icon">fpjs<wbr/>Get<wbr/>Visitor<wbr/>Data<wbr/>Extended<wbr/>Mixin</a></li><li class="tsd-kind-variable"><a href="modules.html#fpjsGetVisitorDataMixin" class="tsd-kind-icon">fpjs<wbr/>Get<wbr/>Visitor<wbr/>Data<wbr/>Mixin</a></li><li class="tsd-kind-variable"><a href="modules.html#fpjsPlugin" class="tsd-kind-icon">fpjs<wbr/>Plugin</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
