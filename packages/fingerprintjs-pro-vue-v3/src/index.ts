@@ -29,4 +29,5 @@ export {
   LocalStorageCache,
   SessionStorageCache,
   InMemoryCache,
+  FingerprintJSPro,
 } from '@fingerprintjs/fingerprintjs-pro-spa';
