@@ -285,8 +285,8 @@ You can find detailed documentation in the [API reference](https://fingerprintjs
 
 Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). By default, the SDK uses `sessionStorage` to cache results. 
 
-* Specify the `cacheLocation` prop on the `FpjsVueOptions` to instead store results in `memory` or  `localStorage`. Use `none` to disable caching completely.
-* Specify the `cache` prop on `FpjsVueOptions` to use your custom cache implementation instead. For more details, see [Creating a custom cache](https://github.com/fingerprintjs/fingerprintjs-pro-spa#creating-a-custom-cache)
+* Specify `cacheLocation` in `FpjsVueOptions` to instead store results in `memory` or  `localStorage`. Use `none` to disable caching completely.
+* Specify `cache` in `FpjsVueOptions` to use your custom cache implementation instead. For more details, see [Creating a custom cache](https://github.com/fingerprintjs/fingerprintjs-pro-spa#creating-a-custom-cache)
  in the Fingerprint Pro SPA repository (a lower-level Fingerprint library used by this SDK).
 * Pass `{ignoreCache: true}` to the `getData()`/`getVisitorData()`/`getVisitorDataExtended()` function to ignore cached results for that specific API call. 
 
