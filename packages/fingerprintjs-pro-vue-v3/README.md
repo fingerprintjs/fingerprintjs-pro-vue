@@ -283,11 +283,16 @@ You can find detailed documentation in the [API reference](https://fingerprintjs
 
 ## Caching strategy
 
-Fingerprint Pro usage is billed per API call. To reduce API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). The SDK uses SessionStorage to cache results by default.
+Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). By default, the SDK uses `sessionStorage` to cache results. 
 
-:warning: **WARNING** If you use data from `extendedResult`, please pay additional attention to caching strategy.
+* Specify `cacheLocation` in `FpjsVueOptions` to instead store results in `memory` or  `localStorage`. Use `none` to disable caching completely.
+* Specify `cache` in `FpjsVueOptions` to use your custom cache implementation instead. For more details, see [Creating a custom cache](https://github.com/fingerprintjs/fingerprintjs-pro-spa#creating-a-custom-cache)
+ in the Fingerprint Pro SPA repository (a lower-level Fingerprint library used by this SDK).
+* Pass `{ignoreCache: true}` to the `getData()`/`getVisitorData()`/`getVisitorDataExtended()` function to ignore cached results for that specific API call. 
 
-Some fields from the [extendedResult](https://dev.fingerprint.com/docs/js-agent#extendedresult) (e.g `ip` or `lastSeenAt`) might change for the same visitor. If you need to get the current data, it is recommended to pass `ignoreCache=true` inside `getData`, `getVisitorData` or `getVisitorDataExtended` functions.
+> [!NOTE]
+> If you use data from [`extendedResult`](https://dev.fingerprint.com/docs/js-agent#extendedresult), pay additional attention to your caching strategy.
+> Some fields, for example, `ip` or `lastSeenAt`, might change over time for the same visitor. Use `getData({ ignoreCache: true })` to fetch the latest identification results.
 
 ## Support and feedback
 
