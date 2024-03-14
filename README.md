@@ -8,63 +8,303 @@
   </a>
 </p>
 <p align="center">
+    <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml">
+    <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml/badge.svg" alt="Build status">
+  </a>
    <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml">
     <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml/badge.svg" alt="Release status">
    </a>
-<a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml">
-    <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml/badge.svg" alt="Tests status">
+   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v3">
+     <img src="https://img.shields.io/npm/v/@fingerprintjs/fingerprintjs-pro-vue-v3.svg" alt="Current NPM version">
+   </a>
+   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v3">
+     <img src="https://img.shields.io/npm/dm/@fingerprintjs/fingerprintjs-pro-vue-v3.svg" alt="Monthly downloads from NPM">
    </a>
    <a href="https://opensource.org/licenses/MIT">
      <img src="https://img.shields.io/:license-mit-blue.svg" alt="MIT license">
    </a>
-    <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v2">
-     <img src="https://img.shields.io/npm/v/@fingerprintjs/fingerprintjs-pro-vue-v2.svg?label=npm%20vue2" alt="Current NPM version for Vue 2 integration">
-   </a>
-    <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v3">
-     <img src="https://img.shields.io/npm/v/@fingerprintjs/fingerprintjs-pro-vue-v3.svg?label=npm%20vue3" alt="Current NPM version for Vue 3 integration">
-   </a>
    <a href="https://discord.gg/39EpE2neBg">
      <img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
    </a>
-    <a href="https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-2">
-     <img src="https://img.shields.io/badge/Vue%202-Documentation-green" alt="Discord server">
-   </a>
-    <a href="https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3">
-     <img src="https://img.shields.io/badge/Vue%203-Documentation-green" alt="Discord server">
-   </a>
 </p>
 
-# FingerprintJS Pro Vue
+# Fingerprint Pro Vue 3 SDK
 
-FingerprintJS Pro Vue is an easy-to-use Vue plugin for [FingerprintJS Pro](https://fingerprint.com/) that also works with NuxtJS. 
-Example apps can be found in the [examples](./examples) folder. Libraries that we publish to NPM can be found in the [packages](./packages) folder.
-This package works with FingerprintJS Pro, it is not compatible with open-source FingerprintJS. You can learn more about the difference between FingerprintJS Pro and open-source FingerprintJS in the [official documentation](https://dev.fingerprint.com/docs/pro-vs-open-source).
+[Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
+
+Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.
+
+## Requirements
+
+- For Typescript users: Typescript 4.5 or higher
+- Vue 3.1 or higher
+- For Nuxt users: Nuxt 3.0 or higher
+
+This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
+
 
 ## Installation
-Currently, we are supporting Vue 2.6.x and Vue 3.1.x.
 
-If you are using Vue 2.6.x:
+To install the plugin run:
+
 ```shell
-yarn add @fingerprintjs/fingerprintjs-pro-vue-2
+yarn add @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
+
 Or:
+
 ```shell
-npm install @fingerprintjs/fingerprintjs-pro-vue-2
+npm install @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
----
-If you are using Vue 3.1.x:
+
 ```shell
-yarn add @fingerprintjs/fingerprintjs-pro-vue-3
-```
-Or:
-```shell
-npm install @fingerprintjs/fingerprintjs-pro-vue-3
+pnpm add @fingerprintjs/fingerprintjs-pro-vue-v3
 ```
 
 ## Getting started
-For instructions on how to use the plugin, see the readme for respective Vue versions:
-- [Vue 2.6.x](./packages/fingerprintjs-pro-vue-v2/README.md)
-- [Vue 3.1.x](./packages/fingerprintjs-pro-vue-v3/README.md)
+
+To identify visitors, you'll need a Fingerprint Pro account (you
+can [sign up for free](https://dashboard.fingerprint.com/signup/)).
+Get your API key and get started with the [Fingerprint Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+
+Register our plugin in your Vue application. 
+
+* Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration. 
+* Set `endpoint` and `scriptUrlPattern` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
+
+```typescript
+import { createApp } from 'vue';
+import App from './App.vue';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+const app = createApp(App);
+
+const apiKey = '<public-api-key>'
+
+app
+  .use(fpjsPlugin, {
+    loadOptions: {
+      apiKey: '<your-public-api-key>',
+      // region: 'eu',
+      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
+    },
+  } as FpjsVueOptions)
+  .mount('#app');
+
+```
+You can use the plugin with Composition API, Options API, or Mixins, with or without Nuxt. See the usage examples below.
+
+## Composition API
+
+The plugin provides a `useVisitorData` function you can use to identify visitors:
+
+```vue
+<script setup>
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { watch } from 'vue';
+
+const { data, error, isLoading, getData } = useVisitorData(
+  { extendedResult: true }, 
+  // Set to true to fetch data on mount
+  { immediate: false }
+);
+
+watch(data, (currentData) => {
+  if (currentData) {
+    // Do something with the data
+  }
+});
+</script>
+
+<template>
+  <button @click='getData'>Get visitor data</button>
+</template>
+
+```
+
+## Options API
+
+The plugin injects a `$fpjs` object into your components that you can use to identify visitors:
+
+```vue
+
+<script lang='ts'>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  methods: {
+    async getVisitorData() {
+      const visitorData = await this.$fpjs.getVisitorData({
+        extendedResult: true
+      });
+
+      // Do something with visitorData
+    }
+  }
+});
+</script>
+
+<template>
+  <button @click='getVisitorData'>Get visitor data</button>
+</template> 
+```
+
+### Mixins
+
+For your convenience, we also provide mixins that handle all query states.
+
+For the extended result:
+
+```vue
+
+<script lang='ts'>
+import { defineComponent } from 'vue';
+import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+export default defineComponent({
+  // Include our mixin
+  mixins: [fpjsGetVisitorDataExtendedMixin],
+  async mounted() {
+    // You can also fetch data on mount
+    // await this.$getVisitorDataExtended();
+  }
+});
+</script>
+
+<template>
+  <div>
+    <button @click='$getVisitorDataExtended'>
+      Get visitor data
+    </button>
+    <span v-if='visitorDataExtended.isLoading'>
+      Loading...
+    </span>
+    <span v-else-if='visitorDataExtended.isError'>
+      Error: {{ visitorDataExtended.error }}
+    </span>
+    <span v-else>
+      <!--Do something with visitorData here-->
+    </span>
+  </div>
+</template>
+```
+
+For the default result:
+
+```vue
+
+<script lang='ts'>
+import { defineComponent } from 'vue';
+import { fpjsGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+export default defineComponent({
+  // Include our mixin
+  mixins: [fpjsGetVisitorDataMixin],
+  async mounted() {
+    // You can also fetch data on mount
+    // await this.$getVisitorData();
+  }
+});
+</script>
+
+<template>
+  <div>
+    <button @click='$getVisitorData'>
+      Get visitor data
+    </button>
+    <span v-if='visitorData.isLoading'>
+      Loading...
+    </span>
+    <span v-else-if='visitorData.isError'>
+      Error: {{ visitorData.error }}
+    </span>
+    <span v-else>
+      <!--Do something with visitorData here-->
+    </span>
+  </div>
+</template>
+```
+
+## Nuxt
+
+The plugin works with Nuxt out of the box, however, you need to register it on the client side only.
+
+```typescript
+// plugins/fingerprintjs.client.ts
+import { defineNuxtPlugin, useRuntimeConfig } from '#app';
+import {
+  fpjsPlugin,
+  FpjsVueOptions,
+  // defaultEndpoint,
+  // defaultScriptUrlPattern,
+} from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig();
+
+  nuxtApp.vueApp.use(fpjsPlugin, {
+    loadOptions: {
+      apiKey: config.public.API_KEY,
+      // region: 'eu',
+      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
+      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
+    },
+  } as FpjsVueOptions);
+});
+```
+
+```typescript
+//nuxt.config.ts
+
+import { defineNuxtConfig } from 'nuxt';
+import path from 'path';
+
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      // Inject Fingerprint Pro API key
+      API_KEY: process.env.API_KEY,
+    },
+  }
+});
+```
+
+See the [example Nuxt Application](examples/nuxt-v3-example) for more details.
+
+## Documentation
+
+You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3/).
+
+## Caching strategy
+
+Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information). By default, the SDK uses `sessionStorage` to cache results. 
+
+* Specify `cacheLocation` in `FpjsVueOptions` to instead store results in `memory` or  `localStorage`. Use `none` to disable caching completely.
+* Specify `cache` in `FpjsVueOptions` to use your custom cache implementation instead. For more details, see [Creating a custom cache](https://github.com/fingerprintjs/fingerprintjs-pro-spa#creating-a-custom-cache)
+ in the Fingerprint Pro SPA repository (a lower-level Fingerprint library used by this SDK).
+* Pass `{ignoreCache: true}` to the `getData()`/`getVisitorData()`/`getVisitorDataExtended()` function to ignore cached results for that specific API call. 
+
+> [!NOTE]
+> If you use data from [`extendedResult`](https://dev.fingerprint.com/docs/js-agent#extendedresult), pay additional attention to your caching strategy.
+> Some fields, for example, `ip` or `lastSeenAt`, might change over time for the same visitor. Use `getData({ ignoreCache: true })` to fetch the latest identification results.
 
 ## Support and feedback
-For support or to provide feedback, please [raise an issue on our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you require private support, please email us at oss-support@fingerprint.com. If you'd like to have a similar Vue library for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider [raising an issue in our issue tracker](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues).
+
+To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
+
+## Examples
+
+You can find the following examples in the [examples](examples) directory:
+
+- [SPA Application](examples/spa-v3-example)
+- [Nuxt Application](examples/nuxt-v3-example)
+
+## License
+
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE).

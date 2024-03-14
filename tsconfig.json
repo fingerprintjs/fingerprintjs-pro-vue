@@ -1,25 +1,27 @@
 {
   "compilerOptions": {
-    "outDir": "dist/src",
-    "module": "es6",
+    "outDir": "dist",
+    "module": "esnext",
     "moduleResolution": "node",
-    "target": "ES6",
+    "target": "esnext",
     "resolveJsonModule": true,
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "noErrorTruncation": true,
+    "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "baseUrl": ".",
-    "paths": {
-      "shared/*": ["./packages/shared/src/*"]
-    }
+    "baseUrl": "."
   },
   "exclude": [
     "**/dist",
     "node_modules",
     "**/*.test.ts"
+  ],
+  "include": [
+    "src",
+    "__tests__"
   ]
 }
