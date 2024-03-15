@@ -1,6 +1,6 @@
-export const init = jest.fn();
-export const getVisitorData = jest.fn();
-export const clearCache = jest.fn();
+export const init = jest.fn()
+export const getVisitorData = jest.fn()
+export const clearCache = jest.fn()
 
 jest.mock('@fingerprintjs/fingerprintjs-pro-spa', () => {
   return {
@@ -10,7 +10,7 @@ jest.mock('@fingerprintjs/fingerprintjs-pro-spa', () => {
         init,
         getVisitorData,
         clearCache,
-      };
+      }
     }),
-  };
-});
+  }
+})

@@ -1,10 +1,10 @@
-import type { Plugin } from 'vue';
-import { FpjsClient } from '@fingerprintjs/fingerprintjs-pro-spa';
-import * as packageInfo from '..//package.json';
-import { CLEAR_CACHE, GET_VISITOR_DATA } from './symbols';
-import { FpjsVueGlobalClient, FpjsVueOptions } from './types';
-import { getOptions } from './config';
-import { makeClientMethods } from './client';
+import type { Plugin } from 'vue'
+import { FpjsClient } from '@fingerprintjs/fingerprintjs-pro-spa'
+import * as packageInfo from '..//package.json'
+import { CLEAR_CACHE, GET_VISITOR_DATA } from './symbols'
+import { FpjsVueGlobalClient, FpjsVueOptions } from './types'
+import { getOptions } from './config'
+import { makeClientMethods } from './client'
 
 /**
  * Fingerprint Pro plugin
@@ -29,16 +29,16 @@ import { makeClientMethods } from './client';
  * */
 export const fpjsPlugin: Plugin = {
   install: (app, options: FpjsVueOptions) => {
-    const client = new FpjsClient(getOptions(options, 'fingerprintjs-pro-vue-v3', packageInfo.version));
+    const client = new FpjsClient(getOptions(options, 'fingerprintjs-pro-vue-v3', packageInfo.version))
 
-    const { getVisitorData, clearCache } = makeClientMethods(client);
+    const { getVisitorData, clearCache } = makeClientMethods(client)
 
-    app.provide(GET_VISITOR_DATA, getVisitorData);
-    app.provide(CLEAR_CACHE, clearCache);
+    app.provide(GET_VISITOR_DATA, getVisitorData)
+    app.provide(CLEAR_CACHE, clearCache)
 
     app.config.globalProperties.$fpjs = {
       getVisitorData,
       clearCache,
-    } as FpjsVueGlobalClient;
+    } as FpjsVueGlobalClient
   },
-};
+}

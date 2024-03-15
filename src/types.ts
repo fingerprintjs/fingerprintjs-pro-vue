@@ -1,19 +1,19 @@
-import type { FpjsClient, FpjsSpaOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { FpjsClient, FpjsSpaOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa'
 
-export type FpjsVueOptions = FpjsSpaOptions;
+export type FpjsVueOptions = FpjsSpaOptions
 
-export type GetVisitorData = FpjsClient['getVisitorData'];
-export type ClearCache = FpjsClient['clearCache'];
+export type GetVisitorData = FpjsClient['getVisitorData']
+export type ClearCache = FpjsClient['clearCache']
 
 export interface FpjsVueGlobalClient {
-  getVisitorData: GetVisitorData;
-  clearCache: ClearCache;
+  getVisitorData: GetVisitorData
+  clearCache: ClearCache
 }
 
 export interface FpjsVisitorQueryData<TExtended extends boolean> {
-  isLoading: boolean;
-  data: VisitorData<TExtended> | undefined;
-  error: Error | undefined;
+  isLoading: boolean
+  data: VisitorData<TExtended> | undefined
+  error: Error | undefined
 }
 
 export interface FpjsVueQueryOptions {
@@ -22,7 +22,7 @@ export interface FpjsVueQueryOptions {
    *
    * @default true
    */
-  immediate?: boolean;
+  immediate?: boolean
 }
 
 export interface GetDataOptions {
@@ -31,5 +31,5 @@ export interface GetDataOptions {
    *
    * @default false
    * */
-  ignoreCache?: boolean;
+  ignoreCache?: boolean
 }

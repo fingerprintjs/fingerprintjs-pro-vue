@@ -1,4 +1,4 @@
-import type { FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa';
+import type { FpjsClientOptions } from '@fingerprintjs/fingerprintjs-pro-spa'
 
 export const getOptions = (options: FpjsClientOptions, packageName: string, version: string) => {
   const clientOptions: FpjsClientOptions = {
@@ -7,6 +7,6 @@ export const getOptions = (options: FpjsClientOptions, packageName: string, vers
       ...options.loadOptions,
       integrationInfo: [...(options.loadOptions?.integrationInfo ?? []), `${packageName}/${version}`],
     },
-  };
-  return clientOptions;
-};
+  }
+  return clientOptions
+}

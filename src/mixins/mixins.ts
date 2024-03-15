@@ -1,5 +1,5 @@
-import type { FpjsVisitorQueryData } from '../types';
-import type { FpjsGetVisitorDataMethod, GetVisitorDataMethodParams } from './mixins.types';
+import type { FpjsVisitorQueryData } from '../types'
+import type { FpjsGetVisitorDataMethod, GetVisitorDataMethodParams } from './mixins.types'
 
 function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   this: any,
@@ -7,35 +7,35 @@ function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   key: Key,
   value: FpjsVisitorQueryData<boolean>[Key]
 ) {
-  this.$data[dataName][key] = value;
+  this.$data[dataName][key] = value
 }
 
 function createMixin<TExtended extends boolean>(extended: TExtended) {
-  const suffix = extended ? 'Extended' : '';
+  const suffix = extended ? 'Extended' : ''
 
-  const dataName = extended ? 'visitorDataExtended' : 'visitorData';
-  const methodName = `$getVisitorData${suffix}` as const;
+  const dataName = extended ? 'visitorDataExtended' : 'visitorData'
+  const methodName = `$getVisitorData${suffix}` as const
 
   const getVisitorData: FpjsGetVisitorDataMethod = async function (options) {
     /**
      * We use this.$root as a fallback, because in nuxt sometimes this.$fpjs might be empty, but it might exist in $root
      * */
-    const fpjs = this.$fpjs ?? this.$root?.$fpjs;
-    const boundSetData = setMixinData.bind(this);
+    const fpjs = this.$fpjs ?? this.$root?.$fpjs
+    const boundSetData = setMixinData.bind(this)
 
     const setData = <Key extends keyof FpjsVisitorQueryData<TExtended>>(
       key: Key,
       value: FpjsVisitorQueryData<TExtended>[Key]
     ) => {
-      return boundSetData(dataName, key, value);
-    };
+      return boundSetData(dataName, key, value)
+    }
 
     if (!fpjs) {
-      throw new TypeError('$fpjs is not defined.');
+      throw new TypeError('$fpjs is not defined.')
     }
 
     try {
-      setData('isLoading', true);
+      setData('isLoading', true)
 
       setData(
         'data',
@@ -46,13 +46,13 @@ function createMixin<TExtended extends boolean>(extended: TExtended) {
           },
           options?.ignoreCache
         )
-      );
+      )
     } catch (error) {
-      setData('error', error as Error);
+      setData('error', error as Error)
     } finally {
-      setData('isLoading', false);
+      setData('isLoading', false)
     }
-  };
+  }
 
   return {
     data() {
@@ -62,12 +62,12 @@ function createMixin<TExtended extends boolean>(extended: TExtended) {
           data: undefined,
           error: undefined,
         } as FpjsVisitorQueryData<TExtended>,
-      };
+      }
     },
     methods: {
       [methodName]: getVisitorData as (options?: GetVisitorDataMethodParams) => Promise<void>,
     },
-  } as const;
+  } as const
 }
 
 /**
@@ -108,11 +108,11 @@ function createMixin<TExtended extends boolean>(extended: TExtended) {
  * ```
  * */
 export const fpjsGetVisitorDataMixin = createMixin(false) as {
-  data: () => { visitorData: FpjsVisitorQueryData<false> };
+  data: () => { visitorData: FpjsVisitorQueryData<false> }
   methods: {
-    $getVisitorData: FpjsGetVisitorDataMethod<any>;
-  };
-};
+    $getVisitorData: FpjsGetVisitorDataMethod<any>
+  }
+}
 
 /**
  * Mixin for fetching extended visitorData
@@ -152,8 +152,8 @@ export const fpjsGetVisitorDataMixin = createMixin(false) as {
  * ```
  * */
 export const fpjsGetVisitorDataExtendedMixin = createMixin(true) as {
-  data: () => { visitorDataExtended: FpjsVisitorQueryData<true> };
+  data: () => { visitorDataExtended: FpjsVisitorQueryData<true> }
   methods: {
-    $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>;
-  };
-};
+    $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>
+  }
+}

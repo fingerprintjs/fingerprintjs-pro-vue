@@ -1,5 +1,5 @@
-import { fpjsPlugin } from './plugin';
-import './vue';
+import { fpjsPlugin } from './plugin'
+import './vue'
 
 export type {
   CacheLocation,
@@ -10,9 +10,9 @@ export type {
   GetResult,
   ExtendedGetResult,
   FpjsClientOptions,
-} from '@fingerprintjs/fingerprintjs-pro-spa';
+} from '@fingerprintjs/fingerprintjs-pro-spa'
 
-export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from './mixins/mixins';
+export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from './mixins/mixins'
 
 export {
   defaultEndpoint,
@@ -22,13 +22,13 @@ export {
   SessionStorageCache,
   InMemoryCache,
   FingerprintJSPro,
-} from '@fingerprintjs/fingerprintjs-pro-spa';
+} from '@fingerprintjs/fingerprintjs-pro-spa'
 
-export * from './plugin';
-export * from './symbols';
-export * from './types';
-export * from './useVisitorData/useVisitorData';
-export * from './useVisitorData/useVisitorData.types';
-export * from './vue';
+export * from './plugin'
+export * from './symbols'
+export * from './types'
+export * from './useVisitorData/useVisitorData'
+export * from './useVisitorData/useVisitorData.types'
+export * from './vue'
 
-export default fpjsPlugin;
+export default fpjsPlugin

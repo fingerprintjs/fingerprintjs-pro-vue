@@ -1,242 +1,242 @@
-import { config, mount } from '@vue/test-utils';
-import { fpjsPlugin } from '../src/plugin';
-import { FpjsVueOptions } from '../src/types';
-import { UseGetVisitorDataResult, useVisitorData } from '../src';
-import { onMounted, ref, watch } from 'vue';
-import { getVisitorData, init } from '../src/tests/setup';
+import { config, mount } from '@vue/test-utils'
+import { fpjsPlugin } from '../src/plugin'
+import { FpjsVueOptions } from '../src/types'
+import { UseGetVisitorDataResult, useVisitorData } from '../src'
+import { onMounted, ref, watch } from 'vue'
+import { getVisitorData, init } from '../src/tests/setup'
 
-const apiKey = 'API_KEY';
+const apiKey = 'API_KEY'
 const testData = {
   visitorId: '#visitor_id',
-};
+}
 
 const pluginConfig = {
   loadOptions: {
     apiKey,
   },
-} as FpjsVueOptions;
+} as FpjsVueOptions
 
 describe('useVisitorData', () => {
   beforeAll(() => {
-    config.global.plugins.push([fpjsPlugin, pluginConfig]);
-  });
+    config.global.plugins.push([fpjsPlugin, pluginConfig])
+  })
 
   beforeEach(() => {
-    getVisitorData.mockClear();
-    init.mockClear();
-  });
+    getVisitorData.mockClear()
+    init.mockClear()
+  })
 
   it('should expose fpjs related methods', () => {
     mount({
       template: '<h1>Hello world</h1>',
       setup() {
-        const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true }, { immediate: false });
+        const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true }, { immediate: false })
 
-        expect(data.value).toBeUndefined();
-        expect(typeof getData === 'function').toEqual(true);
-        expect(error.value).toBeUndefined();
-        expect(isLoading.value).toEqual(false);
+        expect(data.value).toBeUndefined()
+        expect(typeof getData === 'function').toEqual(true)
+        expect(error.value).toBeUndefined()
+        expect(isLoading.value).toEqual(false)
       },
-    });
-  });
+    })
+  })
 
   it('should call getData on mount by default', async () => {
-    getVisitorData.mockResolvedValue(testData);
+    getVisitorData.mockResolvedValue(testData)
 
     await new Promise<void>((resolve) => {
       mount({
         template: '<h1>Hello world</h1>',
         setup() {
-          const { isLoading, data } = useVisitorData({ extendedResult: true });
+          const { isLoading, data } = useVisitorData({ extendedResult: true })
 
           onMounted(() => {
-            expect(isLoading.value).toEqual(true);
-            expect(init).toHaveBeenCalledTimes(1);
-          });
+            expect(isLoading.value).toEqual(true)
+            expect(init).toHaveBeenCalledTimes(1)
+          })
 
           watch(isLoading, (currentLoading, wasLoading) => {
             if (!currentLoading && wasLoading) {
-              expect(data.value).toEqual(testData);
+              expect(data.value).toEqual(testData)
 
-              resolve();
+              resolve()
             }
-          });
+          })
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   it('should expose errors', async () => {
-    const testError = new Error('Test error');
+    const testError = new Error('Test error')
 
-    getVisitorData.mockRejectedValue(testError);
+    getVisitorData.mockRejectedValue(testError)
 
     await new Promise<void>((resolve) => {
       mount({
         template: '<h1>Hello world</h1>',
         setup() {
-          const { isLoading, data, error } = useVisitorData({ extendedResult: true });
+          const { isLoading, data, error } = useVisitorData({ extendedResult: true })
 
           onMounted(() => {
-            expect(isLoading.value).toEqual(true);
-          });
+            expect(isLoading.value).toEqual(true)
+          })
 
           watch(isLoading, (currentLoading, wasLoading) => {
             if (!currentLoading && wasLoading) {
-              expect(data.value).toBeFalsy();
-              expect(error.value).toBeTruthy();
+              expect(data.value).toBeFalsy()
+              expect(error.value).toBeTruthy()
 
-              expect(error.value?.name).toEqual('FPJSAgentError');
-              expect(error.value?.message).toEqual(testError.message);
+              expect(error.value?.name).toEqual('FPJSAgentError')
+              expect(error.value?.message).toEqual(testError.message)
 
-              resolve();
+              resolve()
             }
-          });
+          })
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   it('should provide fresh data after error', async () => {
-    getVisitorData.mockRejectedValueOnce(new Error('Test error'));
+    getVisitorData.mockRejectedValueOnce(new Error('Test error'))
 
     await new Promise<void>((resolve) => {
       mount({
         template: '<h1>Hello world</h1>',
         setup() {
-          const { isLoading, getData, error, data } = useVisitorData({ extendedResult: true }, { immediate: true });
+          const { isLoading, getData, error, data } = useVisitorData({ extendedResult: true }, { immediate: true })
 
-          const didRefetch = ref(false);
-          const checkedError = ref(false);
+          const didRefetch = ref(false)
+          const checkedError = ref(false)
 
           onMounted(() => {
-            expect(isLoading.value).toEqual(true);
-          });
+            expect(isLoading.value).toEqual(true)
+          })
 
           watch(isLoading, async (currentLoading, wasLoading) => {
             if (!currentLoading && wasLoading && !checkedError.value) {
-              expect(error.value).toBeTruthy();
+              expect(error.value).toBeTruthy()
 
-              checkedError.value = true;
+              checkedError.value = true
 
-              getVisitorData.mockResolvedValue(testData);
+              getVisitorData.mockResolvedValue(testData)
 
-              await getData();
+              await getData()
 
-              didRefetch.value = true;
+              didRefetch.value = true
 
-              resolve();
+              resolve()
             }
-          });
+          })
 
           watch(didRefetch, (value) => {
             if (value) {
-              expect(data.value).toEqual(testData);
-              expect(error.value).toBeUndefined();
+              expect(data.value).toEqual(testData)
+              expect(error.value).toBeUndefined()
 
-              resolve();
+              resolve()
             }
-          });
+          })
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   it('should not call getData if "immediate" is set to false', () => {
     mount({
       template: '<h1>Hello world</h1>',
       setup() {
-        const { isLoading } = useVisitorData({ extendedResult: true }, { immediate: false });
+        const { isLoading } = useVisitorData({ extendedResult: true }, { immediate: false })
 
         onMounted(() => {
-          expect(isLoading.value).toEqual(false);
-        });
+          expect(isLoading.value).toEqual(false)
+        })
       },
-    });
-  });
+    })
+  })
 
   describe('Cache', () => {
     function assertIgnoredCache(result: UseGetVisitorDataResult<true>) {
       return new Promise<void>((resolve) => {
         watch(result.isLoading, (currentLoading, wasLoading) => {
           if (!currentLoading && wasLoading) {
-            expect(result.data.value).toEqual(testData);
+            expect(result.data.value).toEqual(testData)
 
-            expect(getVisitorData).toHaveBeenCalledTimes(1);
-            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, true);
+            expect(getVisitorData).toHaveBeenCalledTimes(1)
+            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, true)
 
-            resolve();
+            resolve()
           }
-        });
-      });
+        })
+      })
     }
 
     function assertNotIgnoredCache(result: UseGetVisitorDataResult<true>) {
       return new Promise<void>((resolve) => {
         watch(result.isLoading, (currentLoading, wasLoading) => {
           if (!currentLoading && wasLoading) {
-            expect(result.data.value).toEqual(testData);
+            expect(result.data.value).toEqual(testData)
 
-            expect(getVisitorData).toHaveBeenCalledTimes(1);
-            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, false);
+            expect(getVisitorData).toHaveBeenCalledTimes(1)
+            expect(getVisitorData).toHaveBeenCalledWith({ extendedResult: true }, false)
 
-            resolve();
+            resolve()
           }
-        });
-      });
+        })
+      })
     }
 
     it('should ignore cache if ignoreCache is set to true in useVisitorData', () => {
-      getVisitorData.mockResolvedValue(testData);
+      getVisitorData.mockResolvedValue(testData)
 
       return new Promise<void>((resolve, reject) => {
         mount({
           template: '<h1>Hello world</h1>',
           setup() {
-            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: true });
+            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: true })
 
-            assertIgnoredCache(result).then(resolve).catch(reject);
+            assertIgnoredCache(result).then(resolve).catch(reject)
           },
-        });
-      });
-    });
+        })
+      })
+    })
 
     it('should ignore cache if it is set to true in getData call', () => {
-      getVisitorData.mockResolvedValue(testData);
+      getVisitorData.mockResolvedValue(testData)
 
       return new Promise<void>((resolve, reject) => {
         mount({
           template: '<h1>Hello world</h1>',
           setup() {
-            const result = useVisitorData({ extendedResult: true, ignoreCache: false }, { immediate: false });
+            const result = useVisitorData({ extendedResult: true, ignoreCache: false }, { immediate: false })
 
             onMounted(() => {
-              result.getData({ ignoreCache: true });
-            });
+              result.getData({ ignoreCache: true })
+            })
 
-            assertIgnoredCache(result).then(resolve).catch(reject);
+            assertIgnoredCache(result).then(resolve).catch(reject)
           },
-        });
-      });
-    });
+        })
+      })
+    })
 
     it('should not ignore cache if it is set to ignore in useVisitorData and overwritten in getData call', () => {
-      getVisitorData.mockResolvedValue(testData);
+      getVisitorData.mockResolvedValue(testData)
 
       return new Promise<void>((resolve, reject) => {
         mount({
           template: '<h1>Hello world</h1>',
           setup() {
-            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: false });
+            const result = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: false })
 
             onMounted(() => {
-              result.getData({ ignoreCache: false });
-            });
+              result.getData({ ignoreCache: false })
+            })
 
-            assertNotIgnoredCache(result).then(resolve).catch(reject);
+            assertNotIgnoredCache(result).then(resolve).catch(reject)
           },
-        });
-      });
-    });
-  });
-});
+        })
+      })
+    })
+  })
+})

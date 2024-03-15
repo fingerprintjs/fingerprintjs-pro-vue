@@ -1,8 +1,8 @@
-import { inject, onMounted, ref } from 'vue';
-import { GET_VISITOR_DATA } from '../symbols';
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa';
-import type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisitorData.types';
-import { FpjsVueQueryOptions } from '../types';
+import { inject, onMounted, ref } from 'vue'
+import { GET_VISITOR_DATA } from '../symbols'
+import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisitorData.types'
+import { FpjsVueQueryOptions } from '../types'
 
 /**
  * Composition API for fetching visitorData.
@@ -24,55 +24,55 @@ export function useVisitorData<TExtended extends boolean>(
   { ignoreCache: defaultIgnoreCache, ...options }: UseVisitorDataOptions<TExtended> = {},
   { immediate = true }: FpjsVueQueryOptions = {}
 ): UseGetVisitorDataResult<TExtended> {
-  const data = ref<VisitorData<TExtended> | undefined>();
-  const isLoading = ref(false);
-  const currentError = ref<Error | undefined>();
+  const data = ref<VisitorData<TExtended> | undefined>()
+  const isLoading = ref(false)
+  const currentError = ref<Error | undefined>()
 
-  const getVisitorData = inject(GET_VISITOR_DATA);
+  const getVisitorData = inject(GET_VISITOR_DATA)
 
   if (!getVisitorData) {
-    throw new Error('GET_VISITOR_DATA inject data is missing, perhaps you forgot to install the plugin first?');
+    throw new Error('GET_VISITOR_DATA inject data is missing, perhaps you forgot to install the plugin first?')
   }
 
   const getData: UseGetVisitorDataResult<TExtended>['getData'] = async (getDataOptions) => {
-    isLoading.value = true;
+    isLoading.value = true
 
     const ignoreCache =
-      typeof getDataOptions?.ignoreCache === 'boolean' ? getDataOptions.ignoreCache : defaultIgnoreCache;
+      typeof getDataOptions?.ignoreCache === 'boolean' ? getDataOptions.ignoreCache : defaultIgnoreCache
 
     try {
-      const result = await getVisitorData(options, ignoreCache);
+      const result = await getVisitorData(options, ignoreCache)
 
-      data.value = result;
-      currentError.value = undefined;
+      data.value = result
+      currentError.value = undefined
 
-      return result;
+      return result
     } catch (error) {
-      data.value = undefined;
+      data.value = undefined
 
       if (error instanceof Error) {
-        error.message = `${error.name}: ${error.message}`;
-        error.name = 'FPJSAgentError';
+        error.message = `${error.name}: ${error.message}`
+        error.name = 'FPJSAgentError'
 
-        currentError.value = error;
+        currentError.value = error
       }
 
-      return undefined;
+      return undefined
     } finally {
-      isLoading.value = false;
+      isLoading.value = false
     }
-  };
+  }
 
   onMounted(async () => {
     if (immediate) {
-      await getData();
+      await getData()
     }
-  });
+  })
 
   return {
     getData,
     data,
     isLoading,
     error: currentError,
-  };
+  }
 }
