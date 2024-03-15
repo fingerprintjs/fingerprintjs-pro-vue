@@ -1,4 +1,4 @@
-name: Release
+name: release
 on:
   push:
     branches:
@@ -6,27 +6,9 @@ on:
       - test
 
 jobs:
-  release:
-    environment: production
-    name: Build & Release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          token: ${{ secrets.GH_RELEASE_TOKEN }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install npm dependencies
-        run: pnpm install
-
-      - name: Release
-        run: pnpm run semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          HUSKY: 0
+  build-and-release:
+    name: 'Build project, run CI checks and publish new release'
+    uses: fingerprintjs/dx-team-toolkit/.github/workflows/release-typescript-project.yml@v1
+    secrets:
+      GH_RELEASE_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

@@ -49,8 +49,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/plugin.d.ts",
-    "docs": "typedoc src/index.ts --out docs",
-    "release": "semantic-release"
+    "docs": "typedoc src/index.ts --out docs"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
@@ -61,7 +60,6 @@
     "@fingerprintjs/tsconfig-dx-team": "^0.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@semantic-release/exec": "6.0.3",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",

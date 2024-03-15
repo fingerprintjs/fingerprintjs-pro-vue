@@ -1,0 +1,43 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "test",
+      "prerelease": true
+    }
+  ],
+  "tagFormat": "fingerprintjs-pro-vue3-v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "config": "@fingerprintjs/conventional-changelog-dx-team",
+        "releaseRules": "@fingerprintjs/conventional-changelog-dx-team/release-rules"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "config": "@fingerprintjs/conventional-changelog-dx-team"
+      }
+    ],
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "yarn build"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json"
+        ]
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}
