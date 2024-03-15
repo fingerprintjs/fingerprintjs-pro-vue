@@ -6,6 +6,6 @@
   },
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "pnpm lint --fix"
   }
 }

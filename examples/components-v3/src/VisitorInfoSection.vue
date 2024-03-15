@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import FetchDataBtn from './FetchDataBtn.vue';
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
-import VisitorData from './VisitorData.vue';
+import FetchDataBtn from './FetchDataBtn.vue'
+import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import VisitorData from './VisitorData.vue'
 
 const props = defineProps<{
-  buttonText: string;
-  isLoading: boolean;
-  error?: Error | null;
-  data?: Data<true> | null;
-}>();
+  buttonText: string
+  isLoading: boolean
+  error?: Error | null
+  data?: Data<true> | null
+}>()
 
 const emit = defineEmits<{
-  (e: 'btn-click', data: MouseEvent): void;
-}>();
+  (e: 'btn-click', data: MouseEvent): void
+}>()
 </script>
 
 <template>
