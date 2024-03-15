@@ -10,10 +10,9 @@
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
-    "vue": "^3.1"
+    "@vitejs/plugin-vue": "^2.3.3"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"
+    "@fingerprintjs/fingerprintjs-pro-vue-v3": "workspace:*"
   }
 }

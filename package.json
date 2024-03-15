@@ -4,7 +4,6 @@
   "description": "Fingerprint Pro Plugin for Vue v3",
   "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
   "license": "MIT",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
@@ -12,12 +11,12 @@
   "exports": {
     ".": {
       "types": "./dist/plugin.d.ts",
-      "import": "./dist/plugin.js",
-      "require": "./dist/plugin.cjs",
-      "node": "./dist/plugin.js"
+      "import": "./dist/plugin.esm.js",
+      "require": "./dist/plugin.cjs.js",
+      "node": "./dist/plugin.esm.js"
     }
   },
-  "main": "dist/plugin.js",
+  "main": "dist/plugin.esm.js",
   "module": "dist/plugin.mjs",
   "types": "dist/plugin.d.ts",
   "sideEffects": false,
