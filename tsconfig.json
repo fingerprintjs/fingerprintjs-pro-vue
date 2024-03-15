@@ -1,5 +1,5 @@
 {
-  "extends": "@fingerprintjs/tsconfig-dx-team/tsconfig.json",
+  "extends": "./node_modules/@fingerprintjs/tsconfig-dx-team/tsconfig.json",
   "compilerOptions": {
     "target": "es2020",
     "lib": [
