@@ -22,10 +22,10 @@ jobs:
           node-version: 18
 
       - name: Install npm dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Release
-        run: yarn run semantic-release
+        run: pnpm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

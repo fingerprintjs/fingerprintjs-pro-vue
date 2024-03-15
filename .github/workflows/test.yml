@@ -5,30 +5,4 @@ on:
 jobs:
   build:
     name: Lint, build and test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-            !**/dist/node_modules
-          key: nodemodules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: nodemodules-
-      - name: Install Node packages
-        run: yarn
-      - name: Lint
-        run: yarn lint
-      - name: Tests
-        run: yarn test
-      - name: Build
-        run: yarn build
-      - name: Typecheck
-        run: yarn test:dts
+    uses: fingerprintjs/dx-team-toolkit/.github/workflows/build-typescript-project.yml@v1

@@ -1,6 +1,5 @@
 import type { FpjsVisitorQueryData } from '../types';
-import type { FpjsGetVisitorDataMethod } from './mixins.types';
-import { GetVisitorDataMethodParams } from './mixins.types';
+import type { FpjsGetVisitorDataMethod, GetVisitorDataMethodParams } from './mixins.types';
 
 function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
   this: any,

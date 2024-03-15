@@ -1,11 +1,10 @@
 import typescript from '@rollup/plugin-typescript';
 import jsonPlugin from '@rollup/plugin-json';
 import external from 'rollup-plugin-peer-deps-external';
-import dts from 'rollup-plugin-dts';
+import { dts } from 'rollup-plugin-dts';
 import licensePlugin from 'rollup-plugin-license';
 import { join } from 'path';
-
-const { dependencies } = require('./package.json');
+import pkg from './package.json';
 
 const inputFile = 'src/index.ts';
 const outputDirectory = 'dist';
@@ -32,7 +31,7 @@ const RollupConfig = [
   // NPM bundles. They have all the dependencies excluded for end code size optimization.
   {
     ...commonInput,
-    external: Object.keys(dependencies),
+    external: Object.keys(pkg.dependencies),
     output: [
       // CJS for usage with `require()`
       {
@@ -53,7 +52,14 @@ const RollupConfig = [
   // TypeScript definition
   {
     ...commonInput,
-    plugins: [dts(), commonBanner],
+    plugins: [
+      dts({
+        compilerOptions: {
+          preserveSymlinks: false,
+        },
+      }),
+      commonBanner,
+    ],
     output: {
       file: `${outputDirectory}/plugin.d.ts`,
       format: 'es',

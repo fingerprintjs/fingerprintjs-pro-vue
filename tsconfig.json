@@ -1,27 +1,23 @@
 {
+  "extends": "@fingerprintjs/tsconfig-dx-team/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "esnext",
-    "resolveJsonModule": true,
-    "importHelpers": true,
-    "allowSyntheticDefaultImports": true,
-    "noErrorTruncation": true,
+    "target": "es2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "exactOptionalPropertyTypes": false,
     "skipLibCheck": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "baseUrl": "."
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "exclude": [
-    "**/dist",
-    "node_modules",
-    "**/*.test.ts"
-  ],
   "include": [
-    "src",
-    "__tests__"
+    "src"
   ]
 }
