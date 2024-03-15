@@ -1,6 +1,6 @@
 import { config, mount } from '@vue/test-utils'
 import { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin, fpjsPlugin, FpjsVueOptions } from '../src'
-import { getVisitorData } from '../src/tests/setup'
+import { getVisitorData } from './setup'
 import { wait } from '../src/utils'
 
 const apiKey = 'API_KEY'
@@ -41,7 +41,7 @@ describe('fpjsPlugin - mixins', () => {
     expect(vm.$getVisitorData).toBeDefined()
     expect(vm.visitorData).toBeDefined()
     expect(vm.visitorData).toMatchInlineSnapshot(`
-Object {
+{
   "data": undefined,
   "error": undefined,
   "isLoading": false,
@@ -55,8 +55,8 @@ Object {
     await wait(450)
 
     expect(vm.visitorData).toMatchInlineSnapshot(`
-Object {
-  "data": Object {
+{
+  "data": {
     "visitorId": "#visitor_id",
   },
   "error": undefined,
@@ -82,7 +82,7 @@ Object {
     expect(vm.$getVisitorDataExtended).toBeDefined()
     expect(vm.visitorDataExtended).toBeDefined()
     expect(vm.visitorDataExtended).toMatchInlineSnapshot(`
-Object {
+{
   "data": undefined,
   "error": undefined,
   "isLoading": false,
@@ -92,8 +92,8 @@ Object {
     await vm.$getVisitorDataExtended?.()
 
     expect(vm.visitorDataExtended).toMatchInlineSnapshot(`
-Object {
-  "data": Object {
+{
+  "data": {
     "visitorId": "#visitor_id",
   },
   "error": undefined,

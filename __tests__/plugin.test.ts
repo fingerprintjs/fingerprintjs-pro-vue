@@ -1,6 +1,7 @@
 import { config, mount } from '@vue/test-utils'
 import { fpjsPlugin, FpjsVueOptions } from '../src'
-import { getVisitorData } from '../src/tests/setup'
+import '../src/vue'
+import { getVisitorData } from './setup'
 
 const apiKey = 'API_KEY'
 const testData = {
@@ -26,9 +27,13 @@ describe('fpjsPlugin', () => {
     mount({
       template: '<h1>Hello world</h1>',
       mounted() {
-        expect(this.$fpjs).toBeDefined()
-        expect(this.$fpjs).toMatchInlineSnapshot(`
-Object {
+        // Need to cast as any here due to invalid types.
+        // It works in normal vue components (check ./examples)
+        const $fpjs = (this as any).$fpjs
+
+        expect($fpjs).toBeDefined()
+        expect($fpjs).toMatchInlineSnapshot(`
+{
   "clearCache": [Function],
   "getVisitorData": [Function],
 }
@@ -43,7 +48,8 @@ Object {
     const { vm } = mount({
       template: '<h1>Hello world</h1>',
       async mounted() {
-        const result = await this.$fpjs.getVisitorData()
+        const $fpjs = (this as any).$fpjs
+        const result = await $fpjs.getVisitorData()
 
         expect(result).toEqual(testData)
       },

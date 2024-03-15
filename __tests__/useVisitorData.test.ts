@@ -3,7 +3,7 @@ import { fpjsPlugin } from '../src/plugin'
 import { FpjsVueOptions } from '../src/types'
 import { UseGetVisitorDataResult, useVisitorData } from '../src'
 import { onMounted, ref, watch } from 'vue'
-import { getVisitorData, init } from '../src/tests/setup'
+import { getVisitorData, init } from './setup'
 
 const apiKey = 'API_KEY'
 const testData = {

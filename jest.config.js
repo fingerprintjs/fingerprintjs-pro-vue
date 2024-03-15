@@ -5,4 +5,8 @@ module.exports = {
   testRegex: '/__tests__/.+test.tsx?$',
   collectCoverageFrom: ['./src/**/**.{ts,tsx}'],
   coverageReporters: ['lcov', 'json-summary', ['text', { file: 'coverage.txt', path: './' }]],
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
 }

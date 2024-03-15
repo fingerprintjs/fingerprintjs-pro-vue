@@ -6,3 +6,5 @@ declare module 'vue' {
     $fpjs: FpjsVueGlobalClient
   }
 }
+
+export {}
