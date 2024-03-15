@@ -279,7 +279,7 @@ See the [example Nuxt Application](examples/nuxt-v3-example) for more details.
 
 ## Documentation
 
-You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue/vue-3/).
+You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue).
 
 ## Caching strategy
 
