@@ -42,6 +42,8 @@ Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fi
 
 This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
 
+> ⚠️ We no longer provide SDK for Vue2, [due to the end of support](https://v2.vuejs.org/eol/). We recommend upgrading to Vue 3.
+
 
 ## Installation
 
