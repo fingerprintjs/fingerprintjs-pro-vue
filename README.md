@@ -8,8 +8,8 @@
   </a>
 </p>
 <p align="center">
-   <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml">
-     <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/test.yml/badge.svg" alt="Build status">
+   <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/ci.yml">
+     <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/ci.yml/badge.svg" alt="Build status">
    </a>
    <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml">
      <img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml/badge.svg" alt="Release status">
