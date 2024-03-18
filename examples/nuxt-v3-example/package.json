@@ -8,13 +8,13 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "nuxt": "^3.0.0"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "link:../../packages/fingerprintjs-pro-vue-v3"
+    "@fingerprintjs/fingerprintjs-pro-vue-v3": "workspace:*"
   }
 }

@@ -7,4 +7,4 @@ module.exports = {
   rules: {
     'vue/max-attributes-per-line': 'off',
   },
-};
+}

@@ -1,7 +1,7 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
-import VisitorInfoSection from './VisitorInfoSection.vue';
+import { defineComponent } from 'vue'
+import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import VisitorInfoSection from './VisitorInfoSection.vue'
 
 export default defineComponent({
   components: { VisitorInfoSection },
@@ -11,17 +11,17 @@ export default defineComponent({
       deep: true,
       handler(data) {
         if (data) {
-          console.log('Fetched data using Options API', data);
+          console.log('Fetched data using Options API', data)
         }
       },
     },
   },
   methods: {
     getData() {
-      return this.$getVisitorDataExtended?.();
+      return this.$getVisitorDataExtended?.()
     },
   },
-});
+})
 </script>
 
 <template>

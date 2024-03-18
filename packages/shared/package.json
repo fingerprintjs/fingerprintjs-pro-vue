@@ -1,8 +1,0 @@
-{
-  "name": "shared",
-  "version": "0.0.0",
-  "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix"
-  }
-}
