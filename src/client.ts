@@ -1,4 +1,4 @@
-import type { FpjsClient, GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { FingerprintJSPro, FpjsClient } from '@fingerprintjs/fingerprintjs-pro-spa'
 import type { ClearCache, GetVisitorData } from './types'
 
 type ClientMethods = {
@@ -10,7 +10,7 @@ export function makeClientMethods(client: FpjsClient): ClientMethods {
   const initPromise = client.init()
 
   const getVisitorData: GetVisitorData = async <TExtended extends boolean>(
-    agentOptions: GetOptions<TExtended>,
+    agentOptions: FingerprintJSPro.GetOptions<TExtended>,
     ignoreCache?: boolean
   ) => {
     if (typeof window === 'undefined') {
