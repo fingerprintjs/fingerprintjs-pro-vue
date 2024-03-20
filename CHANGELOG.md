@@ -1,3 +1,10 @@
+## [1.4.1-test.2](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.4.1-test.1...fingerprintjs-pro-vue3-v1.4.1-test.2) (2024-03-20)
+
+
+### Bug Fixes
+
+* chech prerelease ([59b24f6](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/59b24f676a40b18197dbb0bdf63e54054ef6b82f))
+
 ## [1.4.1-test.1](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue3-v1.4.0...fingerprintjs-pro-vue3-v1.4.1-test.1) (2024-03-20)
 
 
