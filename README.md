@@ -267,6 +267,28 @@ export default defineNuxtConfig({
 
 See the [example Nuxt Application](examples/nuxt-v3-example) for more details.
 
+## Linking and tagging information
+The `visitorId` provided by Fingerprint Identification is especially useful when combined with information you already know about your users, for example, account IDs, order IDs, etc. To learn more about various applications of the `linkedId` and `tag`, see [Linking and tagging information](https://dev.fingerprint.com/docs/tagging-information).
+
+Associate your data with a visitor ID using the `linkedId` or `tag` parameter of the options object passed into the `useVisitorData()` hook or the `getData` function:
+```vue
+<script setup>
+ import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+
+ const { data, error, isLoading, getData } = useVisitorData({
+  linkedId: 'user_1234',
+  tag: {
+   userAction: 'login',
+   analyticsId: 'UA-5555-1111-1',
+  },
+ })
+</script>
+
+<template>
+<!--...-->
+</template>
+```
+
 ## Documentation
 
 You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue).
