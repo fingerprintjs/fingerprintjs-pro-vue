@@ -55,3 +55,6 @@ npx nx run fingerprintjs-pro-vue-v2:docs
 The docs will be generated into [./docs](./docs) directory.
 
 The docs are also automatically deployed to Github Pages on every push to the main branch.
+
+
+new line to check prerelease
