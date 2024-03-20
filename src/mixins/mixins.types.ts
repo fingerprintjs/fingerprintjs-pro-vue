@@ -1,4 +1,4 @@
-import type { GetOptions } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { FingerprintJSPro } from '@fingerprintjs/fingerprintjs-pro-spa'
 import type { FpjsVisitorQueryData, FpjsVueGlobalClient, GetDataOptions } from '../types'
 
 export type FpjsGetVisitorDataMethodThis = {
@@ -8,7 +8,7 @@ export type FpjsGetVisitorDataMethodThis = {
   $fpjs?: FpjsVueGlobalClient
 }
 
-export type GetVisitorDataMethodParams = Omit<GetOptions<boolean>, 'extendedResult'> & GetDataOptions
+export type GetVisitorDataMethodParams = Omit<FingerprintJSPro.GetOptions<boolean>, 'extendedResult'> & GetDataOptions
 
 export type FpjsGetVisitorDataMethod<This = FpjsGetVisitorDataMethodThis> = (
   this: This,
