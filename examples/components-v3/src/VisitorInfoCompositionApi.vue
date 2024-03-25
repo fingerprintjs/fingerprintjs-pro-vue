@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
-import VisitorInfoSection from './VisitorInfoSection.vue';
-import { watch } from 'vue';
+import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import VisitorInfoSection from './VisitorInfoSection.vue'
+import { watch } from 'vue'
 
-const { data, error, isLoading, getData } = useVisitorData({ extendedResult: true }, { immediate: false });
+const { data, error, isLoading, getData } = useVisitorData({ extendedResult: true }, { immediate: false })
 
 watch(data, (currentData) => {
   if (currentData) {
-    console.log('Fetched data using Composition API', currentData);
+    console.log('Fetched data using Composition API', currentData)
   }
-});
+})
 </script>
 
 <template>

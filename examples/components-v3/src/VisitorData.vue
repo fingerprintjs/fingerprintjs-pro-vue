@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
 const props = defineProps<{
-  visitorData: VisitorData;
-}>();
+  visitorData: VisitorData
+}>()
 </script>
 
 <template>

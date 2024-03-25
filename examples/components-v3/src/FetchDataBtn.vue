@@ -7,9 +7,9 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  text: string;
-  isLoading: boolean;
-}>();
+  text: string
+  isLoading: boolean
+}>()
 </script>
 
 <style scoped></style>
