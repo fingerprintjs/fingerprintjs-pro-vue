@@ -68,8 +68,7 @@ import App from './App.vue';
 import {
   fpjsPlugin,
   FpjsVueOptions,
-  // defaultEndpoint,
-  // defaultScriptUrlPattern,
+  FingerprintJSPro,
 } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 
 const app = createApp(App);
@@ -80,9 +79,15 @@ app
   .use(fpjsPlugin, {
     loadOptions: {
       apiKey: '<your-public-api-key>',
+      endpoint: [
+        // "https://metrics.yourwebsite.com", 
+        FingerprintJSPro.defaultEndpoint
+      ],
+      scriptUrlPattern: [
+        // "https://metrics.yourwebsite.com/web/v<version>/<apiKey>/loader_v<loaderVersion>.js",
+        FingerprintJSPro.defaultScriptUrlPattern
+      ],
       // region: 'eu',
-      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
-      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
     },
   } as FpjsVueOptions)
   .mount('#app');
@@ -231,8 +236,7 @@ import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import {
   fpjsPlugin,
   FpjsVueOptions,
-  // defaultEndpoint,
-  // defaultScriptUrlPattern,
+  FingerprintJSPro,
 } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -241,9 +245,15 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(fpjsPlugin, {
     loadOptions: {
       apiKey: config.public.API_KEY,
+      endpoint: [
+        // "https://metrics.yourwebsite.com", 
+        FingerprintJSPro.defaultEndpoint
+      ],
+      scriptUrlPattern: [
+        // "https://metrics.yourwebsite.com/web/v<version>/<apiKey>/loader_v<loaderVersion>.js",
+        FingerprintJSPro.defaultScriptUrlPattern
+      ],
       // region: 'eu',
-      // endpoint: ['metrics.yourwebsite.com', defaultEndpoint],
-      // scriptUrlPattern: ['metrics.yourwebsite.com/agent-path', defaultScriptUrlPattern],
     },
   } as FpjsVueOptions);
 });
