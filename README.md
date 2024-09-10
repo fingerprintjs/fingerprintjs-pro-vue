@@ -313,7 +313,7 @@ Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it
 * Pass `{ignoreCache: true}` to the `getData()`/`getVisitorData()`/`getVisitorDataExtended()` function to ignore cached results for that specific API call. 
 
 > [!NOTE]
-> If you use data from [`extendedResult`](https://dev.fingerprint.com/docs/js-agent#extendedresult), pay additional attention to your caching strategy.
+> If you use data from [`extendedResult`](https://dev.fingerprint.com/reference/get-function#extendedresult), pay additional attention to your caching strategy.
 > Some fields, for example, `ip` or `lastSeenAt`, might change over time for the same visitor. Use `getData({ ignoreCache: true })` to fetch the latest identification results.
 
 ## Support and feedback
