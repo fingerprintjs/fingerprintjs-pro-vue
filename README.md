@@ -28,10 +28,9 @@ Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fi
 - Vue 3.1 or higher
 - For Nuxt users: Nuxt 3.0 or higher
 
-This package works with Fingerprint Pro, it is not compatible with source-available FingerprintJS. See our documentation to learn more about the [difference between Fingerprint Pro and the source-available FingerprintJS](https://dev.fingerprint.com/docs/pro-vs-open-source).
+This package works with the commercial [Fingerprint platform](https://fingerprint.com/). It is not compatible with the source-available [FingerprintJS library](https://github.com/fingerprintjs/fingerprintjs). Learn more about the [differences between Fingerprint and FingerprintJS](https://fingerprint.com/github/).
 
 > ⚠️ We no longer provide SDK for Vue2, [due to the end of support](https://v2.vuejs.org/eol/). We recommend upgrading to Vue 3.
-
 
 ## Installation
 
@@ -318,7 +317,7 @@ Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it
 
 ## Support and feedback
 
-To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
+To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [source-available FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
 
 ## Examples
 
