@@ -18,7 +18,7 @@
 
 # Fingerprint Pro Vue 3 SDK
 
-[Fingerprint](https://fingerprint.com/) is a device intelligence platform offering 99.5% accurate visitor identification.
+[Fingerprint](https://fingerprint.com/) is a device intelligence platform offering industry-leading accuracy.
 
 Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application. It supports all capabilities of the Fingerprint JavaScript agent and provides a built-in caching mechanism.
 
