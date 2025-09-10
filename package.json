@@ -82,7 +82,7 @@
     "ts-jest": "^29.1.2",
     "typedoc": "^0.25.12",
     "typescript": "^5.4.2",
-    "vite": "^4.5.2",
+    "vite": "^5.4.20",
     "vue": "^3.1",
     "vue-eslint-parser": "^9.4.2",
     "vue-tsc": "^2.0.6"
