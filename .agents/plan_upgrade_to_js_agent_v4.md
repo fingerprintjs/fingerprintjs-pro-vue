@@ -4,6 +4,8 @@
 
 Implement the first breaking-major PR that upgrades the Vue SDK from the SPA wrapper model to JavaScript agent v4 semantics, without package/repository renaming and without tooling changes.
 
+This plan assumes the tooling upgrade PR lands first.
+
 This PR should mirror the sequencing used in the React SDK:
 
 - migrate to agent v4 first
@@ -130,6 +132,11 @@ Add `useFingerprint()` as a small Composition API helper that exposes:
 
 It should fail fast with a clear plugin-missing error if the plugin is not installed.
 
+Implementation location:
+
+- add [`src/useFingerprint.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/useFingerprint.ts)
+- export it from [`src/index.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/index.ts)
+
 ### Global client
 
 `$fingerprint` should expose:
@@ -154,6 +161,8 @@ Mixin methods/state:
 - `collectData`
 
 Both mixins should expose `{ data, isLoading, isFetched, error }`.
+
+`collect()` should use the agent's native collect return type, and `collectData.data` should use that same type.
 
 ## Implementation Plan
 
@@ -183,7 +192,7 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
 
 - Detect old-style plugin config containing `loadOptions`
 - Throw a concise migration-oriented runtime error
-- Keep the guard minimal; do not add broad compatibility transforms
+- Keep the guard minimal; only guard `loadOptions`
 
 ### 5. Internal client wrapper
 
@@ -264,6 +273,7 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
   - plugin installation options
   - `useVisitorData()` signature
   - result field shape changes
+- Note that the runtime migration guard only covers old `loadOptions`; other removed legacy options fail through normal type/runtime mismatches
 
 ### 12. Example updates
 
