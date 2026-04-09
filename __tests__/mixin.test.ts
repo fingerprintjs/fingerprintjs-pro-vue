@@ -1,4 +1,5 @@
 import { config, mount } from '@vue/test-utils'
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin, fpjsPlugin, FpjsVueOptions } from '../src'
 import { getVisitorData } from './setup'
 import { wait } from '../src/utils'
@@ -36,7 +37,7 @@ describe('fpjsPlugin - mixins', () => {
       template: '<h1>hello world</h1>',
     })
 
-    const spy = jest.spyOn(vm.$fpjs, 'getVisitorData')
+    const spy = vi.spyOn(vm.$fpjs, 'getVisitorData')
 
     expect(vm.$getVisitorData).toBeDefined()
     expect(vm.visitorData).toBeDefined()
@@ -77,7 +78,7 @@ describe('fpjsPlugin - mixins', () => {
       template: '<h1>hello world</h1>',
     })
 
-    const spy = jest.spyOn(vm.$fpjs, 'getVisitorData')
+    const spy = vi.spyOn(vm.$fpjs, 'getVisitorData')
 
     expect(vm.$getVisitorDataExtended).toBeDefined()
     expect(vm.visitorDataExtended).toBeDefined()
