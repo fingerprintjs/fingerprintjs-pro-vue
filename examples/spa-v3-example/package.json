@@ -10,7 +10,8 @@
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3"
+    "@vitejs/plugin-vue": "^5.2.4",
+    "vite": "^5.4.21"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro-vue-v3": "workspace:*"
