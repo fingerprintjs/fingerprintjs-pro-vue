@@ -5,6 +5,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig()
 
   nuxtApp.vueApp.use(FingerprintPlugin, {
-    apiKey: config.public.API_KEY as string,
+    apiKey: config.public.API_KEY,
   })
 })

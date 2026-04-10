@@ -36,7 +36,7 @@ export function useVisitorData(
 
     try {
       const mergedOptions: GetOptions = { ...getOptionsDefaults, ...options }
-      const result = await getVisitorData(Object.keys(mergedOptions).length > 0 ? mergedOptions : undefined)
+      const result = await getVisitorData(mergedOptions)
 
       data.value = result
       currentError.value = undefined
@@ -60,7 +60,8 @@ export function useVisitorData(
       try {
         await getData()
       } catch {
-        // Error is stored in the error ref
+        // getData re-throws so manual callers can handle errors themselves.
+        // Here we swallow the error to avoid an unhandled rejection — it's already stored in the error ref.
       }
     }
   })

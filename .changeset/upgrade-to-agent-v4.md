@@ -18,4 +18,4 @@ Upgrade to JavaScript agent v4
 - Result fields now use snake_case: `visitor_id`, `event_id`, `sealed_result`, `cache_hit`, `suspect_score`
 - `useVisitorData()` takes a single options object, returns `isFetched` ref, and `getData()` throws on failure
 - Added `Fingerprint` namespace re-export for direct agent access
-- Dropped Vue 2 support
+- Removed Vue 2 examples

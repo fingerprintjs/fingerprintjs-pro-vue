@@ -1,4 +1,3 @@
-import type { GetOptions } from '@fingerprint/agent'
 import type { FingerprintVisitorQueryData } from '../types'
 import type { FingerprintGetVisitorDataMethod } from './mixins.types'
 
@@ -64,6 +63,7 @@ const getVisitorData: FingerprintGetVisitorDataMethod = async function (options)
  */
 export const fingerprintGetVisitorDataMixin = {
   data() {
+    // Initial reactive state — properties must be declared here for Vue reactivity tracking.
     return {
       visitorData: {
         isLoading: false,
@@ -74,6 +74,6 @@ export const fingerprintGetVisitorDataMixin = {
     }
   },
   methods: {
-    $getVisitorData: getVisitorData as (options?: GetOptions) => Promise<void>,
+    $getVisitorData: getVisitorData,
   },
 }
