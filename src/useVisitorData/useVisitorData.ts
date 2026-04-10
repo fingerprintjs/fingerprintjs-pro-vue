@@ -16,9 +16,10 @@ import type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisito
  * }
  * ```
  */
-export function useVisitorData(
-  { immediate = true, ...getOptionsDefaults }: UseVisitorDataOptions = {}
-): UseGetVisitorDataResult {
+export function useVisitorData({
+  immediate = true,
+  ...getOptionsDefaults
+}: UseVisitorDataOptions = {}): UseGetVisitorDataResult {
   const data = ref<GetResult | undefined>()
   const isLoading = ref(false)
   const isFetched = ref(false)

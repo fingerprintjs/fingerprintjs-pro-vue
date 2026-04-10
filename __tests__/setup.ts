@@ -1,9 +1,13 @@
 import { vi } from 'vitest'
 
 export const mockGet = vi.fn()
-export const mockStart = vi.fn((_options?: any) => ({
-  get: mockGet,
-}))
+export const mockStart = vi.fn((options?: unknown) => {
+  void options
+
+  return {
+    get: mockGet,
+  }
+})
 
 vi.mock('@fingerprint/agent', async () => {
   const actual = await vi.importActual('@fingerprint/agent')
