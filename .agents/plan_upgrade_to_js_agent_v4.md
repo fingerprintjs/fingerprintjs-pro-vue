@@ -28,8 +28,7 @@ This PR should mirror the sequencing used in the React SDK:
   - `extendedResult`
   - `ignoreCache`
   - `clearCache`
-- Add `collect()` as a supported public API
-- Add `useFingerprint()` for Composition API access to imperative methods
+- Re-export `@fingerprint/agent` so users can access `start()`, `collect()`, etc. directly
 - Update tests, README, and local examples
 - Add a migration guide to the README
 
@@ -50,11 +49,9 @@ This PR should mirror the sequencing used in the React SDK:
 - `FingerprintPlugin`
 - `FingerprintPluginOptions`
 - `useVisitorData`
-- `useFingerprint`
 - `fingerprintGetVisitorDataMixin`
-- `fingerprintCollectMixin`
 - default export -> `FingerprintPlugin`
-- direct re-exports from `@fingerprint/agent` (e.g. `StartOptions`, `GetOptions`, `GetResult`, `CollectResult`, `Region`, `CacheConfig`)
+- direct re-exports from `@fingerprint/agent` (e.g. `start`, `StartOptions`, `GetOptions`, `GetResult`, `CollectResult`, `Region`, `CacheConfig`) — users who need `collect()` can call `start()` directly to get an agent instance
 
 ### Global property
 
@@ -63,7 +60,6 @@ This PR should mirror the sequencing used in the React SDK:
 ### Imperative methods
 
 - `getVisitorData(options?)`
-- `collect(options?)`
 
 ### Removed public names
 
@@ -123,48 +119,26 @@ Target state model:
 - success: `isLoading=false`, `isFetched=true`, `data=GetResult`
 - error: `isLoading=false`, `isFetched=false`, `error=Error`
 
-### useFingerprint
-
-Add `useFingerprint()` as a small Composition API helper that exposes:
-
-- `getVisitorData`
-- `collect`
-
-It should fail fast with a clear plugin-missing error if the plugin is not installed.
-
-Implementation location:
-
-- add [`src/useFingerprint.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/useFingerprint.ts)
-- export it from [`src/index.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/index.ts)
-
 ### Global client
 
 `$fingerprint` should expose:
 
 - `getVisitorData`
-- `collect`
 
-It should not expose `clearCache`.
+It should not expose `clearCache` or `collect`.
 
 ### Mixins
 
-Replace the old mixin split with:
+Replace the old mixin split with a single mixin:
 
 - `fingerprintGetVisitorDataMixin`
-- `fingerprintCollectMixin`
 
 Mixin methods/state:
 
 - `$getVisitorData`
-- `$collect`
 - `visitorData`
-- `collectData`
 
-Both mixins should expose `{ data, isLoading, isFetched, error }`.
-
-`collect()` should use the agent's native collect return type (`CollectResult`, which is `string`), and `collectData.data` should use that same type.
-
-Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested object containing `{ data, isLoading, isFetched, error }`, matching the current nesting pattern.
+The mixin's reactive property (`visitorData`) is a nested object containing `{ data, isLoading, isFetched, error }`, matching the current nesting pattern.
 
 ## Implementation Plan
 
@@ -201,9 +175,8 @@ Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested
 ### 5. Internal client wrapper
 
 - Replace the SPA-client wrapper in [`src/client.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/client.ts)
-- Implement thin wrappers for:
+- Implement thin wrapper for:
   - `getVisitorData(options?)` -> `agent.get(options)`
-  - `collect(options?)` -> `agent.collect(options)`
 - Keep browser-only runtime guards here
 - Preserve shared startup behavior across plugin, composables, and mixins
 - Update [`src/symbols.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/symbols.ts) injection key to use the new client type
@@ -220,7 +193,7 @@ Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested
 - Rewrite [`src/types.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/types.ts)
 - Remove SPA-wrapper-specific types and generics
 - Define `FingerprintPluginOptions = StartOptions`
-- Define the global client as `{ getVisitorData, collect }`
+- Define the global client as `{ getVisitorData }`
 - Update [`src/vue.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/vue.ts) to expose only `$fingerprint`
 
 ### 8. Composition API updates
@@ -235,22 +208,18 @@ Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested
 - Keep ref-based return values
 - Make `getData()` throw on error and return `Promise<GetResult>` (non-nullable on success)
 - `getData()` accepts `GetOptions` to allow per-call overrides of `timeout`/`tag`/`linkedId`
-- Add `useFingerprint()` for Composition API imperative access
-
 ### 9. Mixin rewrite
 
 - Rewrite [`src/mixins/mixins.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/mixins/mixins.ts)
 - Update related mixin typing files
 - Remove the old default/extended dual-mixin model
-- Introduce:
-  - `fingerprintGetVisitorDataMixin`
-  - `fingerprintCollectMixin`
+- Keep a single `fingerprintGetVisitorDataMixin`
 - Use the new `{ data, isLoading, isFetched, error }` query-state shape
 
 ### 10. Test migration
 
 - Rewrite test mocks in [`__tests__/setup.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/setup.ts) using Vitest (`vi.mock`, `vi.fn()`)
-- Mock `@fingerprint/agent`, `start()`, and the returned agent methods (`get`, `collect`)
+- Mock `@fingerprint/agent`, `start()`, and the returned agent method (`get`)
 - Update:
   - [`__tests__/plugin.test.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/plugin.test.ts)
   - [`__tests__/useVisitorData.test.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/useVisitorData.test.ts)
@@ -260,8 +229,6 @@ Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested
   - eager startup behavior
   - `useVisitorData()` state transitions with `isFetched`
   - thrown errors
-  - `useFingerprint()`
-  - `collect()` via global client and mixins
   - v4 result field names
 - Do not add extra legacy failure-path coverage beyond normal migration updates
 
@@ -272,9 +239,7 @@ Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested
 - Lead with:
   - `useVisitorData()`
   - `$fingerprint`
-  - `useFingerprint()`
 - Mention mixins as supported but secondary
-- Document `collect()`
 - Add a migration section with before/after snippets for:
   - plugin installation options
   - `useVisitorData()` signature
@@ -314,9 +279,8 @@ These should be called out clearly in migration messaging:
 - `$fingerprint` replaces `$fpjs`
 - `useVisitorData()` simplified and returns `isFetched`
 - `getData()` throws on failure
-- `useFingerprint()` added
-- `collect()` exposed on global client and mixins
-- Mixins renamed and unified around v4 semantics
+- `@fingerprint/agent` re-exported (including `start()`) for direct agent access
+- Mixin consolidated to single `fingerprintGetVisitorDataMixin`
 - Tests updated to mock `@fingerprint/agent`
 - README updated with migration section
 - Examples updated
