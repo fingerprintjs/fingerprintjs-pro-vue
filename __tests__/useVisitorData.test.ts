@@ -97,7 +97,7 @@ describe('useVisitorData', () => {
     })
   })
 
-  it('should throw when getData() fails', async () => {
+  it('should reject when getData() fails', async () => {
     const testError = new Error('Test error')
     mockGet.mockRejectedValue(testError)
 

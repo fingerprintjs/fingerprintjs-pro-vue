@@ -25,7 +25,7 @@ describe('FingerprintPlugin - mixins', () => {
     mockGet.mockClear()
   })
 
-  it('should provide mixin with $getVisitorData method and visitorData state', async () => {
+  it('should fetch visitor data and update state through full lifecycle', async () => {
     mockGet.mockImplementation(async () => {
       await wait(400)
 
@@ -74,21 +74,6 @@ describe('FingerprintPlugin - mixins', () => {
     expect(spy).toHaveBeenCalledWith(undefined)
   })
 
-  it('should have correct initial state', () => {
-    const { vm } = mount({
-      mixins: [fingerprintGetVisitorDataMixin],
-
-      template: '<h1>hello world</h1>',
-    })
-
-    expect(vm.visitorData).toEqual({
-      isLoading: false,
-      isFetched: false,
-      data: undefined,
-      error: undefined,
-    })
-  })
-
   it('should populate data correctly', async () => {
     mockGet.mockResolvedValue(testData)
 
@@ -106,14 +91,35 @@ describe('FingerprintPlugin - mixins', () => {
     expect(vm.visitorData?.error).toBeUndefined()
   })
 
-  it('should have access to $fingerprint global property', () => {
+  it('should handle errors correctly', async () => {
+    const testError = new Error('Test error')
+    mockGet.mockRejectedValue(testError)
+
     const { vm } = mount({
       mixins: [fingerprintGetVisitorDataMixin],
 
       template: '<h1>hello world</h1>',
     })
 
-    expect(vm.$fingerprint).toBeDefined()
-    expect(vm.$fingerprint.getVisitorData).toBeDefined()
+    await vm.$getVisitorData?.()
+
+    expect(vm.visitorData?.data).toBeUndefined()
+    expect(vm.visitorData?.error).toEqual(testError)
+    expect(vm.visitorData?.isFetched).toBe(false)
+    expect(vm.visitorData?.isLoading).toBe(false)
+  })
+
+  it('should pass options to getVisitorData', async () => {
+    mockGet.mockResolvedValue(testData)
+
+    const { vm } = mount({
+      mixins: [fingerprintGetVisitorDataMixin],
+
+      template: '<h1>hello world</h1>',
+    })
+
+    await vm.$getVisitorData?.({ tag: 'test-tag', linkedId: 'link123' })
+
+    expect(mockGet).toHaveBeenCalledWith({ tag: 'test-tag', linkedId: 'link123' })
   })
 })
