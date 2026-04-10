@@ -49,7 +49,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/plugin.d.ts",
-    "docs": "typedoc src/index.ts --out docs"
+    "docs": "typedoc src/index.ts --out docs",
+    "changeset:version": "changeset version",
+    "changeset:publish": "HUSKY=0 changeset publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
@@ -65,7 +67,8 @@
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "@vue/test-utils": "^2.0.0",
-    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "@changesets/cli": "^2.30.0",
+    "@fingerprintjs/changesets-changelog-format": "^0.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
