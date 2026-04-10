@@ -3,14 +3,18 @@ import type { Agent, GetOptions, GetResult, StartOptions } from '@fingerprint/ag
 import type { GetVisitorData } from './types'
 
 export function makeGetVisitorData(startOptions: StartOptions): GetVisitorData {
-  // Eagerly start the agent in browser environments
-  const agent: Agent | undefined = typeof window !== 'undefined' ? start(startOptions) : undefined
+  let agent: Agent | undefined
 
   return async (options?: GetOptions): Promise<GetResult> => {
-    if (!agent) {
+    if (typeof window === 'undefined') {
       throw new Error(
         'getVisitorData() can only be called in the browser. If you are using nuxt, you should apply our plugin only on client side.'
       )
+    }
+
+    //  Agent is started lazily on first getVisitorData call, then reused for subsequent calls
+    if (!agent) {
+      agent = start(startOptions)
     }
 
     return agent.get(options)
