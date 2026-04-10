@@ -16,11 +16,11 @@
    <a href="https://discord.gg/39EpE2neBg"><img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server"></a>
 </p>
 
-# Fingerprint Pro Vue 3 SDK
+# Fingerprint Vue 3 SDK
 
 [Fingerprint](https://fingerprint.com/) is a device intelligence platform offering industry-leading accuracy.
 
-Fingerprint Pro Vue SDK is an easy way to integrate [Fingerprint Pro](https://fingerprint.com/) into your Vue 3 application. It supports all capabilities of the Fingerprint JavaScript agent.
+Fingerprint Vue SDK is an easy way to integrate [Fingerprint](https://fingerprint.com/) into your Vue 3 application. It supports all capabilities of the Fingerprint JavaScript agent.
 
 ## Requirements
 
@@ -50,14 +50,14 @@ pnpm add @fingerprintjs/fingerprintjs-pro-vue-v3
 
 ## Getting started
 
-To identify visitors, you'll need a Fingerprint Pro account (you
+To identify visitors, you'll need a Fingerprint account (you
 can [sign up for free](https://dashboard.fingerprint.com/signup/)).
-Get your API key and get started with the [Fingerprint Pro documentation](https://dev.fingerprint.com/docs/quick-start-guide).
+Get your API key and get started with the [Fingerprint documentation](https://docs.fingerprint.com/docs/quick-start-guide).
 
 Register the plugin in your Vue application.
 
-* Set a [region](https://dev.fingerprint.com/docs/regions) if you have chosen a non-global region during registration.
-* Set `endpoints` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://dev.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
+* Set a [region](https://docs.fingerprint.com/docs/regions) if you have chosen a non-global region during registration.
+* Set `endpoints` if you are using one of our proxy integrations to [increase the accuracy and effectiveness](https://docs.fingerprint.com/docs/protecting-the-javascript-agent-from-adblockers) of visitor identification.
 
 ```typescript
 import { createApp } from 'vue';
@@ -69,8 +69,8 @@ const app = createApp(App);
 app
   .use(FingerprintPlugin, {
     apiKey: '<your-public-api-key>',
-    // endpoints: "https://metrics.yourwebsite.com",
-    // region: 'eu',
+    endpoints: "https://metrics.yourwebsite.com",
+    region: 'eu',
   })
   .mount('#app');
 ```
@@ -197,8 +197,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.vueApp.use(FingerprintPlugin, {
     apiKey: config.public.API_KEY,
-    // endpoints: "https://metrics.yourwebsite.com",
-    // region: 'eu',
+    endpoints: "https://metrics.yourwebsite.com",
+    region: 'eu',
   });
 });
 ```
@@ -210,7 +210,7 @@ import { defineNuxtConfig } from 'nuxt';
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      // Inject Fingerprint Pro API key
+      // Inject Fingerprint API key
       API_KEY: process.env.API_KEY,
     },
   }
@@ -221,7 +221,7 @@ See the [example Nuxt Application](examples/nuxt-v3-example) for more details.
 
 ## Linking and tagging information
 
-The `visitor_id` provided by Fingerprint Identification is especially useful when combined with information you already know about your users, for example, account IDs, order IDs, etc. To learn more about various applications of the `linkedId` and `tag`, see [Linking and tagging information](https://dev.fingerprint.com/docs/tagging-information).
+The `visitor_id` provided by Fingerprint Identification is especially useful when combined with information you already know about your users, for example, account IDs, order IDs, etc. To learn more about various applications of the `linkedId` and `tag`, see [Linking and tagging information](https://docs.fingerprint.com/docs/tagging-information).
 
 Associate your data with a visitor ID using the `linkedId` or `tag` parameter of the `useVisitorData()` composable or the `getData()` function:
 
@@ -245,7 +245,7 @@ const { data, error, isLoading, getData } = useVisitorData({
 
 ## Direct agent access
 
-For advanced use cases, you can access the full `@fingerprint/agent` API via the `Fingerprint` namespace export:
+For advanced use cases, you can access the full `@fingerprint/agent` API using the `Fingerprint` namespace export:
 
 ```typescript
 import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
@@ -261,9 +261,9 @@ const result = await agent.get();
 
 ## Caching
 
-Fingerprint Pro usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://dev.fingerprint.com/docs/caching-visitor-information).
+Fingerprint usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://docs.fingerprint.com/docs/caching-visitor-information).
 
-You can configure caching via plugin options:
+Caching is off by default.You can configure caching using plugin [options](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cacheconfig):
 
 ```typescript
 app.use(FingerprintPlugin, {
@@ -277,75 +277,7 @@ app.use(FingerprintPlugin, {
 
 ## Migration from v1.x
 
-Version 2.0 upgrades the underlying Fingerprint agent from v3 to v4 and introduces several breaking changes.
-
-### Plugin options
-
-Options are now passed directly instead of being nested under `loadOptions`:
-
-```typescript
-// Before (v1.x)
-app.use(fpjsPlugin, {
-  loadOptions: {
-    apiKey: '<your-api-key>',
-  },
-})
-
-// After (v2.0)
-app.use(FingerprintPlugin, {
-  apiKey: '<your-api-key>',
-})
-```
-
-A runtime error is thrown if the old `loadOptions` format is detected, prompting you to migrate.
-
-### Renamed exports
-
-| v1.x | v2.0 |
-|---|---|
-| `fpjsPlugin` | `FingerprintPlugin` |
-| `FpjsVueOptions` | `FingerprintPluginOptions` |
-| `$fpjs` | `$fingerprint` |
-| `fpjsGetVisitorDataMixin` | `fingerprintGetVisitorDataMixin` |
-| `fpjsGetVisitorDataExtendedMixin` | _(removed)_ |
-| `FingerprintJSPro` | `Fingerprint` |
-
-### useVisitorData
-
-The composable now takes a single options object and returns an `isFetched` ref. `getData()` throws on error instead of returning `undefined`.
-
-```typescript
-// Before (v1.x)
-const { data, getData, isLoading, error } = useVisitorData(
-  { extendedResult: true },
-  { immediate: false }
-)
-
-// After (v2.0)
-const { data, getData, isLoading, isFetched, error } = useVisitorData(
-  { immediate: false }
-)
-```
-
-### Result fields
-
-Agent v4 uses snake_case field names. There is a single result format — the `extendedResult` concept no longer exists.
-
-| v1.x | v2.0 |
-|---|---|
-| `result.visitorId` | `result.visitor_id` |
-| `result.requestId` | `result.event_id` |
-| `result.visitorFound` | _(removed, check `visitor_id` presence)_ |
-
-New fields: `sealed_result`, `suspect_score`, `cache_hit`.
-
-### Removed concepts
-
-- **`extendedResult`** — Agent v4 has a single result format (`GetResult`). All results contain the same fields.
-- **`ignoreCache`** — Caching is now configured at the plugin level via the `cache` option in `StartOptions`.
-- **`clearCache`** — No longer available. The `CLEAR_CACHE` injection symbol has been removed.
-- **SPA re-exports** — `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern` are no longer exported.
-- **Vue 2 support** — Vue 2 examples have been removed. The SDK requires Vue 3.1+.
+Version 2.0 upgrades the underlying Fingerprint agent from v3 to v4 and introduces several breaking changes. See the [migration guide](docs/migration-v1-to-v2.md) for detailed instructions and the [JavaScript agent v3 to v4 migration guide](https://docs.fingerprint.com/docs/migrating-from-v3-to-v4) for underlying agent changes.
 
 ## Documentation
 

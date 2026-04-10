@@ -15,4 +15,3 @@ coverage
 yarn-error.log
 
 .env
-docs
