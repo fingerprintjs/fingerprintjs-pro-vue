@@ -1,4 +1,5 @@
 import { config, mount } from '@vue/test-utils'
+import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { fpjsPlugin, FpjsVueOptions } from '../src'
 import '../src/vue'
 import { getVisitorData } from './setup'

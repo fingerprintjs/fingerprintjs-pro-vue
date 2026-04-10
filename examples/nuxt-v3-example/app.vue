@@ -5,7 +5,7 @@ import VisitorDataRoot from '../components-v3/src/VisitorDataRoot.vue'
 <template>
   <main>
     <client-only>
-      <visitor-data-root />
+      <VisitorDataRoot />
     </client-only>
   </main>
 </template>

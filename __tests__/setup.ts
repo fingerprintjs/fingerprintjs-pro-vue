@@ -1,11 +1,13 @@
-export const init = jest.fn()
-export const getVisitorData = jest.fn()
-export const clearCache = jest.fn()
+import { vi } from 'vitest'
 
-jest.mock('@fingerprintjs/fingerprintjs-pro-spa', () => {
+export const init = vi.fn()
+export const getVisitorData = vi.fn()
+export const clearCache = vi.fn()
+
+vi.mock('@fingerprintjs/fingerprintjs-pro-spa', async () => {
   return {
-    ...(jest.requireActual('@fingerprintjs/fingerprintjs-pro-spa') as any),
-    FpjsClient: jest.fn(() => {
+    ...((await vi.importActual('@fingerprintjs/fingerprintjs-pro-spa')) as any),
+    FpjsClient: vi.fn(() => {
       return {
         init,
         getVisitorData,
