@@ -69,7 +69,7 @@ describe('useVisitorData', () => {
     })
   })
 
-  it('should set isFetched to true on success and keep it false on error', async () => {
+  it('should keep isFetched false on error and expose error', async () => {
     const testError = new Error('Test error')
     mockGet.mockRejectedValue(testError)
 
@@ -80,6 +80,7 @@ describe('useVisitorData', () => {
           const { isLoading, isFetched, error } = useVisitorData()
 
           onMounted(() => {
+            expect(isLoading.value).toBe(true)
             expect(isFetched.value).toBe(false)
           })
 
@@ -165,7 +166,7 @@ describe('useVisitorData', () => {
     })
   })
 
-  it('should not call getData if immediate is set to false', () => {
+  it('should not call getData if `immediate` is set to false', () => {
     mount({
       template: '<h1>Hello world</h1>',
       setup() {
