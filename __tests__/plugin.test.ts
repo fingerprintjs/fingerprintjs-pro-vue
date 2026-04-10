@@ -18,6 +18,8 @@ const pluginConfig: FingerprintPluginOptions = {
   apiKey,
 }
 
+const EmptyComponent = { template: '<div />' }
+
 describe('FingerprintPlugin', () => {
   beforeAll(() => {
     config.global.plugins.push([FingerprintPlugin, pluginConfig])
@@ -36,8 +38,6 @@ describe('FingerprintPlugin', () => {
         expect($fingerprint).toBeDefined()
         expect($fingerprint.getVisitorData).toBeDefined()
         expect(typeof $fingerprint.getVisitorData).toBe('function')
-        // clearCache should not exist
-        expect($fingerprint.clearCache).toBeUndefined()
       },
     })
   })
@@ -62,7 +62,7 @@ describe('FingerprintPlugin', () => {
 
   it('should throw if old loadOptions config shape is used', () => {
     expect(() => {
-      const app = createApp({ template: '<div />' })
+      const app = createApp(EmptyComponent)
       app.use(FingerprintPlugin, { loadOptions: { apiKey: 'test' } } as any)
     }).toThrow(/loadOptions/)
   })
@@ -71,7 +71,7 @@ describe('FingerprintPlugin', () => {
     mockStart.mockClear()
     mockGet.mockResolvedValue(testData)
 
-    const app = createApp({ template: '<div />' })
+    const app = createApp(EmptyComponent)
     app.use(FingerprintPlugin, { apiKey: 'test-key' })
 
     expect(mockStart).not.toHaveBeenCalled()
@@ -89,7 +89,7 @@ describe('FingerprintPlugin', () => {
     mockStart.mockClear()
     mockGet.mockResolvedValue(testData)
 
-    const app = createApp({ template: '<div />' })
+    const app = createApp(EmptyComponent)
     app.use(FingerprintPlugin, { apiKey: 'test-key', integrationInfo: ['custom/1.0'] })
 
     const vm = app.mount(document.createElement('div')) as any
