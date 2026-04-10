@@ -12,7 +12,7 @@ Upgrade to JavaScript agent v4
 - Renamed `$fpjs` global property to `$fingerprint`
 - Renamed `fpjsGetVisitorDataMixin` to `fingerprintGetVisitorDataMixin`
 - Removed `fpjsGetVisitorDataExtendedMixin` — agent v4 has a single result format, no `extendedResult` distinction
-- Removed `extendedResult`, `ignoreCache`, and `clearCache` options
+- Removed `extendedResult`, `ignoreCache`, and `clearCache` options. Caching is now configured at the plugin level using the `cache` option in `StartOptions`.
 - Removed `CLEAR_CACHE` injection symbol
 - Removed SPA re-exports: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
 - Result fields now use snake_case: `visitor_id`, `event_id`, `sealed_result`, `cache_hit`, `suspect_score`

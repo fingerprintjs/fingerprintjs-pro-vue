@@ -89,7 +89,7 @@ describe('FingerprintPlugin - mixins', () => {
     })
   })
 
-  it('should populate data and set isFetched after fetch', async () => {
+  it('should populate data correctly', async () => {
     mockGet.mockResolvedValue(testData)
 
     const { vm } = mount({
@@ -106,7 +106,7 @@ describe('FingerprintPlugin - mixins', () => {
     expect(vm.visitorData?.error).toBeUndefined()
   })
 
-  it('should use $fingerprint global property', () => {
+  it('should have access to $fingerprint global property', () => {
     const { vm } = mount({
       mixins: [fingerprintGetVisitorDataMixin],
 
