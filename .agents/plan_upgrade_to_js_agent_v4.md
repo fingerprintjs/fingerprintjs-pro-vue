@@ -4,7 +4,7 @@
 
 Implement the first breaking-major PR that upgrades the Vue SDK from the SPA wrapper model to JavaScript agent v4 semantics, without package/repository renaming and without tooling changes.
 
-This plan assumes the tooling upgrade PR lands first.
+This branch is based on `upgrade-tooling`, which already migrated from Rollup/Jest to Vite/Vitest and from semantic-release to changesets.
 
 This PR should mirror the sequencing used in the React SDK:
 
@@ -37,7 +37,7 @@ This PR should mirror the sequencing used in the React SDK:
 
 - package rename
 - repository rename
-- tooling/build/test modernization
+- tooling/build/test modernization (already done in `upgrade-tooling`)
 - generated docs artifacts
 - extra environment tagging
 - compatibility aliases for old names
@@ -54,7 +54,7 @@ This PR should mirror the sequencing used in the React SDK:
 - `fingerprintGetVisitorDataMixin`
 - `fingerprintCollectMixin`
 - default export -> `FingerprintPlugin`
-- direct re-exports from `@fingerprint/agent`
+- direct re-exports from `@fingerprint/agent` (e.g. `StartOptions`, `GetOptions`, `GetResult`, `CollectResult`, `Region`, `CacheConfig`)
 
 ### Global property
 
@@ -162,7 +162,9 @@ Mixin methods/state:
 
 Both mixins should expose `{ data, isLoading, isFetched, error }`.
 
-`collect()` should use the agent's native collect return type, and `collectData.data` should use that same type.
+`collect()` should use the agent's native collect return type (`CollectResult`, which is `string`), and `collectData.data` should use that same type.
+
+Note: each mixin's reactive property (`visitorData` / `collectData`) is a nested object containing `{ data, isLoading, isFetched, error }`, matching the current nesting pattern.
 
 ## Implementation Plan
 
@@ -170,12 +172,14 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
 
 - Update [`package.json`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/package.json) to replace `@fingerprintjs/fingerprintjs-pro-spa` with `@fingerprint/agent`
 - Keep package name and repository metadata unchanged for this PR
-- Update lockfile as required by the dependency change
+- Run `pnpm install` to update `pnpm-lock.yaml`
+- No build config change needed — `vite.config.ts` derives externals from `package.json` `dependencies` automatically
 
 ### 2. Rewrite top-level exports
 
 - Update [`src/index.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/index.ts)
-- Re-export `@fingerprint/agent` directly, following the React SDK pattern
+- Re-export `@fingerprint/agent` types and values directly, following the React SDK pattern
+- Removed re-exports that no longer exist in v4: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `LoadOptions`, `ExtendedGetResult`, `FpjsClientOptions`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
 - Export the renamed Vue API surface
 - Keep default export pointing to `FingerprintPlugin`
 
@@ -202,6 +206,7 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
   - `collect(options?)` -> `agent.collect(options)`
 - Keep browser-only runtime guards here
 - Preserve shared startup behavior across plugin, composables, and mixins
+- Update [`src/symbols.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/symbols.ts) injection key to use the new client type
 
 ### 6. Integration metadata
 
@@ -228,7 +233,8 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
   - boolean generic typing
 - Add `isFetched`
 - Keep ref-based return values
-- Make `getData()` throw on error
+- Make `getData()` throw on error and return `Promise<GetResult>` (non-nullable on success)
+- `getData()` accepts `GetOptions` to allow per-call overrides of `timeout`/`tag`/`linkedId`
 - Add `useFingerprint()` for Composition API imperative access
 
 ### 9. Mixin rewrite
@@ -243,8 +249,8 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
 
 ### 10. Test migration
 
-- Rewrite test mocks in [`__tests__/setup.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/setup.ts)
-- Mock `@fingerprint/agent`, `start()`, and the returned agent methods
+- Rewrite test mocks in [`__tests__/setup.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/setup.ts) using Vitest (`vi.mock`, `vi.fn()`)
+- Mock `@fingerprint/agent`, `start()`, and the returned agent methods (`get`, `collect`)
 - Update:
   - [`__tests__/plugin.test.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/plugin.test.ts)
   - [`__tests__/useVisitorData.test.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/__tests__/useVisitorData.test.ts)
@@ -283,6 +289,7 @@ Both mixins should expose `{ data, isLoading, isFetched, error }`.
   - [`examples/components-v3`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/examples/components-v3)
 - Keep example directory names unchanged for this PR
 - Update imports, plugin config, result field usage, and removed option usage
+- Remove Vue 2 / Nuxt 2 examples (`spa-v2-example`, `nuxt-v2-example`) — no longer supported
 
 ## Explicitly Removed Concepts
 
@@ -294,6 +301,8 @@ These should be called out clearly in migration messaging:
 - `clearCache`
 - `fpjs*` names
 - `$fpjs`
+- SPA cache re-exports: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`
+- SPA utility re-exports: `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
 
 ## PR Review Checklist
 
