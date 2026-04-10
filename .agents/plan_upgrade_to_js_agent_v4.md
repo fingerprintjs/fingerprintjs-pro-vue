@@ -21,14 +21,14 @@ This PR should mirror the sequencing used in the React SDK:
 - Keep default export, mapped to `FingerprintPlugin`
 - Align plugin options with agent v4 `StartOptions`
 - Preserve eager startup behavior
-- Preserve current SSR behavior
+- Preserve current SSR behavior (existing `isBrowser()` guard pattern — do not call `start()` on the server)
 - Keep appending the existing integration marker format to `integrationInfo`
 - Remove legacy SPA-wrapper concepts:
   - `loadOptions`
   - `extendedResult`
   - `ignoreCache`
   - `clearCache`
-- Re-export `@fingerprint/agent` so users can access `start()`, `collect()`, etc. directly
+- Export `Fingerprint` namespace (from `@fingerprint/agent`) so users can access `start()`, `collect()`, etc. directly
 - Update tests, README, and local examples
 - Add a migration guide to the README
 
@@ -51,7 +51,7 @@ This PR should mirror the sequencing used in the React SDK:
 - `useVisitorData`
 - `fingerprintGetVisitorDataMixin`
 - default export -> `FingerprintPlugin`
-- direct re-exports from `@fingerprint/agent` (e.g. `start`, `StartOptions`, `GetOptions`, `GetResult`, `CollectResult`, `Region`, `CacheConfig`) — users who need `collect()` can call `start()` directly to get an agent instance
+- `Fingerprint` namespace (re-exported as `import * as Fingerprint from '@fingerprint/agent'`, following the React SDK pattern) — users who need `collect()` or other agent methods can use `Fingerprint.start()` directly
 
 ### Global property
 
@@ -67,6 +67,7 @@ This PR should mirror the sequencing used in the React SDK:
 - `$fpjs`
 - old extended/default mixin split
 - `clearCache`
+- `CLEAR_CACHE` injection symbol
 
 ## Behavior Changes
 
@@ -107,7 +108,7 @@ Keep `useVisitorData()`, but simplify it:
 
 - single options object
 - `UseVisitorDataOptions = GetOptions & { immediate?: boolean }`
-- no generic extended-result model
+- no generic extended-result model (agent v4 has a single result format; the extended/default distinction no longer exists)
 - preserve ref-based return shape
 - add `isFetched`
 - `getData()` throws on failure
@@ -152,8 +153,9 @@ The mixin's reactive property (`visitorData`) is a nested object containing `{ d
 ### 2. Rewrite top-level exports
 
 - Update [`src/index.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/index.ts)
-- Re-export `@fingerprint/agent` types and values directly, following the React SDK pattern
-- Removed re-exports that no longer exist in v4: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `LoadOptions`, `ExtendedGetResult`, `FpjsClientOptions`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
+- Export `Fingerprint` namespace (`import * as Fingerprint from '@fingerprint/agent'`), matching the React SDK pattern
+- Remove all SPA re-exports that no longer exist in v4: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `LoadOptions`, `ExtendedGetResult`, `FpjsClientOptions`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
+- Remove `CLEAR_CACHE` symbol export (was only used for `clearCache` injection, which is removed); keep `GET_VISITOR_DATA` symbol renamed to match new types
 - Export the renamed Vue API surface
 - Keep default export pointing to `FingerprintPlugin`
 
@@ -194,7 +196,9 @@ The mixin's reactive property (`visitorData`) is a nested object containing `{ d
 - Remove SPA-wrapper-specific types and generics
 - Define `FingerprintPluginOptions = StartOptions`
 - Define the global client as `{ getVisitorData }`
-- Update [`src/vue.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/vue.ts) to expose only `$fingerprint`
+- Update [`src/vue.ts`](/Users/jurajuhlar/Documents/Code/fp-client-sdks/vue/src/vue.ts) module augmentation:
+  - rename `$fpjs` to `$fingerprint` with the new global client type
+  - update mixin type augmentation (`Partial<FingerprintVueMixins>`) to reflect the single-mixin model
 
 ### 8. Composition API updates
 
@@ -230,6 +234,9 @@ The mixin's reactive property (`visitorData`) is a nested object containing `{ d
   - `useVisitorData()` state transitions with `isFetched`
   - thrown errors
   - v4 result field names
+  - `loadOptions` runtime migration guard
+  - SSR safety (plugin install does not call `start()` when not in browser)
+  - `integrationInfo` merge order (caller-provided entries preserved, SDK marker appended)
 - Do not add extra legacy failure-path coverage beyond normal migration updates
 
 ### 11. README and docs
@@ -244,6 +251,7 @@ The mixin's reactive property (`visitorData`) is a nested object containing `{ d
   - plugin installation options
   - `useVisitorData()` signature
   - result field shape changes
+- Explain that agent v4 has a single result format — the `extendedResult` concept no longer exists; all results use the same `GetResult` type
 - Note that the runtime migration guard only covers old `loadOptions`; other removed legacy options fail through normal type/runtime mismatches
 
 ### 12. Example updates
@@ -255,6 +263,18 @@ The mixin's reactive property (`visitorData`) is a nested object containing `{ d
 - Keep example directory names unchanged for this PR
 - Update imports, plugin config, result field usage, and removed option usage
 - Remove Vue 2 / Nuxt 2 examples (`spa-v2-example`, `nuxt-v2-example`) — no longer supported
+
+### 13. Add changeset
+
+- Add a changeset (`pnpm changeset`) for a major version bump
+- Summarize the breaking changes: dependency swap, renamed API surface, removed `extendedResult`/`ignoreCache`/`clearCache`/`loadOptions`, new result field names
+
+### 14. Validation
+
+- `pnpm build` — verify clean build with new dependency
+- `pnpm test` — all tests pass
+- `pnpm test:dts` — type declarations are valid
+- Smoke-test examples: `spa-v3-example` and `nuxt-v3-example` build and run
 
 ## Explicitly Removed Concepts
 
@@ -268,6 +288,7 @@ These should be called out clearly in migration messaging:
 - `$fpjs`
 - SPA cache re-exports: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`
 - SPA utility re-exports: `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
+- `CLEAR_CACHE` injection symbol (was public via `export * from './symbols'`)
 
 ## PR Review Checklist
 
@@ -279,9 +300,12 @@ These should be called out clearly in migration messaging:
 - `$fingerprint` replaces `$fpjs`
 - `useVisitorData()` simplified and returns `isFetched`
 - `getData()` throws on failure
-- `@fingerprint/agent` re-exported (including `start()`) for direct agent access
+- `Fingerprint` namespace re-exported for direct agent access
 - Mixin consolidated to single `fingerprintGetVisitorDataMixin`
 - Tests updated to mock `@fingerprint/agent`
 - README updated with migration section
 - Examples updated
+- Vue 2 / Nuxt 2 examples removed
+- Changeset added for major version bump
+- `pnpm build`, `pnpm test`, `pnpm test:dts` all pass
 - No tooling/package-rename scope creep
