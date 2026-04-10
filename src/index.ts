@@ -1,34 +1,20 @@
-import { fpjsPlugin } from './plugin'
+import * as Fingerprint from '@fingerprint/agent'
+import { FingerprintPlugin } from './plugin'
 import './vue'
 
+export { FingerprintPlugin } from './plugin'
+export { GET_VISITOR_DATA } from './symbols'
 export type {
-  CacheLocation,
-  Cacheable,
-  ICache,
-  LoadOptions,
-  VisitorData,
-  GetResult,
-  ExtendedGetResult,
-  FpjsClientOptions,
-} from '@fingerprintjs/fingerprintjs-pro-spa'
+  FingerprintPluginOptions,
+  GetVisitorData,
+  FingerprintVueGlobalClient,
+  FingerprintVisitorQueryData,
+} from './types'
+export type { FingerprintVueMixins } from './mixins/mixins.types'
+export { useVisitorData } from './useVisitorData/useVisitorData'
+export type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisitorData/useVisitorData.types'
+export { fingerprintGetVisitorDataMixin } from './mixins/mixins'
 
-export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from './mixins/mixins'
+export { Fingerprint }
 
-export {
-  defaultEndpoint,
-  defaultTlsEndpoint,
-  defaultScriptUrlPattern,
-  LocalStorageCache,
-  SessionStorageCache,
-  InMemoryCache,
-  FingerprintJSPro,
-} from '@fingerprintjs/fingerprintjs-pro-spa'
-
-export * from './plugin'
-export * from './symbols'
-export * from './types'
-export * from './useVisitorData/useVisitorData'
-export * from './useVisitorData/useVisitorData.types'
-export * from './vue'
-
-export default fpjsPlugin
+export default FingerprintPlugin

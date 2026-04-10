@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import type { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
 defineProps<{
-  visitorData: VisitorData
+  visitorData: Fingerprint.GetResult
 }>()
 </script>
 

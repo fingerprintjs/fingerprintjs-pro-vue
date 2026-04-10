@@ -1,159 +1,79 @@
-import type { FpjsVisitorQueryData } from '../types'
-import type { FpjsGetVisitorDataMethod, GetVisitorDataMethodParams } from './mixins.types'
+import type { GetOptions } from '@fingerprint/agent'
+import type { FingerprintVisitorQueryData } from '../types'
+import type { FingerprintGetVisitorDataMethod } from './mixins.types'
 
-function setMixinData<Key extends keyof FpjsVisitorQueryData<boolean>>(
+function setMixinData<Key extends keyof FingerprintVisitorQueryData>(
   this: any,
-  dataName: string,
   key: Key,
-  value: FpjsVisitorQueryData<boolean>[Key]
+  value: FingerprintVisitorQueryData[Key]
 ) {
-  this.$data[dataName][key] = value
+  this.$data.visitorData[key] = value
 }
 
-function createMixin<TExtended extends boolean>(extended: TExtended) {
-  const suffix = extended ? 'Extended' : ''
+const getVisitorData: FingerprintGetVisitorDataMethod = async function (options) {
+  /**
+   * We use this.$root as a fallback, because in nuxt sometimes this.$fingerprint might be empty, but it might exist in $root
+   */
+  const fingerprint = this.$fingerprint ?? this.$root?.$fingerprint
 
-  const dataName = extended ? 'visitorDataExtended' : 'visitorData'
-  const methodName = `$getVisitorData${suffix}` as const
-
-  const getVisitorData: FpjsGetVisitorDataMethod = async function (options) {
-    /**
-     * We use this.$root as a fallback, because in nuxt sometimes this.$fpjs might be empty, but it might exist in $root
-     * */
-    const fpjs = this.$fpjs ?? this.$root?.$fpjs
-    const boundSetData = setMixinData.bind(this)
-
-    const setData = <Key extends keyof FpjsVisitorQueryData<TExtended>>(
-      key: Key,
-      value: FpjsVisitorQueryData<TExtended>[Key]
-    ) => {
-      return boundSetData(dataName, key, value)
-    }
-
-    if (!fpjs) {
-      throw new TypeError('$fpjs is not defined.')
-    }
-
-    try {
-      setData('isLoading', true)
-
-      setData(
-        'data',
-        await fpjs.getVisitorData(
-          {
-            ...(options ?? {}),
-            extendedResult: extended,
-          },
-          options?.ignoreCache
-        )
-      )
-    } catch (error) {
-      setData('error', error as Error)
-    } finally {
-      setData('isLoading', false)
-    }
+  if (!fingerprint) {
+    throw new TypeError('$fingerprint is not defined.')
   }
 
-  return {
-    data() {
-      return {
-        [dataName]: {
-          isLoading: false,
-          data: undefined,
-          error: undefined,
-        } as FpjsVisitorQueryData<TExtended>,
-      }
-    },
-    methods: {
-      [methodName]: getVisitorData as (options?: GetVisitorDataMethodParams) => Promise<void>,
-    },
-  } as const
+  const setData = setMixinData.bind(this)
+
+  try {
+    setData('isLoading', true)
+    setData('isFetched', false)
+    setData('error', undefined)
+    setData('data', await fingerprint.getVisitorData(options))
+    setData('isFetched', true)
+  } catch (error) {
+    setData('data', undefined)
+    setData('error', error instanceof Error ? error : new Error(String(error)))
+    setData('isFetched', false)
+  } finally {
+    setData('isLoading', false)
+  }
 }
 
 /**
- * Mixin for fetching normal visitorData
+ * Mixin for fetching visitor data
  *
  * @example ```vue
- *
  * <script>
- * import { fpjsGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
- * //import { fpjsGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
+ * import { fingerprintGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
  *
  * export default {
- *   // Include our mixin
- *   mixins: [fpjsGetVisitorDataMixin],
+ *   mixins: [fingerprintGetVisitorDataMixin],
  *   async mounted() {
- *     // You can also fetch data on mount
- *     // await this.$getVisitorData();
+ *     await this.$getVisitorData();
  *   }
  * };
  * </script>
  *
  * <template>
  *   <div>
- *     <button @click='$getVisitorData'>
- *       Get visitor data
- *     </button>
- *     <span v-if='visitorData.isLoading'>
- *       Loading...
- *     </span>
- *     <span v-else-if='visitorData.isError'>
- *       Error: {{ visitorData.error }}
- *     </span>
- *     <span v-else>
- *       <!--Do something with visitorData here-->
- *     </span>
+ *     <button @click='$getVisitorData'>Get visitor data</button>
+ *     <span v-if='visitorData.isLoading'>Loading...</span>
+ *     <span v-else-if='visitorData.error'>Error: {{ visitorData.error }}</span>
+ *     <span v-else>{{ visitorData.data }}</span>
  *   </div>
  * </template>
  * ```
- * */
-export const fpjsGetVisitorDataMixin = createMixin(false) as {
-  data: () => { visitorData: FpjsVisitorQueryData<false> }
+ */
+export const fingerprintGetVisitorDataMixin = {
+  data() {
+    return {
+      visitorData: {
+        isLoading: false,
+        isFetched: false,
+        data: undefined,
+        error: undefined,
+      } as FingerprintVisitorQueryData,
+    }
+  },
   methods: {
-    $getVisitorData: FpjsGetVisitorDataMethod<any>
-  }
-}
-
-/**
- * Mixin for fetching extended visitorData
- *
- * @example ```vue
- *
- * <script>
- * import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
- * //import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v2';
- *
- * export default {
- *   // Include our mixin
- *   mixins: [fpjsGetVisitorDataExtendedMixin],
- *   async mounted() {
- *     // You can also fetch data on mount
- *     // await this.$getVisitorDataExtended();
- *   }
- * );
- * </script>
- *
- * <template>
- *   <div>
- *     <button @click='$getVisitorDataExtended'>
- *       Get visitor data
- *     </button>
- *     <span v-if='visitorDataExtended.isLoading'>
- *       Loading...
- *     </span>
- *     <span v-else-if='visitorDataExtended.isError'>
- *       Error: {{ visitorDataExtended.error }}
- *     </span>
- *     <span v-else>
- *       <!--Do something with visitorData here-->
- *     </span>
- *   </div>
- * </template>
- * ```
- * */
-export const fpjsGetVisitorDataExtendedMixin = createMixin(true) as {
-  data: () => { visitorDataExtended: FpjsVisitorQueryData<true> }
-  methods: {
-    $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>
-  }
+    $getVisitorData: getVisitorData as (options?: GetOptions) => Promise<void>,
+  },
 }

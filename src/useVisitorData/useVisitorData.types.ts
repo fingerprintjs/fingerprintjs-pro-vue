@@ -1,17 +1,22 @@
-import type { FingerprintJSPro, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { GetOptions, GetResult } from '@fingerprint/agent'
 import type { Ref } from 'vue'
-import type { FpjsVisitorQueryData, GetDataOptions } from '../types'
+import type { FingerprintVisitorQueryData } from '../types'
 
 type AsRefs<T> = {
   [K in keyof T]: Ref<T[K]>
 }
 
-export type UseGetVisitorDataResult<TExtended extends boolean> = AsRefs<FpjsVisitorQueryData<TExtended>> & {
+export type UseGetVisitorDataResult = AsRefs<FingerprintVisitorQueryData> & {
   /**
-   * Fetches visitor data.
-   * */
-  getData: (options?: GetDataOptions) => Promise<VisitorData<TExtended> | undefined>
+   * Fetches visitor data. Throws on failure.
+   */
+  getData: (options?: GetOptions) => Promise<GetResult>
 }
 
-export type UseVisitorDataOptions<TExtended extends boolean> = FingerprintJSPro.GetOptions<TExtended> &
-  Partial<GetDataOptions>
+export type UseVisitorDataOptions = GetOptions & {
+  /**
+   * Determines whether getData() will be called immediately on mount.
+   * @default true
+   */
+  immediate?: boolean
+}

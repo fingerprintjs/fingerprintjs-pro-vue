@@ -1,38 +1,26 @@
-import type { FingerprintJSPro } from '@fingerprintjs/fingerprintjs-pro-spa'
-import type { FpjsVisitorQueryData, FpjsVueGlobalClient, GetDataOptions } from '../types'
+import type { GetOptions } from '@fingerprint/agent'
+import type { FingerprintVisitorQueryData, FingerprintVueGlobalClient } from '../types'
 
-export type FpjsGetVisitorDataMethodThis = {
+export type FingerprintGetVisitorDataMethodThis = {
   $root?: {
-    $fpjs?: FpjsVueGlobalClient
+    $fingerprint?: FingerprintVueGlobalClient
   }
-  $fpjs?: FpjsVueGlobalClient
+  $fingerprint?: FingerprintVueGlobalClient
 }
 
-export type GetVisitorDataMethodParams = Omit<FingerprintJSPro.GetOptions<boolean>, 'extendedResult'> & GetDataOptions
-
-export type FpjsGetVisitorDataMethod<This = FpjsGetVisitorDataMethodThis> = (
+export type FingerprintGetVisitorDataMethod<This = FingerprintGetVisitorDataMethodThis> = (
   this: This,
-  options?: GetVisitorDataMethodParams
+  options?: GetOptions
 ) => Promise<void>
 
-export interface FpjsVueMixins {
+export interface FingerprintVueMixins {
   /**
    * Method for fetching visitor data
-   * */
-  $getVisitorData: FpjsGetVisitorDataMethod<any>
-
-  /**
-   * Method for fetching extended data
-   * */
-  $getVisitorDataExtended: FpjsGetVisitorDataMethod<any>
+   */
+  $getVisitorData: FingerprintGetVisitorDataMethod<any>
 
   /**
    * Query state for visitor data
-   * */
-  visitorData: FpjsVisitorQueryData<false>
-
-  /**
-   * Query state for extended visitor data
-   * */
-  visitorDataExtended: FpjsVisitorQueryData<true>
+   */
+  visitorData: FingerprintVisitorQueryData
 }

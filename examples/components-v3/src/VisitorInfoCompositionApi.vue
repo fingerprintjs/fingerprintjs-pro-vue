@@ -3,7 +3,7 @@ import { watch } from 'vue'
 import VisitorInfoSection from './VisitorInfoSection.vue'
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
-const { data, error, isLoading, getData } = useVisitorData({ extendedResult: true }, { immediate: false })
+const { data, error, isLoading, getData } = useVisitorData({ immediate: false })
 
 watch(data, (currentData) => {
   if (currentData) {
