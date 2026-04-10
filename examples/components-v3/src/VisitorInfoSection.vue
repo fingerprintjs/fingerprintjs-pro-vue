@@ -3,7 +3,7 @@ import FetchDataBtn from './FetchDataBtn.vue'
 import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 import VisitorData from './VisitorData.vue'
 
-const props = defineProps<{
+defineProps<{
   buttonText: string
   isLoading: boolean
   error?: Error | null
@@ -17,10 +17,10 @@ const emit = defineEmits<{
 
 <template>
   <section>
-    <fetch-data-btn :is-loading="props.isLoading" :text="props.buttonText" @click="emit('btn-click', $event)" />
-    <visitor-data v-if="props.data" :visitor-data="props.data" />
-    <p v-if="props.error" class="error">
-      {{ props.error.message }}
+    <FetchDataBtn :is-loading="isLoading" :text="buttonText" @click="emit('btn-click', $event)" />
+    <VisitorData v-if="data" :visitor-data="data" />
+    <p v-if="error" class="error">
+      {{ error.message }}
     </p>
   </section>
 </template>

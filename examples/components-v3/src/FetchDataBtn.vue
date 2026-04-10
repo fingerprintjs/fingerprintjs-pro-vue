@@ -1,15 +1,15 @@
-<template>
-  <button :disabled="props.isLoading">
-    <span v-if="!props.isLoading">{{ props.text }}</span>
-    <span v-if="props.isLoading"> Loading... </span>
-  </button>
-</template>
-
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   text: string
   isLoading: boolean
 }>()
 </script>
+
+<template>
+  <button :disabled="isLoading">
+    <span v-if="!isLoading">{{ text }}</span>
+    <span v-if="isLoading"> Loading... </span>
+  </button>
+</template>
 
 <style scoped></style>

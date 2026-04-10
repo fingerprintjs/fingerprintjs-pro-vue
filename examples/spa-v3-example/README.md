@@ -9,5 +9,5 @@ API_KEY=<YOUR_API_KEY>
 
 2. Execute the following command from the root directory:
 ```shell
-yarn nx run spa-v3-example:dev
+pnpm --filter spa-v3-example dev
 ```

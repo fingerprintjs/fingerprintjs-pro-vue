@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
-const props = defineProps<{
+defineProps<{
   visitorData: VisitorData
 }>()
 </script>
@@ -10,7 +10,7 @@ const props = defineProps<{
   <div class="output-holder">
     <div class="output">
       <pre>
-        {{ JSON.stringify(props.visitorData, null, 4) }}
+        {{ JSON.stringify(visitorData, null, 4) }}
       </pre>
     </div>
   </div>
