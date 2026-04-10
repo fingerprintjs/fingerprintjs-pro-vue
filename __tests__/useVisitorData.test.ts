@@ -190,7 +190,8 @@ describe('useVisitorData', () => {
           const { getData, isLoading } = useVisitorData({ immediate: false })
 
           onMounted(async () => {
-            await getData({ tag: 'test', linkedId: 'link123' })
+            const result = await getData({ tag: 'test', linkedId: 'link123' })
+            expect(result).toEqual(testData)
           })
 
           watch(isLoading, (currentLoading, wasLoading) => {

@@ -47,12 +47,6 @@ describe('FingerprintPlugin', () => {
 
     const { vm } = mount({
       template: '<h1>Hello world</h1>',
-      async mounted() {
-        const $fingerprint = (this as any).$fingerprint
-        const result = await $fingerprint.getVisitorData()
-
-        expect(result).toEqual(testData)
-      },
     })
 
     const result = await vm.$fingerprint.getVisitorData()
@@ -80,6 +74,11 @@ describe('FingerprintPlugin', () => {
     await vm.$fingerprint.getVisitorData()
 
     expect(mockStart).toHaveBeenCalledTimes(1)
+
+    // Verify agent reuse on subsequent calls
+    await vm.$fingerprint.getVisitorData()
+    expect(mockStart).toHaveBeenCalledTimes(1)
+
     const callArgs = mockStart.mock.calls[0][0] as any
     expect(callArgs.apiKey).toBe('test-key')
     expect(callArgs.integrationInfo).toContain(`fingerprintjs-pro-vue-v3/${packageInfo.version}`)
