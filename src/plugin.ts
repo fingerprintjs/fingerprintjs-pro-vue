@@ -6,7 +6,7 @@ import { getOptions } from './config'
 import { makeGetVisitorData } from './client'
 
 /**
- * Fingerprint Pro plugin for Vue 3
+ * Fingerprint plugin for Vue 3
  *
  * @example ```ts
  * import { createApp } from 'vue';

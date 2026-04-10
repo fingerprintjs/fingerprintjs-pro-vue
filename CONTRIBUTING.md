@@ -1,4 +1,4 @@
-# Contributing to FingerprintJS Pro Vue integration
+# Contributing to Fingerprint Vue integration
 
 ## Working with code
 
