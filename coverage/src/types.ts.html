@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/index.ts</title>
+    <title>Code coverage report for src/types.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> index.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> types.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/34</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/34</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -97,7 +97,8 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -131,40 +132,42 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { fpjsPlugin } from './plugin'
-import './vue'
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { FpjsClient, FpjsSpaOptions, VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa'
 &nbsp;
-export type {
-  CacheLocation,
-  Cacheable,
-  ICache,
-  LoadOptions,
-  VisitorData,
-  GetResult,
-  ExtendedGetResult,
-  FpjsClientOptions,
-} from '@fingerprintjs/fingerprintjs-pro-spa'
+export type FpjsVueOptions = FpjsSpaOptions
 &nbsp;
-export { fpjsGetVisitorDataExtendedMixin, fpjsGetVisitorDataMixin } from './mixins/mixins'
+export type GetVisitorData = FpjsClient['getVisitorData']
+export type ClearCache = FpjsClient['clearCache']
 &nbsp;
-export {
-  defaultEndpoint,
-  defaultTlsEndpoint,
-  defaultScriptUrlPattern,
-  LocalStorageCache,
-  SessionStorageCache,
-  InMemoryCache,
-  FingerprintJSPro,
-} from '@fingerprintjs/fingerprintjs-pro-spa'
+export interface FpjsVueGlobalClient {
+  getVisitorData: GetVisitorData
+  clearCache: ClearCache
+}
 &nbsp;
-export * from './plugin'
-export * from './symbols'
-export * from './types'
-export * from './useVisitorData/useVisitorData'
-export * from './useVisitorData/useVisitorData.types'
-export * from './vue'
+export interface FpjsVisitorQueryData&lt;TExtended extends boolean&gt; {
+  isLoading: boolean
+  data: VisitorData&lt;TExtended&gt; | undefined
+  error: Error | undefined
+}
 &nbsp;
-export default fpjsPlugin
+export interface FpjsVueQueryOptions {
+  /**
+   * Determines whether the `getData()` method will be called immediately after function is called or not
+   *
+   * @default true
+   */
+  immediate?: boolean
+}
+&nbsp;
+export interface GetDataOptions {
+  /**
+   * Determines whether the method should ignore cache
+   *
+   * @default false
+   * */
+  ignoreCache?: boolean
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
