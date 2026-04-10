@@ -4,7 +4,7 @@ import { FingerprintPlugin } from '../src/plugin'
 import type { FingerprintPluginOptions } from '../src/types'
 import { useVisitorData } from '../src'
 import { onMounted, ref, watch } from 'vue'
-import { mockGet } from './setup'
+import { mockGet, mockStart } from './setup'
 
 const apiKey = 'API_KEY'
 const testData = {
@@ -24,6 +24,7 @@ describe('useVisitorData', () => {
 
   beforeEach(() => {
     mockGet.mockClear()
+    mockStart.mockClear()
   })
 
   it('should expose data, getData, isLoading, isFetched, and error', () => {
@@ -52,6 +53,7 @@ describe('useVisitorData', () => {
 
           onMounted(() => {
             expect(isLoading.value).toBe(true)
+            expect(mockStart).toHaveBeenCalledTimes(1)
           })
 
           watch(isLoading, (currentLoading, wasLoading) => {

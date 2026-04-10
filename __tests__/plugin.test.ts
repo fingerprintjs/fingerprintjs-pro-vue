@@ -67,11 +67,17 @@ describe('FingerprintPlugin', () => {
     }).toThrow(/loadOptions/)
   })
 
-  it('should call start() with integrationInfo appended', () => {
+  it('should call start() with integrationInfo appended on first getVisitorData call', async () => {
     mockStart.mockClear()
+    mockGet.mockResolvedValue(testData)
 
     const app = createApp({ template: '<div />' })
     app.use(FingerprintPlugin, { apiKey: 'test-key' })
+
+    expect(mockStart).not.toHaveBeenCalled()
+
+    const vm = app.mount(document.createElement('div')) as any
+    await vm.$fingerprint.getVisitorData()
 
     expect(mockStart).toHaveBeenCalledTimes(1)
     const callArgs = mockStart.mock.calls[0][0] as any
@@ -79,11 +85,15 @@ describe('FingerprintPlugin', () => {
     expect(callArgs.integrationInfo).toContain(`fingerprintjs-pro-vue-v3/${packageInfo.version}`)
   })
 
-  it('should preserve existing integrationInfo entries', () => {
+  it('should preserve existing integrationInfo entries', async () => {
     mockStart.mockClear()
+    mockGet.mockResolvedValue(testData)
 
     const app = createApp({ template: '<div />' })
     app.use(FingerprintPlugin, { apiKey: 'test-key', integrationInfo: ['custom/1.0'] })
+
+    const vm = app.mount(document.createElement('div')) as any
+    await vm.$fingerprint.getVisitorData()
 
     expect(mockStart).toHaveBeenCalledTimes(1)
     const callArgs = mockStart.mock.calls[0][0] as any

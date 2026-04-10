@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import licensePlugin from 'vite-plugin-banner'
 import dts from 'vite-plugin-dts'
 import { dependencies, peerDependencies, version } from './package.json'
@@ -25,7 +25,7 @@ export default defineConfig({
   plugins: [
     licensePlugin({
       content: licenseContents,
-    }),
+    }) as PluginOption,
     dts({
       rollupTypes: true,
     }),
