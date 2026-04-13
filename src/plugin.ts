@@ -30,6 +30,10 @@ export const FingerprintPlugin: Plugin = {
       )
     }
 
+    if (!options?.apiKey) {
+      throw new Error('FingerprintPlugin requires an apiKey. Pass { apiKey: "..." } when installing the plugin.')
+    }
+
     const startOptions = getOptions(options, 'fingerprintjs-pro-vue-v3', packageInfo.version)
     const getVisitorData = makeGetVisitorData(startOptions)
 

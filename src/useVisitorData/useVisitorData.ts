@@ -46,9 +46,10 @@ export function useVisitorData({
 
       return result
     } catch (error) {
-      currentError.value = error instanceof Error ? error : new Error(String(error))
+      const normalizedError = error instanceof Error ? error : new Error(String(error))
+      currentError.value = normalizedError
 
-      throw error
+      throw normalizedError
     } finally {
       isLoading.value = false
     }

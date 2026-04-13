@@ -61,6 +61,13 @@ describe('FingerprintPlugin', () => {
     }).toThrow(/loadOptions/)
   })
 
+  it('should fail fast when apiKey is missing', () => {
+    expect(() => {
+      const app = createApp(EmptyComponent)
+      app.use(FingerprintPlugin, undefined as any)
+    }).toThrow(/apiKey/)
+  })
+
   it('should call start() with integrationInfo appended on first getVisitorData call', async () => {
     mockStart.mockClear()
     mockGet.mockResolvedValue(testData)

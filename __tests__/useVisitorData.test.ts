@@ -178,6 +178,29 @@ describe('useVisitorData', () => {
     })
   })
 
+  it('should normalize non-Error failures consistently', async () => {
+    mockGet.mockRejectedValue('Test failure')
+
+    await new Promise<void>((resolve) => {
+      mount({
+        template: '<h1>Hello world</h1>',
+        setup() {
+          const { getData, error } = useVisitorData({ immediate: false })
+
+          onMounted(async () => {
+            const thrown = await getData().catch((caughtError) => caughtError)
+
+            expect(thrown).toBeInstanceOf(Error)
+            expect(thrown.message).toBe('Test failure')
+            expect(error.value).toBe(thrown)
+
+            resolve()
+          })
+        },
+      })
+    })
+  })
+
   it('should provide fresh data after error recovery', async () => {
     mockGet.mockRejectedValueOnce(new Error('Test error'))
 
