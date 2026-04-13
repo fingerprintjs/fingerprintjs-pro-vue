@@ -3,7 +3,7 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { FingerprintPlugin } from '../src/plugin'
 import type { FingerprintPluginOptions } from '../src/types'
 import { useVisitorData } from '../src'
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { mockGet, mockStart } from './setup'
 
 const apiKey = 'API_KEY'
@@ -253,6 +253,56 @@ describe('useVisitorData', () => {
 
               resolve()
             }
+          })
+        },
+      })
+    })
+  })
+
+  it('should clear stale error and data immediately when getData() is called again', async () => {
+    // First call fails so error/data are populated.
+    mockGet.mockRejectedValueOnce(new Error('Test error'))
+
+    // Second call: a deferred promise so we can inspect mid-flight refs before it resolves.
+    let resolveSecond!: (value: typeof testData) => void
+    mockGet.mockReturnValueOnce(
+      new Promise<typeof testData>((resolve) => {
+        resolveSecond = resolve
+      })
+    )
+
+    await new Promise<void>((done) => {
+      mount({
+        template: '<h1>Hello world</h1>',
+        setup() {
+          const { getData, error, data, isLoading, isFetched } = useVisitorData({ immediate: true })
+
+          let retried = false
+
+          watch(isLoading, async (current, was) => {
+            if (current || !was || retried) {
+              return
+            }
+
+            // First call has just settled with an error.
+            retried = true
+            expect(error.value).toBeTruthy()
+
+            // Start the retry but don't await it — we want to assert state mid-flight.
+            const pending = getData()
+
+            // Flush the synchronous reset that happens at the top of getData().
+            await nextTick()
+
+            expect(isLoading.value).toBe(true)
+            expect(error.value).toBeUndefined()
+            expect(data.value).toBeUndefined()
+            expect(isFetched.value).toBe(false)
+
+            // Resolve the deferred so the test can settle cleanly.
+            resolveSecond(testData)
+            await pending
+            done()
           })
         },
       })

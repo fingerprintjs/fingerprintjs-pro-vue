@@ -34,20 +34,18 @@ export function useVisitorData({
   const getData = async (options?: GetOptions): Promise<GetResult> => {
     isLoading.value = true
     isFetched.value = false
+    data.value = undefined
+    currentError.value = undefined
 
     try {
       const mergedOptions: GetOptions = { ...getOptionsDefaults, ...options }
       const result = await getVisitorData(mergedOptions)
 
       data.value = result
-      currentError.value = undefined
       isFetched.value = true
 
       return result
     } catch (error) {
-      data.value = undefined
-      isFetched.value = false
-
       currentError.value = error instanceof Error ? error : new Error(String(error))
 
       throw error
