@@ -15,8 +15,6 @@ Upgrade to JavaScript agent v4
 - Removed `extendedResult`, `ignoreCache`, and `clearCache` options. Caching is now configured at the plugin level using the `cache` option in `StartOptions`.
 - Removed `CLEAR_CACHE` injection symbol
 - Removed SPA re-exports: `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern`, `FingerprintJSPro`
-- Removed root type re-exports: `VisitorData`, `ExtendedGetResult`, `LoadOptions`, `FpjsClientOptions`, `GetResult`. The agent v4 equivalents are now accesible under `Fingerprint` namespace, which is still re-exported from the Vue SDK package.
+- Removed root type re-exports: `VisitorData`, `ExtendedGetResult`, `LoadOptions`, `FpjsClientOptions`, `GetResult`. The agent v4 equivalents are now accesible under `Fingerprint` namespace, which is still re-exported from the Vue SDK package for direct agent access.
 - Result fields now use snake_case: `visitor_id`, `event_id`, `sealed_result`, `cache_hit`, `suspect_score`
 - `useVisitorData()` takes a single options object, returns `isFetched` ref, and `getData()` throws on failure
-- Added `Fingerprint` namespace re-export for direct agent access
-- Removed Vue 2 examples
