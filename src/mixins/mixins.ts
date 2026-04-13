@@ -24,6 +24,7 @@ const getVisitorData: FingerprintGetVisitorDataMethod = async function (options)
   try {
     setData('isLoading', true)
     setData('isFetched', false)
+    setData('data', undefined)
     setData('error', undefined)
     setData('data', await fingerprint.getVisitorData(options))
     setData('isFetched', true)

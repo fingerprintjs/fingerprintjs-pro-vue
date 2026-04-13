@@ -1,7 +1,6 @@
-import type { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
 // Derive the cache field types straight from the agent's `StartOptions['cache']`.
-// `Fingerprint` is re-exported from `@fingerprint/agent` by the vue SDK.
 type AgentCacheConfig = NonNullable<Fingerprint.StartOptions['cache']>
 export type CacheStorage = AgentCacheConfig['storage']
 // Agent allows a number for `duration`, but for the example UI we only expose the named presets.

@@ -2,7 +2,7 @@ import { config, mount } from '@vue/test-utils'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { FingerprintPlugin, fingerprintGetVisitorDataMixin } from '../src'
 import type { FingerprintPluginOptions } from '../src'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { mockGet, mockStart } from './setup'
 import { wait } from '../src/utils'
 
@@ -146,5 +146,40 @@ describe('FingerprintPlugin - mixins', () => {
     await vm.$getVisitorData?.({ tag: 'test-tag', linkedId: 'link123' })
 
     expect(mockGet).toHaveBeenCalledWith({ tag: 'test-tag', linkedId: 'link123' })
+  })
+
+  it('should clear stale data immediately when getVisitorData is called again', async () => {
+    mockGet.mockResolvedValueOnce(testData)
+
+    let resolveSecond!: (value: typeof testData) => void
+    mockGet.mockReturnValueOnce(
+      new Promise<typeof testData>((resolve) => {
+        resolveSecond = resolve
+      })
+    )
+
+    const { vm } = mount({
+      mixins: [fingerprintGetVisitorDataMixin],
+      template: '<h1>hello world</h1>',
+    })
+
+    await vm.$getVisitorData?.()
+
+    expect(vm.visitorData?.data).toEqual(testData)
+    expect(vm.visitorData?.isFetched).toBe(true)
+
+    const pending = vm.$getVisitorData?.({ tag: 'retry' })
+    await nextTick()
+
+    expect(vm.visitorData?.isLoading).toBe(true)
+    expect(vm.visitorData?.data).toBeUndefined()
+    expect(vm.visitorData?.error).toBeUndefined()
+    expect(vm.visitorData?.isFetched).toBe(false)
+
+    resolveSecond(testData)
+    await pending
+
+    expect(vm.visitorData?.data).toEqual(testData)
+    expect(vm.visitorData?.isFetched).toBe(true)
   })
 })
