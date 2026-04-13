@@ -111,6 +111,7 @@ describe('useVisitorData', () => {
             await expect(getData()).rejects.toThrow('Test error')
             expect(error.value).toBeTruthy()
             expect(error.value?.message).toBe('Test error')
+            expect(error.value?.name).toBe('Error')
 
             resolve()
           })
