@@ -33,6 +33,30 @@ A runtime error is thrown if the old `loadOptions` format is detected, prompting
 | `fpjsGetVisitorDataExtendedMixin` | _(removed)_                      |
 | `FingerprintJSPro`                | `Fingerprint`                    |
 
+## Type export changes
+
+The package root no longer re-exports the old SPA client types. Update imports to use the `Fingerprint` namespace export from this package or import directly from `@fingerprint/agent`.
+
+Removed root type re-exports:
+
+- `VisitorData`
+- `ExtendedGetResult`
+- `LoadOptions`
+- `FpjsClientOptions`
+- `GetResult`
+
+Example migration:
+
+```typescript
+// Before (v1.x)
+import type { GetResult, LoadOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+
+// After (v2.0)
+import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+type Result = Fingerprint.GetResult
+type Options = Fingerprint.StartOptions
+```
+
 ## useVisitorData
 
 The composable now takes a single options object and returns an `isFetched` ref. `getData()` throws on error instead of returning `undefined`.
@@ -68,4 +92,5 @@ New fields: `sealed_result`, `suspect_score`, `cache_hit`.
 - **`ignoreCache`** — Caching is now configured at the plugin level using the `cache` option in `StartOptions`.
 - **`clearCache`** — No longer available. The `CLEAR_CACHE` injection symbol has been removed.
 - **SPA re-exports** — `LocalStorageCache`, `SessionStorageCache`, `InMemoryCache`, `CacheLocation`, `Cacheable`, `ICache`, `defaultEndpoint`, `defaultTlsEndpoint`, `defaultScriptUrlPattern` are no longer exported.
+- **Root type re-exports** — `VisitorData`, `ExtendedGetResult`, `LoadOptions`, `FpjsClientOptions`, and `GetResult` are no longer exported from this package root.
 - **Vue 2 support** — Vue 2 examples have been removed. The SDK requires Vue 3.1+.
