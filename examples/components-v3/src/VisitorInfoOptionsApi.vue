@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { fingerprintGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import VisitorInfoSection from './VisitorInfoSection.vue'
 
 export default defineComponent({
+  components: { VisitorInfoSection },
   mixins: [fingerprintGetVisitorDataMixin],
   watch: {
     'visitorData.data': {
@@ -23,9 +25,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <section>
-    <button type="button" @click="getData">Get visitor data using Options API</button>
-    <pre v-if="visitorData.data">{{ JSON.stringify(visitorData.data, null, 2) }}</pre>
-    <p v-if="visitorData.error" class="error">{{ visitorData.error.message }}</p>
-  </section>
+  <VisitorInfoSection
+    button-text="Get visitor data using Options API"
+    :is-loading="visitorData.isLoading"
+    :error="visitorData.error"
+    :data="visitorData.data"
+    @btn-click="getData"
+  />
 </template>
