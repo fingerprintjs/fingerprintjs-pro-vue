@@ -3,7 +3,7 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { FingerprintPlugin } from '../src/plugin'
 import type { FingerprintPluginOptions } from '../src/types'
 import { useVisitorData } from '../src'
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import { mockGet, mockStart } from './setup'
 
 const apiKey = 'API_KEY'
@@ -63,6 +63,64 @@ describe('useVisitorData', () => {
 
               resolve()
             }
+          })
+        },
+      })
+    })
+  })
+
+  it('should reuse the same agent across multiple useVisitorData instances', async () => {
+    mockGet.mockResolvedValue(testData)
+
+    await new Promise<void>((resolve) => {
+      mount({
+        template: '<h1>Hello world</h1>',
+        setup() {
+          const firstVisitorData = useVisitorData({ immediate: false })
+          const secondVisitorData = useVisitorData({ immediate: false })
+
+          onMounted(async () => {
+            const firstResult = await firstVisitorData.getData()
+            const secondResult = await secondVisitorData.getData({ tag: 'second-instance' })
+
+            expect(firstResult).toEqual(testData)
+            expect(secondResult).toEqual(testData)
+            expect(mockGet).toHaveBeenCalledTimes(2)
+            expect(mockStart).toHaveBeenCalledTimes(1)
+
+            resolve()
+          })
+        },
+      })
+    })
+  })
+
+  it('should reuse the same agent between useVisitorData and $fingerprint.getVisitorData', async () => {
+    mockGet.mockResolvedValue(testData)
+
+    await new Promise<void>((resolve) => {
+      mount({
+        template: '<h1>Hello world</h1>',
+        setup() {
+          const { getData } = useVisitorData({ immediate: false })
+          const instance = getCurrentInstance()
+
+          if (!instance?.proxy) {
+            throw new Error('Expected current component instance')
+          }
+
+          const fingerprint = instance.proxy.$fingerprint
+
+          onMounted(async () => {
+            const composableResult = await getData()
+            const pluginResult = await fingerprint.getVisitorData({ tag: 'plugin-call' })
+
+            expect(composableResult).toEqual(testData)
+            expect(pluginResult).toEqual(testData)
+            expect(mockGet).toHaveBeenCalledTimes(2)
+            expect(mockStart).toHaveBeenCalledTimes(1)
+
+            resolve()
           })
         },
       })
