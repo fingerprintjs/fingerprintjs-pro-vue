@@ -9,9 +9,7 @@ defineProps<{
 <template>
   <div class="output-holder">
     <div class="output">
-      <pre>
-        {{ JSON.stringify(visitorData, null, 4) }}
-      </pre>
+      <pre>{{ JSON.stringify(visitorData, null, 4) }}</pre>
     </div>
   </div>
 </template>
