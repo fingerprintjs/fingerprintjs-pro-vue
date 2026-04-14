@@ -5,6 +5,9 @@ import type { FingerprintPluginOptions, FingerprintVueGlobalClient } from './typ
 import { getOptions } from './config'
 import { makeGetVisitorData } from './client'
 
+// Using the original package name instead of just `vue` for data analytics consistency
+export const INTEGRATION_INFO_PACKAGE_NAME = 'fingerprintjs-pro-vue-v3'
+
 /**
  * Fingerprint plugin for Vue 3
  *
@@ -34,7 +37,7 @@ export const FingerprintPlugin: Plugin = {
       throw new Error('FingerprintPlugin requires an apiKey. Pass { apiKey: "..." } when installing the plugin.')
     }
 
-    const startOptions = getOptions(options, 'fingerprintjs-pro-vue-v3', packageInfo.version)
+    const startOptions = getOptions(options, INTEGRATION_INFO_PACKAGE_NAME, packageInfo.version)
     const getVisitorData = makeGetVisitorData(startOptions)
 
     app.provide(GET_VISITOR_DATA, getVisitorData)

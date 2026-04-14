@@ -6,6 +6,7 @@ import '../src/vue'
 import { mockGet, mockStart } from './setup'
 import * as packageInfo from '../package.json'
 import { createApp } from 'vue'
+import { INTEGRATION_INFO_PACKAGE_NAME } from '../src/plugin'
 
 const apiKey = 'API_KEY'
 const testData = {
@@ -88,7 +89,7 @@ describe('FingerprintPlugin', () => {
 
     const callArgs = mockStart.mock.calls[0][0] as any
     expect(callArgs.apiKey).toBe('test-key')
-    expect(callArgs.integrationInfo).toContain(`fingerprintjs-pro-vue-v3/${packageInfo.version}`)
+    expect(callArgs.integrationInfo).toContain(`${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`)
   })
 
   it('should preserve existing integrationInfo entries', async () => {
@@ -104,6 +105,6 @@ describe('FingerprintPlugin', () => {
     expect(mockStart).toHaveBeenCalledTimes(1)
     const callArgs = mockStart.mock.calls[0][0] as any
     expect(callArgs.integrationInfo).toContain('custom/1.0')
-    expect(callArgs.integrationInfo).toContain(`fingerprintjs-pro-vue-v3/${packageInfo.version}`)
+    expect(callArgs.integrationInfo).toContain(`${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`)
   })
 })
