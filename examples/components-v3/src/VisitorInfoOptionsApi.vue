@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { fingerprintGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { fingerprintGetVisitorDataMixin } from '@fingerprint/vue'
 import VisitorInfoSection from './VisitorInfoSection.vue'
 
 export default defineComponent({

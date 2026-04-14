@@ -42,7 +42,7 @@ const getVisitorData: FingerprintGetVisitorDataMethod = async function (options)
  *
  * @example ```vue
  * <script>
- * import { fingerprintGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+ * import { fingerprintGetVisitorDataMixin } from '@fingerprint/vue';
  *
  * export default {
  *   mixins: [fingerprintGetVisitorDataMixin],

@@ -16,6 +16,6 @@
     "nuxt": "^3.19.0"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "workspace:*"
+    "@fingerprint/vue": "workspace:*"
   }
 }

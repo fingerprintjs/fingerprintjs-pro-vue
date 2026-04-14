@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watch } from 'vue'
 import VisitorInfoSection from './VisitorInfoSection.vue'
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { useVisitorData } from '@fingerprint/vue'
 
 const { data, error, isLoading, getData } = useVisitorData({ immediate: false })
 

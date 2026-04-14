@@ -1,4 +1,4 @@
-import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { Fingerprint } from '@fingerprint/vue'
 
 // Derive the cache field types straight from the agent's `StartOptions['cache']`.
 type AgentCacheConfig = NonNullable<Fingerprint.StartOptions['cache']>

@@ -2,7 +2,7 @@
   "name": "components-v3",
   "version": "0.0.0",
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-vue-v3": "workspace:*"
+    "@fingerprint/vue": "workspace:*"
   },
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --max-warnings 0 .",

@@ -3,7 +3,7 @@ import licensePlugin from 'vite-plugin-banner'
 import dts from 'vite-plugin-dts'
 import { dependencies, peerDependencies, version } from './package.json'
 
-const licenseContents = `Fingerprint Vue v${version} - Copyright (c) FingerprintJS, Inc, ${new Date().getFullYear()} (https://fingerprintjs.com)
+const licenseContents = `Fingerprint Vue v${version} - Copyright (c) FingerprintJS, Inc, ${new Date().getFullYear()} (https://fingerprint.com)
 Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.`
 
 export default defineConfig({
@@ -11,9 +11,9 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: 'src/index.ts',
-      fileName: 'plugin',
+      fileName: 'fingerprint-vue',
       formats: ['cjs', 'es'],
-      name: 'FingerprintJSProVue',
+      name: 'FingerprintVue',
     },
     rollupOptions: {
       external: [...Object.keys(dependencies ?? {}), ...Object.keys(peerDependencies ?? {})],

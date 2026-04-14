@@ -1,5 +1,5 @@
 ---
-"@fingerprintjs/fingerprintjs-pro-vue-v3": major
+"@fingerprint/vue": major
 ---
 
 Upgrade to JavaScript agent v4

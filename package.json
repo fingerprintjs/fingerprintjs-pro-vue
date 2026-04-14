@@ -1,23 +1,27 @@
 {
-  "name": "@fingerprintjs/fingerprintjs-pro-vue-v3",
+  "name": "@fingerprint/vue",
   "version": "1.5.0",
-  "description": "Fingerprint Plugin for Vue v3",
-  "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
+  "description": "Fingerprint Vue 3 SDK",
+  "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
+    "url": "git+https://github.com/fingerprintjs/vue.git"
   },
+  "bugs": {
+    "url": "https://github.com/fingerprintjs/vue/issues"
+  },
+  "homepage": "https://github.com/fingerprintjs/vue#readme",
   "exports": {
     ".": {
-      "types": "./dist/plugin.d.ts",
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.js"
+      "types": "./dist/fingerprint-vue.d.ts",
+      "import": "./dist/fingerprint-vue.mjs",
+      "require": "./dist/fingerprint-vue.js"
     }
   },
-  "main": "dist/plugin.js",
-  "module": "dist/plugin.mjs",
-  "types": "dist/plugin.d.ts",
+  "main": "dist/fingerprint-vue.js",
+  "module": "dist/fingerprint-vue.mjs",
+  "types": "dist/fingerprint-vue.d.ts",
   "sideEffects": false,
   "files": [
     "dist"
@@ -36,7 +40,8 @@
   ],
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
   },
   "private": false,
   "scripts": {
@@ -49,7 +54,7 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:coverage:diff": "vitest run --coverage --reporter json --outputFile.json=report.json",
-    "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/plugin.d.ts",
+    "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/fingerprint-vue.d.ts",
     "docs": "typedoc src/index.ts --out docs",
     "changeset:version": "changeset version",
     "changeset:publish": "HUSKY=0 changeset publish"

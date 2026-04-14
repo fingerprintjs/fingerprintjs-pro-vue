@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { FingerprintPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { FingerprintPlugin } from '@fingerprint/vue'
 import { loadCacheConfig } from '../../components-v3/src/cacheConfig'
 
 const app = createApp(App)

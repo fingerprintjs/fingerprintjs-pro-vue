@@ -8,10 +8,10 @@
   </a>
 </p>
 <p align="center">
-   <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/ci.yml"><img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/ci.yml/badge.svg" alt="Build status"></a>
-   <a href="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/fingerprintjs-pro-vue/actions/workflows/release.yml/badge.svg" alt="Release status"></a>
-   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v3"><img src="https://img.shields.io/npm/v/@fingerprintjs/fingerprintjs-pro-vue-v3.svg" alt="Current NPM version"></a>
-   <a href="https://www.npmjs.com/package/@fingerprintjs/fingerprintjs-pro-vue-v3"><img src="https://img.shields.io/npm/dm/@fingerprintjs/fingerprintjs-pro-vue-v3.svg" alt="Monthly downloads from NPM"></a>
+   <a href="https://github.com/fingerprintjs/vue/actions/workflows/ci.yml"><img src="https://github.com/fingerprintjs/vue/actions/workflows/ci.yml/badge.svg" alt="Build status"></a>
+   <a href="https://github.com/fingerprintjs/vue/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/vue/actions/workflows/release.yml/badge.svg" alt="Release status"></a>
+   <a href="https://www.npmjs.com/package/@fingerprint/vue"><img src="https://img.shields.io/npm/v/@fingerprint/vue.svg" alt="Current NPM version"></a>
+   <a href="https://www.npmjs.com/package/@fingerprint/vue"><img src="https://img.shields.io/npm/dm/@fingerprint/vue.svg" alt="Monthly downloads from NPM"></a>
    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/:license-mit-blue.svg" alt="MIT license"></a>
    <a href="https://discord.gg/39EpE2neBg"><img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server"></a>
 </p>
@@ -35,17 +35,17 @@ This package works with the commercial [Fingerprint platform](https://fingerprin
 To install the plugin run:
 
 ```shell
-yarn add @fingerprintjs/fingerprintjs-pro-vue-v3
+yarn add @fingerprint/vue
 ```
 
 Or:
 
 ```shell
-npm install @fingerprintjs/fingerprintjs-pro-vue-v3
+npm install @fingerprint/vue
 ```
 
 ```shell
-pnpm add @fingerprintjs/fingerprintjs-pro-vue-v3
+pnpm add @fingerprint/vue
 ```
 
 ## Getting started
@@ -62,7 +62,7 @@ Register the plugin in your Vue application.
 ```typescript
 import { createApp } from 'vue';
 import App from './App.vue';
-import { FingerprintPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { FingerprintPlugin } from '@fingerprint/vue';
 
 const app = createApp(App);
 
@@ -83,7 +83,7 @@ The plugin provides a `useVisitorData` composable you can use to identify visito
 
 ```vue
 <script setup>
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { useVisitorData } from '@fingerprint/vue';
 import { watch } from 'vue';
 
 const { data, error, isLoading, isFetched, getData } = useVisitorData(
@@ -108,7 +108,7 @@ The `getData()` function throws on error. You can catch errors using try/catch o
 
 ```vue
 <script setup>
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { useVisitorData } from '@fingerprint/vue';
 
 const { data, error, isLoading, isFetched, getData } = useVisitorData();
 
@@ -154,7 +154,7 @@ For convenience, we also provide a mixin that handles all query states:
 ```vue
 <script lang='ts'>
 import { defineComponent } from 'vue';
-import { fingerprintGetVisitorDataMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { fingerprintGetVisitorDataMixin } from '@fingerprint/vue';
 
 export default defineComponent({
   mixins: [fingerprintGetVisitorDataMixin],
@@ -190,7 +190,7 @@ The plugin works with Nuxt out of the box, however, you need to register it on t
 ```typescript
 // plugins/fingerprint.client.ts
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
-import { FingerprintPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { FingerprintPlugin } from '@fingerprint/vue';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
@@ -227,7 +227,7 @@ Associate your data with a visitor ID using the `linkedId` or `tag` parameter of
 
 ```vue
 <script setup>
-import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { useVisitorData } from '@fingerprint/vue';
 
 const { data, error, isLoading, getData } = useVisitorData({
   linkedId: 'user_1234',
@@ -248,7 +248,7 @@ const { data, error, isLoading, getData } = useVisitorData({
 For advanced use cases, you can access the full `@fingerprint/agent` API using the `Fingerprint` namespace export:
 
 ```typescript
-import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3';
+import { Fingerprint } from '@fingerprint/vue';
 
 // Use agent types
 type Result = Fingerprint.GetResult;
@@ -281,11 +281,11 @@ Version 2.0 upgrades the underlying Fingerprint agent from v3 to v4 and introduc
 
 ## Documentation
 
-You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/fingerprintjs-pro-vue).
+You can find detailed documentation in the [API reference](https://fingerprintjs.github.io/vue).
 
 ## Support and feedback
 
-To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [source-available FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
+To ask questions or provide feedback, use [Issues](https://github.com/fingerprintjs/vue/issues). If you need private support, please email us at `oss-support@fingerprint.com`. If you'd like to have a similar Vue wrapper for the [source-available FingerprintJS](https://github.com/fingerprintjs/fingerprintjs), consider creating an issue in the main [FingerprintJS repository](https://github.com/fingerprintjs/fingerprintjs/issues).
 
 ## Examples
 
@@ -296,4 +296,4 @@ You can find the following examples in the [examples](examples) directory:
 
 ## License
 
-This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprintjs-pro-vue/blob/main/LICENSE).
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/vue/blob/main/LICENSE).
