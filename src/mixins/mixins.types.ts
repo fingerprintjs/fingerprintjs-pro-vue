@@ -4,12 +4,12 @@ import type { FingerprintVisitorQueryData, FingerprintVueGlobalClient } from '..
 export type FingerprintGetVisitorDataMethodThis = {
   $root?: {
     $fingerprint?: FingerprintVueGlobalClient
-  }
+  } | null
   $fingerprint?: FingerprintVueGlobalClient
 }
 
-export type FingerprintGetVisitorDataMethod<This = FingerprintGetVisitorDataMethodThis> = (
-  this: This,
+export type FingerprintGetVisitorDataMethod = (
+  this: FingerprintGetVisitorDataMethodThis,
   options?: GetOptions
 ) => Promise<void>
 
@@ -17,7 +17,7 @@ export interface FingerprintVueMixins {
   /**
    * Method for fetching visitor data
    */
-  $getVisitorData: FingerprintGetVisitorDataMethod<any>
+  $getVisitorData: FingerprintGetVisitorDataMethod
 
   /**
    * Query state for visitor data
