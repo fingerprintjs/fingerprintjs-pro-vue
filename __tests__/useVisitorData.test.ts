@@ -1,4 +1,4 @@
-/* exslint-disable vue/one-component-per-file */
+/* eslint-disable vue/one-component-per-file */
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useVisitorData } from '../src'
@@ -204,12 +204,12 @@ describe('useVisitorData', () => {
     expect(api.isLoading.value).toBe(false)
   })
 
-  it('normalizes non-Error rejections while preserving the rejection value', async () => {
+  it('normalizes non-Error rejections into Error objects', async () => {
     mockGet.mockRejectedValue('Test error')
 
     const { api } = mountUseVisitorData({ immediate: false })
 
-    await expect(api.getData()).rejects.toBe('Test error')
+    await expect(api.getData()).rejects.toThrow('Test error')
 
     expect(api.error.value).toBeInstanceOf(Error)
     expect(api.error.value?.message).toBe('Test error')

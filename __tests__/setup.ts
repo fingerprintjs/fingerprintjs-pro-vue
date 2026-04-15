@@ -1,7 +1,7 @@
-import { vi } from 'vitest'
+import { type MockInstance, vi } from 'vitest'
 
-export const mockGet = vi.fn()
-export const mockStart = vi.fn(() => ({
+export const mockGet: MockInstance = vi.fn()
+export const mockStart: MockInstance = vi.fn(() => ({
   get: mockGet,
 }))
 

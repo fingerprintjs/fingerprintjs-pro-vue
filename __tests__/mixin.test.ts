@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { fingerprintGetVisitorDataMixin } from '../src'
-import { defineComponent, nextTick } from 'vue'
+import { defineComponent } from 'vue'
 import { deferred, mountWithPlugin, testData } from './helpers'
 import { mockGet, mockStart } from './setup'
 
