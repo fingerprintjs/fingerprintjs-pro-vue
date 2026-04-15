@@ -11,9 +11,10 @@
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^3.1.0",
+    "@nuxt/devtools": "^2.6.5",
     "eslint": "^8.57.0",
-    "nuxt": "^3.19.0"
+    "nuxt": "3.20.0",
+    "vue-tsc": "^3.2.6"
   },
   "dependencies": {
     "@fingerprint/vue": "workspace:*"
