@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { assert, beforeEach, describe, expect, it } from 'vitest'
 import { fingerprintGetVisitorDataMixin } from '../src'
 import { defineComponent } from 'vue'
 import { deferred, mountWithPlugin, testData } from './helpers'
@@ -24,7 +24,6 @@ describe('fingerprintGetVisitorDataMixin', () => {
 
     const { vm } = mountMixinComponent()
 
-    expect(vm.$getVisitorData).toBeDefined()
     expect(vm.visitorData).toEqual({
       data: undefined,
       error: undefined,
@@ -32,7 +31,8 @@ describe('fingerprintGetVisitorDataMixin', () => {
       isLoading: false,
     })
 
-    const request = vm.$getVisitorData?.()
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    const request = vm.$getVisitorData()
 
     expect(vm.visitorData).toEqual({
       data: undefined,
@@ -81,7 +81,8 @@ describe('fingerprintGetVisitorDataMixin', () => {
 
     const { vm } = mountMixinComponent()
 
-    await vm.$getVisitorData?.()
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData()
 
     expect(vm.visitorData).toEqual({
       data: undefined,
@@ -96,7 +97,8 @@ describe('fingerprintGetVisitorDataMixin', () => {
 
     const { vm } = mountMixinComponent()
 
-    await vm.$getVisitorData?.()
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData()
 
     const { visitorData } = vm
 
@@ -114,7 +116,8 @@ describe('fingerprintGetVisitorDataMixin', () => {
 
     const { vm } = mountMixinComponent()
 
-    await vm.$getVisitorData?.({ tag: 'test-tag', linkedId: 'link123' })
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData({ tag: 'test-tag', linkedId: 'link123' })
 
     expect(mockGet).toHaveBeenCalledWith({ tag: 'test-tag', linkedId: 'link123' })
   })
@@ -125,6 +128,7 @@ describe('fingerprintGetVisitorDataMixin', () => {
       template: '<h1>hello world</h1>',
     })
 
-    await expect(vm.$getVisitorData?.()).rejects.toThrow('$fingerprint is not defined.')
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await expect(vm.$getVisitorData()).rejects.toThrow('$fingerprint is not defined.')
   })
 })
