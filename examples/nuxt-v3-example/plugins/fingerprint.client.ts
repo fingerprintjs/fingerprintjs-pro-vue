@@ -1,4 +1,4 @@
-import { FingerprintPlugin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { FingerprintPlugin } from '@fingerprint/vue'
 import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
 import { loadCacheConfig } from '../../components-v3/src/cacheConfig'
 

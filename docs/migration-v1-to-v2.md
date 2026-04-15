@@ -52,7 +52,7 @@ Example migration:
 import type { GetResult, LoadOptions } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
 
 // After (v2.0)
-import { Fingerprint } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { Fingerprint } from '@fingerprint/vue'
 type Result = Fingerprint.GetResult
 type Options = Fingerprint.StartOptions
 ```
