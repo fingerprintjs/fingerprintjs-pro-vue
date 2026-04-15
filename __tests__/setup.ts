@@ -1,13 +1,9 @@
-import { vi, type Mock } from 'vitest'
+import { vi } from 'vitest'
 
-export const mockGet: Mock<[], Promise<unknown>> = vi.fn()
-export const mockStart: Mock<[options?: unknown], { get: typeof mockGet }> = vi.fn((options?: unknown) => {
-  void options
-
-  return {
-    get: mockGet,
-  }
-})
+export const mockGet = vi.fn()
+export const mockStart = vi.fn(() => ({
+  get: mockGet,
+}))
 
 vi.mock('@fingerprint/agent', async () => {
   const actual = await vi.importActual('@fingerprint/agent')
