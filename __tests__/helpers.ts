@@ -42,7 +42,6 @@ export function getMountedFingerprintClient(options: FingerprintPluginOptions = 
 
   const app = createAppWithPlugin(
     defineComponent({
-      template: '<div />',
       setup() {
         const instance = getCurrentInstance()
 
@@ -54,6 +53,7 @@ export function getMountedFingerprintClient(options: FingerprintPluginOptions = 
 
         return {}
       },
+      template: '<div />',
     }),
     options
   )

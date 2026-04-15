@@ -1,3 +1,4 @@
+/* exslint-disable vue/one-component-per-file */
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useVisitorData } from '../src'
@@ -13,12 +14,12 @@ function mountUseVisitorData(options: UseVisitorDataOptions = {}) {
 
   mountWithPlugin(
     defineComponent({
-      template: '<div />',
       setup() {
         api = useVisitorData(options)
 
         return {}
       },
+      template: '<div />',
     })
   )
 
@@ -104,13 +105,13 @@ describe('useVisitorData', () => {
 
     mountWithPlugin(
       defineComponent({
-        template: '<div />',
         setup() {
           first = useVisitorData({ immediate: false })
           second = useVisitorData({ immediate: false })
 
           return {}
         },
+        template: '<div />',
       })
     )
 
@@ -130,7 +131,6 @@ describe('useVisitorData', () => {
 
     mountWithPlugin(
       defineComponent({
-        template: '<div />',
         setup() {
           api = useVisitorData({ immediate: false })
 
@@ -144,6 +144,7 @@ describe('useVisitorData', () => {
 
           return {}
         },
+        template: '<div />',
       })
     )
 
@@ -162,12 +163,12 @@ describe('useVisitorData', () => {
     expect(() => {
       mount(
         defineComponent({
-          template: '<div />',
           setup() {
             useVisitorData()
 
             return {}
           },
+          template: '<div />',
         })
       )
     }).toThrow(/GET_VISITOR_DATA inject data is missing/)

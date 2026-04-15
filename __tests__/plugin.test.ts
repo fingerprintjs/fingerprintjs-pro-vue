@@ -19,13 +19,13 @@ describe('FingerprintPlugin', () => {
   it('exposes $fingerprint.getVisitorData on component instances', () => {
     mountWithPlugin(
       defineComponent({
-        template: '<h1>Hello world</h1>',
         mounted() {
           const { $fingerprint } = this
 
           expect($fingerprint).toBeDefined()
           expect(typeof $fingerprint.getVisitorData).toBe('function')
         },
+        template: '<h1>Hello world</h1>',
       })
     )
   })
