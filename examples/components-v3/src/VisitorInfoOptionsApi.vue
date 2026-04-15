@@ -1,13 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { fpjsGetVisitorDataExtendedMixin } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { fingerprintGetVisitorDataMixin } from '@fingerprint/vue'
 import VisitorInfoSection from './VisitorInfoSection.vue'
 
 export default defineComponent({
   components: { VisitorInfoSection },
-  mixins: [fpjsGetVisitorDataExtendedMixin],
+  mixins: [fingerprintGetVisitorDataMixin],
   watch: {
-    'visitorDataExtended.data': {
+    'visitorData.data': {
       deep: true,
       handler(data) {
         if (data) {
@@ -18,18 +18,18 @@ export default defineComponent({
   },
   methods: {
     getData() {
-      return this.$getVisitorDataExtended?.()
+      return this.$getVisitorData?.()
     },
   },
 })
 </script>
 
 <template>
-  <visitor-info-section
+  <VisitorInfoSection
     button-text="Get visitor data using Options API"
-    :is-loading="visitorDataExtended.isLoading"
-    :error="visitorDataExtended.error"
-    :data="visitorDataExtended.data"
+    :is-loading="visitorData.isLoading"
+    :error="visitorData.error"
+    :data="visitorData.data"
     @btn-click="getData"
   />
 </template>

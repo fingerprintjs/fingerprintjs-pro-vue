@@ -4,8 +4,8 @@ export default defineConfig({
   test: {
     coverage: {
       include: ['src/**/*.{ts,tsx}'],
-      provider: 'v8',
-      reporter: ['lcov', 'json-summary', ['text', { file: 'coverage.txt' }]],
+      provider: 'istanbul',
+      reporter: [['text', { file: 'coverage.txt' }], ['json'], ['json-summary'], ['lcov']],
       reportsDirectory: './coverage',
     },
     environment: 'jsdom',

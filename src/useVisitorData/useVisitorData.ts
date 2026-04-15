@@ -1,31 +1,28 @@
 import { inject, onMounted, ref } from 'vue'
 import { GET_VISITOR_DATA } from '../symbols'
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { GetOptions, GetResult } from '@fingerprint/agent'
 import type { UseGetVisitorDataResult, UseVisitorDataOptions } from './useVisitorData.types'
-import { FpjsVueQueryOptions } from '../types'
 
 /**
- * Composition API for fetching visitorData.
+ * Composition API for fetching visitor data.
  *
  * @example
  * ```typescript
- *     {
- *       template: '<h1>Hello world</h1>',
- *       setup() {
- *         const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true });
+ * setup() {
+ *   const { data, getData, isLoading, isFetched, error } = useVisitorData()
  *
- *         // Fetch data on mount and ignore cache
- *         // const { data, getData, isLoading, error } = useVisitorData({ extendedResult: true, ignoreCache: true }, { immediate: true });
- *       }
- *     }
+ *   // Or with options:
+ *   // const { data, getData, isLoading, isFetched, error } = useVisitorData({ immediate: false, tag: 'my-tag' })
+ * }
  * ```
- * */
-export function useVisitorData<TExtended extends boolean>(
-  { ignoreCache: defaultIgnoreCache, ...options }: UseVisitorDataOptions<TExtended> = {},
-  { immediate = true }: FpjsVueQueryOptions = {}
-): UseGetVisitorDataResult<TExtended> {
-  const data = ref<VisitorData<TExtended> | undefined>()
+ */
+export function useVisitorData({
+  immediate = true,
+  ...getOptionsDefaults
+}: UseVisitorDataOptions = {}): UseGetVisitorDataResult {
+  const data = ref<GetResult | undefined>()
   const isLoading = ref(false)
+  const isFetched = ref(false)
   const currentError = ref<Error | undefined>()
 
   const getVisitorData = inject(GET_VISITOR_DATA)
@@ -34,30 +31,25 @@ export function useVisitorData<TExtended extends boolean>(
     throw new Error('GET_VISITOR_DATA inject data is missing, perhaps you forgot to install the plugin first?')
   }
 
-  const getData: UseGetVisitorDataResult<TExtended>['getData'] = async (getDataOptions) => {
+  const getData = async (options?: GetOptions): Promise<GetResult> => {
     isLoading.value = true
-
-    const ignoreCache =
-      typeof getDataOptions?.ignoreCache === 'boolean' ? getDataOptions.ignoreCache : defaultIgnoreCache
+    isFetched.value = false
+    data.value = undefined
+    currentError.value = undefined
 
     try {
-      const result = await getVisitorData(options, ignoreCache)
+      const mergedOptions: GetOptions = { ...getOptionsDefaults, ...options }
+      const result = await getVisitorData(mergedOptions)
 
       data.value = result
-      currentError.value = undefined
+      isFetched.value = true
 
       return result
     } catch (error) {
-      data.value = undefined
+      const normalizedError = error instanceof Error ? error : new Error(String(error))
+      currentError.value = normalizedError
 
-      if (error instanceof Error) {
-        error.message = `${error.name}: ${error.message}`
-        error.name = 'FPJSAgentError'
-
-        currentError.value = error
-      }
-
-      return undefined
+      throw normalizedError
     } finally {
       isLoading.value = false
     }
@@ -65,7 +57,13 @@ export function useVisitorData<TExtended extends boolean>(
 
   onMounted(async () => {
     if (immediate) {
-      await getData()
+      try {
+        await getData()
+      } catch (error) {
+        // getData re-throws so manual callers can handle errors themselves.
+        // Here we swallow the error to avoid an unhandled rejection — it's already stored in the error ref.
+        console.error(`Failed to fetch visitor data on mount: ${error}`)
+      }
     }
   })
 
@@ -73,6 +71,7 @@ export function useVisitorData<TExtended extends boolean>(
     getData,
     data,
     isLoading,
+    isFetched,
     error: currentError,
   }
 }

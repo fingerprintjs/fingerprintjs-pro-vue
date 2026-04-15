@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import type { VisitorData } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { Fingerprint } from '@fingerprint/vue'
 
 defineProps<{
-  visitorData: VisitorData
+  visitorData: Fingerprint.GetResult
 }>()
 </script>
 
 <template>
   <div class="output-holder">
     <div class="output">
-      <pre>
-        {{ JSON.stringify(visitorData, null, 4) }}
-      </pre>
+      <pre>{{ JSON.stringify(visitorData, null, 4) }}</pre>
     </div>
   </div>
 </template>

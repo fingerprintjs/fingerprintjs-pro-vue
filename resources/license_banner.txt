@@ -1,2 +1,0 @@
-FingerprintJS Pro Vue v<%= pkg.version %> - Copyright (c) FingerprintJS, Inc, <%= new Date().getFullYear() %> (https://fingerprintjs.com)
-Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.

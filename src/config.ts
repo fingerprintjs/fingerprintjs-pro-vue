@@ -1,14 +1,12 @@
-import type { FpjsSpaOptions } from '@fingerprintjs/fingerprintjs-pro-spa'
+import type { StartOptions } from '@fingerprint/agent'
 
-export const getOptions = (options: FpjsSpaOptions, packageName: string, version: string) => {
-  const loadOptions = {
-    ...(options?.loadOptions ?? {}),
-    integrationInfo: [...(options.loadOptions?.integrationInfo ?? []), `${packageName}/${version}`],
-  } as FpjsSpaOptions['loadOptions']
-
-  const clientOptions: FpjsSpaOptions = {
+export const getOptions = (
+  options: StartOptions,
+  integrationInfoPackageName: string,
+  version: string
+): StartOptions => {
+  return {
     ...options,
-    loadOptions,
+    integrationInfo: [...(options.integrationInfo ?? []), `${integrationInfoPackageName}/${version}`],
   }
-  return clientOptions
 }

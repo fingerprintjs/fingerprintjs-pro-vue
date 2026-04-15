@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import FetchDataBtn from './FetchDataBtn.vue'
-import type { VisitorData as Data } from '@fingerprintjs/fingerprintjs-pro-vue-v3'
+import { Fingerprint } from '@fingerprint/vue'
 import VisitorData from './VisitorData.vue'
 
 defineProps<{
   buttonText: string
   isLoading: boolean
   error?: Error | null
-  data?: Data<true> | null
+  data?: Fingerprint.GetResult | null
 }>()
 
 const emit = defineEmits<{

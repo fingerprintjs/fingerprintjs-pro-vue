@@ -1,23 +1,27 @@
 {
-  "name": "@fingerprintjs/fingerprintjs-pro-vue-v3",
+  "name": "@fingerprint/vue",
   "version": "1.5.0",
-  "description": "Fingerprint Pro Plugin for Vue v3",
-  "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
+  "description": "Fingerprint Vue 3 SDK",
+  "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fingerprintjs/fingerprintjs-pro-vue.git"
+    "url": "git+https://github.com/fingerprintjs/vue.git"
   },
+  "bugs": {
+    "url": "https://github.com/fingerprintjs/vue/issues"
+  },
+  "homepage": "https://github.com/fingerprintjs/vue#readme",
   "exports": {
     ".": {
-      "types": "./dist/plugin.d.ts",
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.js"
+      "types": "./dist/fingerprint-vue.d.ts",
+      "import": "./dist/fingerprint-vue.mjs",
+      "require": "./dist/fingerprint-vue.js"
     }
   },
-  "main": "dist/plugin.js",
-  "module": "dist/plugin.mjs",
-  "types": "dist/plugin.d.ts",
+  "main": "dist/fingerprint-vue.js",
+  "module": "dist/fingerprint-vue.mjs",
+  "types": "dist/fingerprint-vue.d.ts",
   "sideEffects": false,
   "files": [
     "dist"
@@ -36,7 +40,8 @@
   ],
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
   },
   "private": false,
   "scripts": {
@@ -49,26 +54,26 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:coverage:diff": "vitest run --coverage --reporter json --outputFile.json=report.json",
-    "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/plugin.d.ts",
+    "test:dts": "tsc --noEmit --isolatedModules --skipLibCheck dist/fingerprint-vue.d.ts",
     "docs": "typedoc src/index.ts --out docs",
     "changeset:version": "changeset version",
     "changeset:publish": "HUSKY=0 changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.30.0",
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
+    "@fingerprintjs/changesets-changelog-format": "^0.2.0",
     "@fingerprintjs/commit-lint-dx-team": "^0.0.2",
     "@fingerprintjs/conventional-changelog-dx-team": "^0.1.0",
     "@fingerprintjs/eslint-config-dx-team": "^0.1.0",
     "@fingerprintjs/prettier-config-dx-team": "^0.1.0",
     "@fingerprintjs/tsconfig-dx-team": "^0.0.2",
     "@types/node": "^20.14.10",
-    "@vitest/coverage-v8": "^1.6.1",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
+    "@vitest/coverage-istanbul": "^1.6.1",
     "@vue/test-utils": "^2.0.0",
-    "@changesets/cli": "^2.30.0",
-    "@fingerprintjs/changesets-changelog-format": "^0.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
@@ -87,7 +92,7 @@
     "vue-tsc": "^2.0.6"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs-pro-spa": "^1.3.2",
+    "@fingerprint/agent": "^4.0.0",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {

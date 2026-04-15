@@ -1,18 +1,18 @@
 import { vi } from 'vitest'
 
-export const init = vi.fn()
-export const getVisitorData = vi.fn()
-export const clearCache = vi.fn()
+export const mockGet = vi.fn()
+export const mockStart = vi.fn((options?: unknown) => {
+  void options
 
-vi.mock('@fingerprintjs/fingerprintjs-pro-spa', async () => {
   return {
-    ...((await vi.importActual('@fingerprintjs/fingerprintjs-pro-spa')) as any),
-    FpjsClient: vi.fn(() => {
-      return {
-        init,
-        getVisitorData,
-        clearCache,
-      }
-    }),
+    get: mockGet,
+  }
+})
+
+vi.mock('@fingerprint/agent', async () => {
+  const actual = await vi.importActual('@fingerprint/agent')
+  return {
+    ...actual,
+    start: mockStart,
   }
 })
