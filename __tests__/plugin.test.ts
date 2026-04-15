@@ -1,5 +1,6 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest'
 import { FingerprintPlugin } from '../src'
+import type { FingerprintPluginOptions } from '../src'
 import { INTEGRATION_INFO_PACKAGE_NAME } from '../src/plugin'
 import '../src/vue'
 import { mockGet, mockStart } from './setup'
@@ -51,6 +52,13 @@ describe('FingerprintPlugin', () => {
       const app = createApp(EmptyComponent)
       app.use(FingerprintPlugin, deprecatedOptions)
     }).toThrow(/loadOptions/)
+  })
+
+  it('throws when apiKey is missing', () => {
+    expect(() => {
+      const app = createApp(EmptyComponent)
+      app.use(FingerprintPlugin, undefined as unknown as FingerprintPluginOptions)
+    }).toThrow(/apiKey/)
   })
 
   it('rejects getVisitorData outside the browser before starting the agent', async () => {
