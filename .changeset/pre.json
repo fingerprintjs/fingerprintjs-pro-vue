@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "@fingerprint/vue": "1.5.0",
+    "components-v3": "0.0.0",
+    "nuxt-v3-example": "0.0.0",
+    "spa-v3-example": "0.0.0"
+  },
+  "changesets": []
+}

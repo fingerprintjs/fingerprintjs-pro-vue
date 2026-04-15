@@ -69,7 +69,7 @@
     "@fingerprintjs/eslint-config-dx-team": "^0.1.0",
     "@fingerprintjs/prettier-config-dx-team": "^0.1.0",
     "@fingerprintjs/tsconfig-dx-team": "^0.0.2",
-    "@types/node": "^20.19.39",
+    "@types/node": "^24.12.2",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "@vitest/coverage-istanbul": "^4.1.4",
