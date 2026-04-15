@@ -1,7 +1,7 @@
-import { vi } from 'vitest'
+import { vi, type Mock } from 'vitest'
 
-export const mockGet = vi.fn()
-export const mockStart = vi.fn((options?: unknown) => {
+export const mockGet: Mock<[], Promise<unknown>> = vi.fn()
+export const mockStart: Mock<[options?: unknown], { get: typeof mockGet }> = vi.fn((options?: unknown) => {
   void options
 
   return {
