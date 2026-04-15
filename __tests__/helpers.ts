@@ -64,6 +64,10 @@ export function getMountedFingerprintClient(options: FingerprintPluginOptions = 
     throw new Error('Expected mounted component to expose $fingerprint')
   }
 
+  // The captured $fingerprint closure survives teardown, so we can unmount the
+  // throwaway app here and avoid leaking Vue app instances across tests.
+  app.unmount()
+
   return fingerprint
 }
 

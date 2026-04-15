@@ -268,5 +268,10 @@ describe('useVisitorData', () => {
 
     retry.resolve(testData)
     await pending
+
+    expect(api.data.value).toEqual(testData)
+    expect(api.error.value).toBeUndefined()
+    expect(api.isFetched.value).toBe(true)
+    expect(api.isLoading.value).toBe(false)
   })
 })

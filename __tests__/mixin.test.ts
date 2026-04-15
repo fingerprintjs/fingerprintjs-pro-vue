@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { fingerprintGetVisitorDataMixin } from '../src'
-import { defineComponent } from 'vue'
-import { wait } from '../src/utils'
+import { defineComponent, nextTick } from 'vue'
 import { deferred, mountWithPlugin, testData } from './helpers'
 import { mockGet, mockStart } from './setup'
 
@@ -43,7 +42,6 @@ describe('fingerprintGetVisitorDataMixin', () => {
     })
 
     pending.resolve(testData)
-    await wait(0)
     await request
 
     expect(vm.visitorData).toEqual({
