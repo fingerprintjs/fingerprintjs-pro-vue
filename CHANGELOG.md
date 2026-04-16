@@ -11,7 +11,7 @@
 * **README:** add a code example with linking and tagging ([deee32a](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/deee32a76cdcb6b73a85f46ff84176a92af9b61d))
 * **README:** mention removal of vue 2 sdk ([efc200e](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/efc200ef5ee421820a0165cead9793cec364b7f0))
 
-# [1.3.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.2.1...fingerprintjs-pro-vue2-v1.3.0) (2023-10-11)
+## [1.3.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.2.1...fingerprintjs-pro-vue2-v1.3.0) (2023-10-11)
 
 
 ### Features
@@ -20,7 +20,7 @@
 
 ## [1.2.1](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.2.0...fingerprintjs-pro-vue2-v1.2.1) (2023-10-05)
 
-# [1.2.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.1.1...fingerprintjs-pro-vue2-v1.2.0) (2023-09-20)
+## [1.2.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.1.1...fingerprintjs-pro-vue2-v1.2.0) (2023-09-20)
 
 
 ### Features
@@ -34,7 +34,7 @@
 
 * bump spa package version to 1.1.2 ([d85e85b](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/d85e85bfc9701c98afedac8ce35b4b12f878e988))
 
-# [1.1.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.5...fingerprintjs-pro-vue2-v1.1.0) (2023-07-06)
+## [1.1.0](https://github.com/fingerprintjs/fingerprintjs-pro-vue/compare/fingerprintjs-pro-vue2-v1.0.5...fingerprintjs-pro-vue2-v1.1.0) (2023-07-06)
 
 
 ### Bug Fixes
@@ -77,7 +77,7 @@
 
 * use correct badges ([de957d7](https://github.com/fingerprintjs/fingerprintjs-pro-vue/commit/de957d79fe2319b1b9a05a68ed0e1bf33531946d))
 
-# 1.0.0 (2022-06-13)
+## 1.0.0 (2022-06-13)
 
 
 ### Features
