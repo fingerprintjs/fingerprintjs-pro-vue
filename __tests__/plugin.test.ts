@@ -1,110 +1,112 @@
-import { config, mount } from '@vue/test-utils'
-import { beforeAll, beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest'
 import { FingerprintPlugin } from '../src'
 import type { FingerprintPluginOptions } from '../src'
+import { INTEGRATION_INFO_PACKAGE_NAME } from '../src/plugin'
 import '../src/vue'
 import { mockGet, mockStart } from './setup'
 import * as packageInfo from '../package.json'
-import { createApp } from 'vue'
-import { INTEGRATION_INFO_PACKAGE_NAME } from '../src/plugin'
-
-const apiKey = 'API_KEY'
-const testData = {
-  visitor_id: '#visitor_id',
-  event_id: 'event123',
-  sealed_result: null,
-}
-
-const pluginConfig: FingerprintPluginOptions = {
-  apiKey,
-}
-
-const EmptyComponent = { template: '<div />' }
+import { createApp, defineComponent } from 'vue'
+import { EmptyComponent, getMountedFingerprintClient, mountWithPlugin, testData } from './helpers'
 
 describe('FingerprintPlugin', () => {
-  beforeAll(() => {
-    config.global.plugins.push([FingerprintPlugin, pluginConfig])
-  })
-
   beforeEach(() => {
-    mockGet.mockClear()
+    mockGet.mockReset()
+    mockStart.mockClear()
   })
 
-  it('should expose $fingerprint global property with getVisitorData', () => {
-    mount({
-      template: '<h1>Hello world</h1>',
-      mounted() {
-        const $fingerprint = (this as any).$fingerprint
-
-        expect($fingerprint).toBeDefined()
-        expect($fingerprint.getVisitorData).toBeDefined()
-        expect(typeof $fingerprint.getVisitorData).toBe('function')
-      },
-    })
+  afterEach(() => {
+    vi.unstubAllGlobals()
   })
 
-  it('should support fetching data using $fingerprint.getVisitorData()', async () => {
+  it('exposes $fingerprint.getVisitorData on component instances', () => {
+    mountWithPlugin(
+      defineComponent({
+        mounted() {
+          const { $fingerprint } = this
+
+          expect($fingerprint).toBeDefined()
+          expect(typeof $fingerprint.getVisitorData).toBe('function')
+        },
+        template: '<h1>Hello world</h1>',
+      })
+    )
+  })
+
+  it('fetches visitor data through $fingerprint.getVisitorData()', async () => {
     mockGet.mockResolvedValue(testData)
 
-    const { vm } = mount({
+    const { vm } = mountWithPlugin({
       template: '<h1>Hello world</h1>',
     })
 
-    const result = await vm.$fingerprint.getVisitorData()
-
-    expect(result).toEqual(testData)
+    await expect(vm.$fingerprint.getVisitorData()).resolves.toEqual(testData)
   })
 
-  it('should throw if old loadOptions config shape is used', () => {
+  it('rejects deprecated loadOptions config shape', () => {
+    const deprecatedOptions = {
+      apiKey: 'test',
+      loadOptions: { apiKey: 'test' },
+    }
+
     expect(() => {
       const app = createApp(EmptyComponent)
-      app.use(FingerprintPlugin, { loadOptions: { apiKey: 'test' } } as any)
+      app.use(FingerprintPlugin, deprecatedOptions)
     }).toThrow(/loadOptions/)
   })
 
-  it('should fail fast when apiKey is missing', () => {
+  it('throws when apiKey is missing', () => {
     expect(() => {
       const app = createApp(EmptyComponent)
-      app.use(FingerprintPlugin, undefined as any)
+      app.use(FingerprintPlugin, undefined as unknown as FingerprintPluginOptions)
     }).toThrow(/apiKey/)
   })
 
-  it('should call start() with integrationInfo appended on first getVisitorData call', async () => {
-    mockStart.mockClear()
+  it('rejects getVisitorData outside the browser before starting the agent', async () => {
+    const fingerprint = getMountedFingerprintClient({ apiKey: 'test-key' })
+
+    vi.stubGlobal('window', undefined)
+
+    await expect(fingerprint.getVisitorData()).rejects.toThrow(/only be called in the browser/)
+    expect(mockStart).not.toHaveBeenCalled()
+  })
+
+  it('appends integrationInfo when the agent starts and reuses the agent afterwards', async () => {
     mockGet.mockResolvedValue(testData)
 
-    const app = createApp(EmptyComponent)
-    app.use(FingerprintPlugin, { apiKey: 'test-key' })
+    const fingerprint = getMountedFingerprintClient({ apiKey: 'test-key' })
 
     expect(mockStart).not.toHaveBeenCalled()
 
-    const vm = app.mount(document.createElement('div')) as any
-    await vm.$fingerprint.getVisitorData()
+    await fingerprint.getVisitorData()
+    await fingerprint.getVisitorData()
 
     expect(mockStart).toHaveBeenCalledTimes(1)
-
-    // Verify agent reuse on subsequent calls
-    await vm.$fingerprint.getVisitorData()
-    expect(mockStart).toHaveBeenCalledTimes(1)
-
-    const callArgs = mockStart.mock.calls[0][0] as any
-    expect(callArgs.apiKey).toBe('test-key')
-    expect(callArgs.integrationInfo).toContain(`${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`)
+    expect(mockStart).toHaveBeenCalledWith(
+      expect.objectContaining({
+        apiKey: 'test-key',
+        integrationInfo: expect.arrayContaining([`${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`]),
+      })
+    )
   })
 
-  it('should preserve existing integrationInfo entries', async () => {
-    mockStart.mockClear()
+  it('preserves existing integrationInfo entries', async () => {
     mockGet.mockResolvedValue(testData)
 
-    const app = createApp(EmptyComponent)
-    app.use(FingerprintPlugin, { apiKey: 'test-key', integrationInfo: ['custom/1.0'] })
+    const fingerprint = getMountedFingerprintClient({
+      apiKey: 'test-key',
+      integrationInfo: ['custom/1.0'],
+    })
 
-    const vm = app.mount(document.createElement('div')) as any
-    await vm.$fingerprint.getVisitorData()
+    await fingerprint.getVisitorData()
 
     expect(mockStart).toHaveBeenCalledTimes(1)
-    const callArgs = mockStart.mock.calls[0][0] as any
-    expect(callArgs.integrationInfo).toContain('custom/1.0')
-    expect(callArgs.integrationInfo).toContain(`${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`)
+    expect(mockStart).toHaveBeenCalledWith(
+      expect.objectContaining({
+        integrationInfo: expect.arrayContaining([
+          'custom/1.0',
+          `${INTEGRATION_INFO_PACKAGE_NAME}/${packageInfo.version}`,
+        ]),
+      })
+    )
   })
 })

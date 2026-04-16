@@ -6,4 +6,7 @@ module.exports = {
     '@fingerprintjs/eslint-config-dx-team',
     'plugin:@typescript-eslint/eslint-recommended',
   ],
+  rules: {
+    '@typescript-eslint/no-non-null-assertion': 'error',
+  },
 }

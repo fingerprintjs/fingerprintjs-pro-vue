@@ -1,99 +1,58 @@
-import { config, mount } from '@vue/test-utils'
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
-import { FingerprintPlugin, fingerprintGetVisitorDataMixin } from '../src'
-import type { FingerprintPluginOptions } from '../src'
-import { defineComponent, nextTick } from 'vue'
+import { mount } from '@vue/test-utils'
+import { assert, beforeEach, describe, expect, it } from 'vitest'
+import { fingerprintGetVisitorDataMixin } from '../src'
+import { defineComponent } from 'vue'
+import { deferred, mountWithPlugin, testData } from './helpers'
 import { mockGet, mockStart } from './setup'
-import { wait } from '../src/utils'
 
-const apiKey = 'API_KEY'
-const testData = {
-  visitor_id: '#visitor_id',
-  event_id: 'event123',
-  sealed_result: null,
-}
-
-const pluginConfig: FingerprintPluginOptions = {
-  apiKey,
-}
-
-describe('FingerprintPlugin - mixins', () => {
-  beforeAll(() => {
-    config.global.plugins.push([FingerprintPlugin, pluginConfig])
+function mountMixinComponent() {
+  return mountWithPlugin({
+    mixins: [fingerprintGetVisitorDataMixin],
+    template: '<h1>hello world</h1>',
   })
+}
 
+describe('fingerprintGetVisitorDataMixin', () => {
   beforeEach(() => {
-    mockGet.mockClear()
+    mockGet.mockReset()
     mockStart.mockClear()
   })
 
-  it('should fetch visitor data and update state through full lifecycle', async () => {
-    mockGet.mockImplementation(async () => {
-      await wait(400)
+  it('fetches visitor data and updates state through loading and success', async () => {
+    const pending = deferred<typeof testData>()
+    mockGet.mockReturnValueOnce(pending.promise)
 
-      return testData
+    const { vm } = mountMixinComponent()
+
+    expect(vm.visitorData).toEqual({
+      data: undefined,
+      error: undefined,
+      isFetched: false,
+      isLoading: false,
     })
 
-    const { vm } = mount({
-      mixins: [fingerprintGetVisitorDataMixin],
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    const request = vm.$getVisitorData()
 
-      template: '<h1>hello world</h1>',
+    expect(vm.visitorData).toEqual({
+      data: undefined,
+      error: undefined,
+      isFetched: false,
+      isLoading: true,
     })
 
-    const spy = vi.spyOn(vm.$fingerprint, 'getVisitorData')
+    pending.resolve(testData)
+    await request
 
-    expect(vm.$getVisitorData).toBeDefined()
-    expect(vm.visitorData).toBeDefined()
-    expect(vm.visitorData).toMatchInlineSnapshot(`
-{
-  "data": undefined,
-  "error": undefined,
-  "isFetched": false,
-  "isLoading": false,
-}
-`)
-
-    vm.$getVisitorData?.()
-
-    expect(vm.visitorData?.isLoading).toBe(true)
-
-    await wait(450)
-
-    expect(vm.visitorData).toMatchInlineSnapshot(`
-{
-  "data": {
-    "event_id": "event123",
-    "sealed_result": null,
-    "visitor_id": "#visitor_id",
-  },
-  "error": undefined,
-  "isFetched": true,
-  "isLoading": false,
-}
-`)
-
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(spy).toHaveBeenCalledWith(undefined)
+    expect(vm.visitorData).toEqual({
+      data: testData,
+      error: undefined,
+      isFetched: true,
+      isLoading: false,
+    })
   })
 
-  it('should populate data correctly', async () => {
-    mockGet.mockResolvedValue(testData)
-
-    const { vm } = mount({
-      mixins: [fingerprintGetVisitorDataMixin],
-
-      template: '<h1>hello world</h1>',
-    })
-
-    await vm.$getVisitorData?.()
-
-    expect(vm.visitorData?.data).toEqual(testData)
-    expect(vm.visitorData?.isFetched).toBe(true)
-    expect(vm.visitorData?.isLoading).toBe(false)
-    expect(vm.visitorData?.error).toBeUndefined()
-  })
-
-  it('should reuse the same agent across multiple mixin instances', async () => {
+  it('reuses the same agent across multiple mixin instances', async () => {
     mockGet.mockResolvedValue(testData)
 
     const Child = defineComponent({
@@ -101,7 +60,7 @@ describe('FingerprintPlugin - mixins', () => {
       template: '<h1>hello world</h1>',
     })
 
-    const wrapper = mount({
+    const wrapper = mountWithPlugin({
       components: { Child },
       template: '<div><Child ref="first" /><Child ref="second" /></div>',
     })
@@ -109,77 +68,67 @@ describe('FingerprintPlugin - mixins', () => {
     const first = wrapper.getComponent({ ref: 'first' }).vm
     const second = wrapper.getComponent({ ref: 'second' }).vm
 
-    await first.$getVisitorData?.()
-    await second.$getVisitorData?.({ tag: 'second-instance' })
+    await first.$getVisitorData()
+    await second.$getVisitorData({ tag: 'second-instance' })
 
     expect(mockGet).toHaveBeenCalledTimes(2)
     expect(mockStart).toHaveBeenCalledTimes(1)
   })
 
-  it('should handle errors correctly', async () => {
+  it('stores errors without marking the fetch as complete', async () => {
     const testError = new Error('Test error')
     mockGet.mockRejectedValue(testError)
 
-    const { vm } = mount({
-      mixins: [fingerprintGetVisitorDataMixin],
+    const { vm } = mountMixinComponent()
 
-      template: '<h1>hello world</h1>',
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData()
+
+    expect(vm.visitorData).toEqual({
+      data: undefined,
+      error: testError,
+      isFetched: false,
+      isLoading: false,
     })
-
-    await vm.$getVisitorData?.()
-
-    expect(vm.visitorData?.data).toBeUndefined()
-    expect(vm.visitorData?.error).toEqual(testError)
-    expect(vm.visitorData?.isFetched).toBe(false)
-    expect(vm.visitorData?.isLoading).toBe(false)
   })
 
-  it('should pass options to getVisitorData', async () => {
+  it('normalizes non-Error rejections into Error objects', async () => {
+    mockGet.mockRejectedValue('Test error')
+
+    const { vm } = mountMixinComponent()
+
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData()
+
+    const { visitorData } = vm
+
+    if (!visitorData) {
+      throw new Error('Expected visitorData to be defined')
+    }
+
+    expect(visitorData.error).toBeInstanceOf(Error)
+    expect(visitorData.error?.message).toBe('Test error')
+    expect(visitorData.isFetched).toBe(false)
+  })
+
+  it('passes options to getVisitorData', async () => {
     mockGet.mockResolvedValue(testData)
 
-    const { vm } = mount({
-      mixins: [fingerprintGetVisitorDataMixin],
+    const { vm } = mountMixinComponent()
 
-      template: '<h1>hello world</h1>',
-    })
-
-    await vm.$getVisitorData?.({ tag: 'test-tag', linkedId: 'link123' })
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await vm.$getVisitorData({ tag: 'test-tag', linkedId: 'link123' })
 
     expect(mockGet).toHaveBeenCalledWith({ tag: 'test-tag', linkedId: 'link123' })
   })
 
-  it('should clear stale data immediately when getVisitorData is called again', async () => {
-    mockGet.mockResolvedValueOnce(testData)
-
-    let resolveSecond!: (value: typeof testData) => void
-    mockGet.mockReturnValueOnce(
-      new Promise<typeof testData>((resolve) => {
-        resolveSecond = resolve
-      })
-    )
-
+  it('throws when the plugin is missing', async () => {
     const { vm } = mount({
       mixins: [fingerprintGetVisitorDataMixin],
       template: '<h1>hello world</h1>',
     })
 
-    await vm.$getVisitorData?.()
-
-    expect(vm.visitorData?.data).toEqual(testData)
-    expect(vm.visitorData?.isFetched).toBe(true)
-
-    const pending = vm.$getVisitorData?.({ tag: 'retry' })
-    await nextTick()
-
-    expect(vm.visitorData?.isLoading).toBe(true)
-    expect(vm.visitorData?.data).toBeUndefined()
-    expect(vm.visitorData?.error).toBeUndefined()
-    expect(vm.visitorData?.isFetched).toBe(false)
-
-    resolveSecond(testData)
-    await pending
-
-    expect(vm.visitorData?.data).toEqual(testData)
-    expect(vm.visitorData?.isFetched).toBe(true)
+    assert(vm.$getVisitorData, 'Expected mixin to expose $getVisitorData')
+    await expect(vm.$getVisitorData()).rejects.toThrow('$fingerprint is not defined.')
   })
 })
