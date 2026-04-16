@@ -6,6 +6,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write # Required for npm provenance / Trusted Publishing
+  contents: read
+
 jobs:
   build-and-release:
     name: "Build project, run CI checks and publish new release"
