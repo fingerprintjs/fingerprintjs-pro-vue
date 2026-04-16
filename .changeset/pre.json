@@ -7,5 +7,7 @@
     "nuxt-v3-example": "0.0.0",
     "spa-v3-example": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "upgrade-to-agent-v4"
+  ]
 }

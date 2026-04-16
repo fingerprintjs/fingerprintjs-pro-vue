@@ -1,6 +1,6 @@
 {
   "name": "@fingerprint/vue",
-  "version": "1.5.0",
+  "version": "2.0.0-rc.0",
   "description": "Fingerprint Vue 3 SDK",
   "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "license": "MIT",
