@@ -29,9 +29,9 @@ function mountUseVisitorData(options: UseVisitorDataOptions = {}) {
 const getDataOptionCases = [
   {
     name: 'passes per-call GetOptions to agent.get()',
-    composableOptions: { immediate: false },
-    callOptions: { tag: 'test', linkedId: 'link123' },
-    expectedOptions: { tag: 'test', linkedId: 'link123' },
+    composableOptions: { immediate: false, linkedId: 'default-link' },
+    callOptions: { tag: 'test' },
+    expectedOptions: { tag: 'test', linkedId: 'default-link' },
   },
   {
     name: 'merges default GetOptions with per-call options',
@@ -41,9 +41,9 @@ const getDataOptionCases = [
   },
   {
     name: 'lets per-call options override default options',
-    composableOptions: { immediate: false, tag: 'default-tag' },
+    composableOptions: { immediate: false, tag: 'default-tag', linkedId: 'default-link' },
     callOptions: { tag: 'override-tag' },
-    expectedOptions: { tag: 'override-tag' },
+    expectedOptions: { tag: 'override-tag', linkedId: 'default-link' },
   },
 ] satisfies Array<{
   name: string
