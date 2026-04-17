@@ -92,8 +92,7 @@
     "vue-tsc": "^2.0.6"
   },
   "dependencies": {
-    "@fingerprint/agent": "^4.0.0",
-    "tslib": "^2.6.2"
+    "@fingerprint/agent": "^4.0.0"
   },
   "peerDependencies": {
     "vue": "^3.1"
