@@ -11,9 +11,6 @@ importers:
       '@fingerprint/agent':
         specifier: ^4.0.0
         version: 4.0.3
-      tslib:
-        specifier: ^2.6.2
-        version: 2.6.2
     devDependencies:
       '@changesets/cli':
         specifier: ^2.30.0
