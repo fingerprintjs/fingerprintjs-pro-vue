@@ -8,8 +8,8 @@
 
   **Breaking changes:**
 
-  - The default caching strategy has changed from `sessionStorage` caching to **no caching by default**, aligned with the underlying [JavaScript agent v4 default](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cache).
   - Replaced `@fingerprintjs/fingerprintjs-pro-spa` dependency with `@fingerprint/agent` v4
+  - The default caching strategy has changed from `sessionStorage` caching to **no caching by default**, aligned with the underlying [JavaScript agent v4 default](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cache).
   - Plugin options are now passed directly instead of nested under `loadOptions` — use `{ apiKey: '...' }` instead of `{ loadOptions: { apiKey: '...' } }`
   - Renamed `fpjsPlugin` to `FingerprintPlugin`, `FpjsVueOptions` to `FingerprintPluginOptions`
   - Renamed `$fpjs` global property to `$fingerprint`
