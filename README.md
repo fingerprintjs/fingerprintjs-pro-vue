@@ -263,7 +263,7 @@ const result = await agent.get();
 
 Fingerprint usage is billed per API call. To avoid unnecessary API calls, it is a good practice to [cache identification results](https://docs.fingerprint.com/docs/caching-visitor-information).
 
-Caching is off by default. You can configure caching using plugin [options](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cacheconfig):
+Caching is disabled by default, aligned with the underlying [JavaScript agent v4 default](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cache). To enable caching, pass the [`cache` start option](https://docs.fingerprint.com/reference/js-agent-v4-start-function#cacheconfig):
 
 ```typescript
 app.use(FingerprintPlugin, {
